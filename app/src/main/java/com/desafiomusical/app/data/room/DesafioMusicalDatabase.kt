@@ -71,7 +71,8 @@ abstract class DesafioMusicalDatabase : RoomDatabase() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
                 applicationScope.launch {
-                    getInstance(context, applicationScope).songDao().upsertAll(InitialSongCatalog.songs)
+                    val catalog = CatalogAssetSource(context).loadCatalog()
+                    getInstance(context, applicationScope).songDao().upsertAll(catalog)
                 }
             }
         }

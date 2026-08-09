@@ -1,7 +1,7 @@
 package com.desafiomusical.app.data.repository
 
 import com.desafiomusical.app.data.mapper.toDomain
-import com.desafiomusical.app.data.room.InitialSongCatalog
+import com.desafiomusical.app.data.room.CatalogAssetSource
 import com.desafiomusical.app.data.room.dao.SongDao
 import com.desafiomusical.app.domain.model.Song
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +12,10 @@ interface SongRepository {
     suspend fun getCatalog(): List<Song>
 }
 
-class SongRepositoryImpl(private val songDao: SongDao) : SongRepository {
+class SongRepositoryImpl(
+    private val songDao: SongDao,
+    private val catalogAssetSource: CatalogAssetSource
+) : SongRepository {
 
     override fun observeCatalog(): Flow<List<Song>> =
         songDao.observeActive().map { entities -> entities.map { it.toDomain() } }
@@ -24,7 +27,7 @@ class SongRepositoryImpl(private val songDao: SongDao) : SongRepository {
     override suspend fun getCatalog(): List<Song> {
         var entities = songDao.getActiveCatalog()
         if (entities.isEmpty()) {
-            songDao.upsertAll(InitialSongCatalog.songs)
+            songDao.upsertAll(catalogAssetSource.loadCatalog())
             entities = songDao.getActiveCatalog()
         }
         return entities.map { it.toDomain() }

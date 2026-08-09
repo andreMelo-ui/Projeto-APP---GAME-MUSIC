@@ -8,6 +8,7 @@ import com.desafiomusical.app.data.repository.PlayerRepository
 import com.desafiomusical.app.data.repository.PlayerRepositoryImpl
 import com.desafiomusical.app.data.repository.SongRepository
 import com.desafiomusical.app.data.repository.SongRepositoryImpl
+import com.desafiomusical.app.data.room.CatalogAssetSource
 import com.desafiomusical.app.data.room.DesafioMusicalDatabase
 import com.desafiomusical.app.domain.GameEngine
 import kotlinx.coroutines.CoroutineScope
@@ -27,7 +28,7 @@ class AppContainer(context: Context) {
     private val database: DesafioMusicalDatabase =
         DesafioMusicalDatabase.getInstance(context, applicationScope)
 
-    val songRepository: SongRepository = SongRepositoryImpl(database.songDao())
+    val songRepository: SongRepository = SongRepositoryImpl(database.songDao(), CatalogAssetSource(context))
     val playerRepository: PlayerRepository = PlayerRepositoryImpl(database.playerDao())
     val gameHistoryRepository: GameHistoryRepository = GameHistoryRepositoryImpl(
         gameDao = database.gameDao(),

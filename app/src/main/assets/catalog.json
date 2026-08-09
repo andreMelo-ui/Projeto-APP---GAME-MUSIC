@@ -1,0 +1,214 @@
+[
+  {
+    "id": "song-brasileira-001",
+    "title": "Águas de Março",
+    "artist": "Elis Regina & Tom Jobim",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "aKvwnHiJSdk",
+    "hint1": "Uma das duplas mais icônicas da MPB.",
+    "hint2": "A letra é uma enumeração de pequenas coisas do cotidiano.",
+    "hint3": "O título remete ao fim do verão e às chuvas no Brasil.",
+    "tags": [
+      "mpb",
+      "bossa_nova",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-002",
+    "title": "Mas Que Nada",
+    "artist": "Jorge Ben Jor",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "FACIL",
+    "youtubeVideoId": "hg0XftC43Zo",
+    "hint1": "Uma das canções brasileiras mais regravadas no mundo.",
+    "hint2": "Tem uma versão internacional com o grupo Black Eyed Peas.",
+    "hint3": "O refrão repete o próprio título da música.",
+    "tags": [
+      "samba",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-001",
+    "title": "Billie Jean",
+    "artist": "Michael Jackson",
+    "category": "INTERNACIONAL",
+    "work": "Thriller",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "Zi_XLOBDo_Y",
+    "hint1": "O artista é conhecido como o 'Rei do Pop'.",
+    "hint2": "A faixa tem uma das linhas de baixo mais famosas da história.",
+    "hint3": "O clipe tornou o piso iluminado embaixo dos pés um ícone.",
+    "tags": [
+      "pop",
+      "anos_80",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-002",
+    "title": "Shape of You",
+    "artist": "Ed Sheeran",
+    "category": "INTERNACIONAL",
+    "work": "÷ (Divide)",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "JGwWNGJdvx8",
+    "hint1": "Um dos maiores sucessos pop da década de 2010.",
+    "hint2": "O artista é britânico e costuma se apresentar só com violão.",
+    "hint3": "O título fala sobre a 'forma' de alguém.",
+    "tags": [
+      "pop",
+      "anos_2010"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-001",
+    "title": "Someone Like You",
+    "artist": "Adele",
+    "category": "POPULAR",
+    "work": "21",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "hLQl3WQQoQ0",
+    "hint1": "A cantora britânica venceu diversos prêmios Grammy.",
+    "hint2": "A canção fala sobre reencontrar um antigo amor.",
+    "hint3": "É uma balada tocada ao piano.",
+    "tags": [
+      "pop",
+      "balada"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-002",
+    "title": "Uptown Funk",
+    "artist": "Mark Ronson feat. Bruno Mars",
+    "category": "POPULAR",
+    "work": null,
+    "difficulty": "FACIL",
+    "youtubeVideoId": "OPf0YbXqDm0",
+    "hint1": "A faixa mistura funk, soul e pop.",
+    "hint2": "O clipe é gravado em preto e branco.",
+    "hint3": "O refrão tem a expressão 'don't believe me, just watch'.",
+    "tags": [
+      "funk",
+      "pop"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-001",
+    "title": "Megalovania",
+    "artist": "Toby Fox",
+    "category": "GAMES",
+    "work": "Undertale",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "KK3KXAECte4",
+    "hint1": "Trilha de um RPG independente lançado em 2015.",
+    "hint2": "Toca durante o confronto contra um esqueleto muito forte.",
+    "hint3": "Uma das trilhas de jogos mais remixadas da internet.",
+    "tags": [
+      "rpg",
+      "indie",
+      "chiptune"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-002",
+    "title": "Zelda's Lullaby",
+    "artist": "Koji Kondo",
+    "category": "GAMES",
+    "work": "The Legend of Zelda: Ocarina of Time",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "EPhfbtjqWM8",
+    "hint1": "Trilha de uma franquia de aventura e exploração.",
+    "hint2": "É tocada com um instrumento de sopro dentro do próprio jogo.",
+    "hint3": "Leva o nome de uma princesa élfica.",
+    "tags": [
+      "aventura",
+      "nintendo",
+      "instrumental"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-001",
+    "title": "Hakuna Matata",
+    "artist": "Elton John & Tim Rice",
+    "category": "PERSONAGENS",
+    "work": "O Rei Leão",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "WTQCWzP2X-o",
+    "hint1": "A frase-título é uma expressão em suaíli.",
+    "hint2": "É cantada por um javali e um suricato.",
+    "hint3": "Significa 'sem problemas' e virou filosofia de vida na trama.",
+    "tags": [
+      "animacao",
+      "disney"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-002",
+    "title": "Batman Theme",
+    "artist": "Danny Elfman",
+    "category": "PERSONAGENS",
+    "work": "Batman (1989)",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "ZvrN93B4-3w",
+    "hint1": "Tema instrumental de um herói vigilante de Gotham City.",
+    "hint2": "O compositor também assina trilhas de vários filmes de Tim Burton.",
+    "hint3": "O personagem também é conhecido como 'Cavaleiro das Trevas'.",
+    "tags": [
+      "cinema",
+      "heroi",
+      "instrumental"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-001",
+    "title": "Gurenge",
+    "artist": "LiSA",
+    "category": "ANIME",
+    "work": "Demon Slayer",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "x1FV6IrjZCY",
+    "hint1": "Abertura de um anime ambientado na era Taisho, no Japão.",
+    "hint2": "O protagonista busca curar a irmã transformada em demônio.",
+    "hint3": "A cantora também interpretou o tema 'Homura'.",
+    "tags": [
+      "anime",
+      "abertura",
+      "shonen"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-002",
+    "title": "Zankoku na Tenshi no These",
+    "artist": "Yoko Takahashi",
+    "category": "ANIME",
+    "work": "Neon Genesis Evangelion",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "o6wtDPVkKqI",
+    "hint1": "Abertura de um clássico anime dos anos 90 sobre robôs gigantes.",
+    "hint2": "O título em português é algo como 'A Tese do Anjo Cruel'.",
+    "hint3": "É considerada uma das aberturas de anime mais famosas de todos os tempos.",
+    "tags": [
+      "anime",
+      "abertura",
+      "mecha",
+      "classico"
+    ],
+    "active": true
+  }
+]

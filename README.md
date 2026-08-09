@@ -56,15 +56,15 @@ A especificação exige que toda pontuação, validação de roubo e transição
 
 Entidades: `PlayerEntity`, `SongEntity`, `GameEntity`, `GamePlayerEntity`, `RoundEntity`, `RoundScoreEntity`, `AttemptEntity` — espelhando a seção 28 da especificação (com o campo adicional `stealEnabled` em `GameEntity`, necessário para reconstruir o histórico da regra "Roubo ON/OFF" da seção 4).
 
-O catálogo inicial (`InitialSongCatalog.kt`) é inserido automaticamente na primeira execução via `RoomDatabase.Callback`, com **12 músicas** (2 por categoria): Brasileira, Internacional, Popular, Games, Personagens, Anime.
+O catálogo inicial vive em **`app/src/main/assets/catalog.json`** (não em código Kotlin) e é carregado por `CatalogAssetSource`, tanto no `RoomDatabase.Callback` (primeira instalação) quanto sob demanda em `SongRepositoryImpl.getCatalog()` (proteção contra corrida caso o app seja usado antes do callback terminar). Hoje traz **12 músicas** (2 por categoria): Brasileira, Internacional, Popular, Games, Personagens, Anime. O formato de cada entrada é o `SongDto` (`data/dto/SongDto.kt`).
 
 ### Sobre os YouTube video IDs do catálogo
 
-Os IDs vêm como placeholder (`REPLACE_WITH_YOUTUBE_ID__...`) — a especificação já antecipa isso ("YouTubeVideoId: configurável"). Eu não inventei IDs de vídeo reais porque um ID incorreto levaria a um vídeo errado ou a um erro de reprodução, o que é pior do que deixar explícito que precisa ser preenchido. **Antes de testar a integração com YouTube (Fase 4), edite `data/room/InitialSongCatalog.kt`** e substitua cada placeholder pelo ID real do vídeo oficial correspondente.
+Os IDs vêm como placeholder (`REPLACE_WITH_YOUTUBE_ID__...`) — a especificação já antecipa isso ("YouTubeVideoId: configurável"). Eu não inventei IDs de vídeo reais porque um ID incorreto levaria a um vídeo errado ou a um erro de reprodução, o que é pior do que deixar explícito que precisa ser preenchido. **Antes de testar a integração com YouTube (Fase 4), edite `app/src/main/assets/catalog.json`** e substitua cada placeholder pelo ID real do vídeo oficial correspondente. Veja `scripts/catalog-lookup/` para uma ferramenta de busca assistida via YouTube Data API.
 
 ### Adicionar novas músicas
 
-Adicione entradas em `InitialSongCatalog.songs` (ou insira via `SongDao.upsertAll` em runtime) preenchendo todos os campos, especialmente as 3 dicas progressivas — elas não podem ser vazias nem repetir o título/artista diretamente, conforme a seção 13 da especificação.
+Adicione objetos em `app/src/main/assets/catalog.json` seguindo o schema do `SongDto` (título, artista, categoria, obra, dificuldade, `youtubeVideoId`, 3 dicas, tags). Não precisa recompilar nada além do app — é um asset, não código. As 3 dicas progressivas não podem ser vazias nem repetir o título/artista diretamente, conforme a seção 13 da especificação.
 
 ## Motor de regras — resumo
 

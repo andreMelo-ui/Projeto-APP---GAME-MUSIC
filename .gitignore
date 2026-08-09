@@ -12,3 +12,5 @@ app/build/
 app/schemas/
 *.hprof
 .claude/
+scripts/catalog-lookup/.env
+node_modules/
