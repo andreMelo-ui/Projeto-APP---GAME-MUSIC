@@ -75,12 +75,31 @@ Adicione entradas em `InitialSongCatalog.songs` (ou insira via `SongDao.upsertAl
 - **Cronômetro**: global de 90s, nunca reinicia em erro/roubo; força o fim da rodada mesmo em uma janela de roubo aberta
 - **Roubo**: janela de 5s, primeiro toque (no pass-and-play, quem segura o aparelho registra manualmente), quem erra é eliminado só naquela rodada, escolhedor nunca é elegível
 
-## Executando o projeto
+## Setup do ambiente
 
-1. Abra a pasta do projeto no **Android Studio** (Koala/Ladybug ou mais recente). O Android Studio gera o `gradlew`/`gradle-wrapper.jar` automaticamente na primeira sincronização — este repositório já inclui `gradle/wrapper/gradle-wrapper.properties` apontando para o Gradle 8.9.
-   - Se preferir gerar o wrapper manualmente antes de abrir no Studio: com o Gradle instalado localmente, rode `gradle wrapper --gradle-version 8.9` na raiz do projeto.
-2. Deixe o Android Studio baixar o Android SDK (compileSdk/targetSdk 35, minSdk 26) e sincronizar as dependências.
+### Pré-requisitos
+
+- **JDK 17 ou mais recente** para rodar o Gradle. Qualquer JDK serve (Temurin, Corretto, ou a JBR embutida no Android Studio em `<pasta do Android Studio>/jbr`).
+  - ⚠️ Se sua JDK for **24+** (ex.: a JBR de instalações recentes do Android Studio), use **Gradle 9.5 ou mais recente** — é o que este repositório já traz configurado em `gradle/wrapper/gradle-wrapper.properties`. Versões do Gradle anteriores à 9.x têm um bug de parsing no compilador Kotlin embutido do `kotlin-dsl` que quebra a leitura de `build.gradle.kts` em JDKs 24+ (o erro aparece como `IllegalArgumentException: 25.0.2` ou similar, na avaliação do projeto). Se precisar trocar de versão do Gradle, rode `gradlew wrapper --gradle-version <versão>`.
+- **Android SDK** com `compileSdk`/`targetSdk` 35 e `minSdk` 26. Mais simples via Android Studio (baixa tudo na primeira sincronização); para linha de comando, use as [command-line tools](https://developer.android.com/studio#command-tools) (`sdkmanager`) para instalar `platform-tools` e a plataforma 35.
+- Variável `JAVA_HOME` apontando para a JDK escolhida (necessária tanto para o Android Studio quanto para `./gradlew` via terminal). Não é preciso editar `gradle.properties` — configure `JAVA_HOME` no seu ambiente (ou, se preferir fixar por projeto, use `org.gradle.java.home` no seu `gradle.properties` **local**, fora do controle de versão).
+
+### Via Android Studio (recomendado)
+
+1. Abra a pasta do projeto no **Android Studio** (Koala/Ladybug ou mais recente).
+2. Deixe o Android Studio baixar o Android SDK e sincronizar as dependências.
 3. Rode o módulo `app` em um emulador ou dispositivo físico (API 26+).
+
+### Via linha de comando
+
+```bash
+# usa o wrapper já commitado (gradlew/gradlew.bat) — não precisa instalar Gradle à parte
+./gradlew testDebugUnitTest   # testes unitários
+./gradlew assembleDebug       # compila o APK de debug
+./gradlew installDebug        # instala num emulador/dispositivo já conectado (`adb devices`)
+```
+
+Para rodar num emulador sem abrir o Android Studio: crie um AVD com `avdmanager` (API 26+, `google_apis` recomendado para ter o Play Services básico) e suba com `emulator -avd <nome>`, depois use `adb devices` para confirmar que está visível antes do `installDebug`.
 
 ### Testes
 
