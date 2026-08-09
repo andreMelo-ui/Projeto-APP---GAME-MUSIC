@@ -2,7 +2,8 @@ package com.desafiomusical.app.ui.screens.game
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -27,15 +28,17 @@ import com.desafiomusical.app.ui.components.SecondaryButton
 import com.desafiomusical.app.ui.theme.NeonCyan
 import com.desafiomusical.app.ui.theme.TextSecondary
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun PlayingScreen(
     round: ActiveRoundView,
     elapsedSeconds: Int,
     onRequestHint: () -> Unit,
-    onSubmitAnswer: (titleClaimed: Boolean, artistClaimed: Boolean) -> Unit
+    onSubmitAnswer: (titleClaimed: Boolean, artistClaimed: Boolean, workClaimed: Boolean) -> Unit
 ) {
     var titleClaimed by remember(round.roundNumber) { mutableStateOf(false) }
     var artistClaimed by remember(round.roundNumber) { mutableStateOf(false) }
+    var workClaimed by remember(round.roundNumber) { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -77,9 +80,10 @@ fun PlayingScreen(
             }
         }
 
-        Row(
+        FlowRow(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier.padding(vertical = 16.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp)
         ) {
             FilterChip(
                 selected = titleClaimed,
@@ -99,12 +103,23 @@ fun PlayingScreen(
                     selectedLabelColor = MaterialTheme.colorScheme.onPrimary
                 )
             )
+            if (round.maskedSong.hasWork) {
+                FilterChip(
+                    selected = workClaimed,
+                    onClick = { workClaimed = !workClaimed },
+                    label = { Text("Acertei a Obra") },
+                    colors = FilterChipDefaults.filterChipColors(
+                        selectedContainerColor = MaterialTheme.colorScheme.primary,
+                        selectedLabelColor = MaterialTheme.colorScheme.onPrimary
+                    )
+                )
+            }
         }
 
         PrimaryButton(
             text = "Confirmar Resposta",
-            onClick = { onSubmitAnswer(titleClaimed, artistClaimed) },
-            enabled = titleClaimed || artistClaimed,
+            onClick = { onSubmitAnswer(titleClaimed, artistClaimed, workClaimed) },
+            enabled = titleClaimed || artistClaimed || workClaimed,
             modifier = Modifier.fillMaxWidth()
         )
 

@@ -30,16 +30,16 @@ class GameViewModel(private val container: AppContainer) : ViewModel() {
 
     fun requestHint() = engine.requestHint()
 
-    fun submitMainAnswer(titleClaimed: Boolean, artistClaimed: Boolean) =
-        engine.submitMainAnswer(titleClaimed, artistClaimed)
+    fun submitMainAnswer(titleClaimed: Boolean, artistClaimed: Boolean, workClaimed: Boolean) =
+        engine.submitMainAnswer(titleClaimed, artistClaimed, workClaimed)
 
-    fun confirmMainAnswer(titleCorrect: Boolean, artistCorrect: Boolean) =
-        engine.confirmMainAnswer(titleCorrect, artistCorrect)
+    fun confirmMainAnswer(titleCorrect: Boolean, artistCorrect: Boolean, workCorrect: Boolean) =
+        engine.confirmMainAnswer(titleCorrect, artistCorrect, workCorrect)
 
     fun claimSteal(playerId: String) = engine.claimSteal(playerId)
 
-    fun confirmStealAnswer(titleCorrect: Boolean, artistCorrect: Boolean) =
-        engine.confirmStealAnswer(titleCorrect, artistCorrect)
+    fun confirmStealAnswer(titleCorrect: Boolean, artistCorrect: Boolean, workCorrect: Boolean) =
+        engine.confirmStealAnswer(titleCorrect, artistCorrect, workCorrect)
 
     fun goToNextRound() = engine.goToNextRound()
 

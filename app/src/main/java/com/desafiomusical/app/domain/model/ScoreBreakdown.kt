@@ -5,8 +5,9 @@ data class ScoreBreakdown(
     val timePoints: Int,
     val titlePoints: Int,
     val artistPoints: Int,
+    val workPoints: Int,
     val hintPenalty: Int
 ) {
     val totalPoints: Int
-        get() = timePoints + titlePoints + artistPoints - hintPenalty
+        get() = timePoints + titlePoints + artistPoints + workPoints - hintPenalty
 }

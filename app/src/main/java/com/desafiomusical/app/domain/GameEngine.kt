@@ -244,7 +244,7 @@ class GameEngine(
 
     // ---- Resposta do respondente principal ----
 
-    fun submitMainAnswer(titleClaimed: Boolean, artistClaimed: Boolean) {
+    fun submitMainAnswer(titleClaimed: Boolean, artistClaimed: Boolean, workClaimed: Boolean = false) {
         check(phase == GamePhase.PLAYING) { "Só é possível responder durante PLAYING." }
         transitionTo(GamePhase.ANSWERING)
         _uiState.value = GameUiState.Answering(
@@ -252,23 +252,25 @@ class GameEngine(
             song = currentSong ?: error("Música da rodada não definida."),
             elapsedSeconds = _elapsedSeconds.value,
             titleClaimed = titleClaimed,
-            artistClaimed = artistClaimed
+            artistClaimed = artistClaimed,
+            workClaimed = workClaimed
         )
     }
 
     /** Confirmação feita pelo host/controlador local, com base na música secreta. */
-    fun confirmMainAnswer(titleCorrect: Boolean, artistCorrect: Boolean) {
+    fun confirmMainAnswer(titleCorrect: Boolean, artistCorrect: Boolean, workCorrect: Boolean = false) {
         check(phase == GamePhase.ANSWERING) { "Confirmação só é válida durante ANSWERING." }
         val setup = currentRoundSetup()
-        val outcome = outcomeFor(titleCorrect, artistCorrect)
+        val outcome = outcomeFor(titleCorrect, artistCorrect, workCorrect)
         attempts.add(AttemptRecord(setup.mainResponderId, AttemptType.MAIN_ANSWER, outcome, now()))
 
-        if (titleCorrect || artistCorrect) {
+        if (titleCorrect || artistCorrect || workCorrect) {
             val breakdown = calculateScore(
                 playerId = setup.mainResponderId,
                 elapsedSeconds = _elapsedSeconds.value,
                 titleCorrect = titleCorrect,
                 artistCorrect = artistCorrect,
+                workCorrect = workCorrect,
                 hintsUsed = hintsUsedThisRound
             )
             finalizeRound(winnerId = setup.mainResponderId, breakdown = breakdown)
@@ -345,18 +347,19 @@ class GameEngine(
         )
     }
 
-    fun confirmStealAnswer(titleCorrect: Boolean, artistCorrect: Boolean) {
+    fun confirmStealAnswer(titleCorrect: Boolean, artistCorrect: Boolean, workCorrect: Boolean = false) {
         check(phase == GamePhase.STEAL_ANSWER) { "Confirmação de roubo só é válida durante STEAL_ANSWER." }
         val stealerId = pendingStealerId ?: error("Nenhum roubo pendente.")
-        val outcome = outcomeFor(titleCorrect, artistCorrect)
+        val outcome = outcomeFor(titleCorrect, artistCorrect, workCorrect)
         attempts.add(AttemptRecord(stealerId, AttemptType.STEAL_ANSWER, outcome, now()))
 
-        if (titleCorrect || artistCorrect) {
+        if (titleCorrect || artistCorrect || workCorrect) {
             val breakdown = calculateScore(
                 playerId = stealerId,
                 elapsedSeconds = _elapsedSeconds.value,
                 titleCorrect = titleCorrect,
                 artistCorrect = artistCorrect,
+                workCorrect = workCorrect,
                 hintsUsed = hintsUsedThisRound
             )
             finalizeRound(winnerId = stealerId, breakdown = breakdown)
@@ -367,10 +370,11 @@ class GameEngine(
         }
     }
 
-    private fun outcomeFor(titleCorrect: Boolean, artistCorrect: Boolean): AttemptOutcome = when {
+    private fun outcomeFor(titleCorrect: Boolean, artistCorrect: Boolean, workCorrect: Boolean): AttemptOutcome = when {
         titleCorrect && artistCorrect -> AttemptOutcome.CORRECT_BOTH
         titleCorrect -> AttemptOutcome.CORRECT_TITLE
         artistCorrect -> AttemptOutcome.CORRECT_ARTIST
+        workCorrect -> AttemptOutcome.CORRECT_WORK
         else -> AttemptOutcome.WRONG
     }
 
@@ -508,7 +512,11 @@ class GameEngine(
             eligibleStealers = setup.eligibleStealerIds.map { playerById(it) },
             eliminatedIds = eliminatedThisRound.toSet(),
             hintsRevealedCount = hintsUsedThisRound,
-            pointsAvailableNow = calculateScore.pointsAvailableNow(_elapsedSeconds.value, hintsUsedThisRound)
+            pointsAvailableNow = calculateScore.pointsAvailableNow(
+                _elapsedSeconds.value,
+                hintsUsedThisRound,
+                workAvailable = !song.work.isNullOrBlank()
+            )
         )
     }
 

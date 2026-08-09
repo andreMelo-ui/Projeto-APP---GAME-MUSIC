@@ -30,7 +30,7 @@ import kotlinx.coroutines.launch
         RoundScoreEntity::class,
         AttemptEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 abstract class DesafioMusicalDatabase : RoomDatabase() {
@@ -62,6 +62,9 @@ abstract class DesafioMusicalDatabase : RoomDatabase() {
             DATABASE_NAME
         )
             .addCallback(SeedCatalogCallback(context, applicationScope))
+            // Fase 1, sem release/usuários em produção ainda — histórico local
+            // pode ser descartado com segurança quando o schema evolui.
+            .fallbackToDestructiveMigration()
             .build()
 
         private class SeedCatalogCallback(

@@ -38,10 +38,13 @@ fun AnsweringScreen(
     song: Song,
     titleClaimed: Boolean,
     artistClaimed: Boolean,
-    onConfirm: (titleCorrect: Boolean, artistCorrect: Boolean) -> Unit
+    workClaimed: Boolean = false,
+    onConfirm: (titleCorrect: Boolean, artistCorrect: Boolean, workCorrect: Boolean) -> Unit
 ) {
     var titleCorrect by remember { mutableStateOf(titleClaimed) }
     var artistCorrect by remember { mutableStateOf(artistClaimed) }
+    var workCorrect by remember { mutableStateOf(workClaimed) }
+    val work = song.work
 
     Column(
         modifier = Modifier.fillMaxSize().padding(24.dp),
@@ -63,8 +66,16 @@ fun AnsweringScreen(
             text = "Artista: ${song.artist}",
             style = MaterialTheme.typography.bodyMedium,
             color = TextSecondary,
-            modifier = Modifier.padding(bottom = 24.dp)
+            modifier = Modifier.padding(bottom = if (work.isNullOrBlank()) 24.dp else 4.dp)
         )
+        if (!work.isNullOrBlank()) {
+            Text(
+                text = "Obra: $work",
+                style = MaterialTheme.typography.bodyMedium,
+                color = TextSecondary,
+                modifier = Modifier.padding(bottom = 24.dp)
+            )
+        }
 
         ConfirmToggleRow(
             label = "Acertou o título?",
@@ -76,10 +87,17 @@ fun AnsweringScreen(
             value = artistCorrect,
             onChange = { artistCorrect = it }
         )
+        if (!work.isNullOrBlank()) {
+            ConfirmToggleRow(
+                label = "Acertou a obra?",
+                value = workCorrect,
+                onChange = { workCorrect = it }
+            )
+        }
 
         PrimaryButton(
             text = "Confirmar",
-            onClick = { onConfirm(titleCorrect, artistCorrect) },
+            onClick = { onConfirm(titleCorrect, artistCorrect, workCorrect && !work.isNullOrBlank()) },
             modifier = Modifier.fillMaxWidth().padding(top = 24.dp)
         )
     }

@@ -62,6 +62,7 @@ fun GameHostScreen(container: AppContainer, onExitToHome: () -> Unit) {
             song = current.song,
             titleClaimed = current.titleClaimed,
             artistClaimed = current.artistClaimed,
+            workClaimed = current.workClaimed,
             onConfirm = viewModel::confirmMainAnswer
         )
 

@@ -33,7 +33,8 @@ data class MaskedSong(
     val category: Category,
     val difficulty: Difficulty,
     val youtubeVideoId: String,
-    val hintsRevealed: List<String>
+    val hintsRevealed: List<String>,
+    val hasWork: Boolean
 )
 
 fun Song.mask(hintsRevealedCount: Int): MaskedSong = MaskedSong(
@@ -41,5 +42,6 @@ fun Song.mask(hintsRevealedCount: Int): MaskedSong = MaskedSong(
     category = category,
     difficulty = difficulty,
     youtubeVideoId = youtubeVideoId,
-    hintsRevealed = (1..hintsRevealedCount).map { hintFor(it) }
+    hintsRevealed = (1..hintsRevealedCount).map { hintFor(it) },
+    hasWork = !work.isNullOrBlank()
 )

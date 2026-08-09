@@ -65,4 +65,29 @@ class CalculateScoreUseCaseTest {
         val result = useCase("p1", elapsedSeconds = 10, titleCorrect = true, artistCorrect = true, hintsUsed = 3)
         assertEquals(20 - 6, result.totalPoints)
     }
+
+    @Test
+    fun `acertar a obra soma mais 5 pontos`() {
+        val result = useCase(
+            "p1",
+            elapsedSeconds = 0,
+            titleCorrect = true,
+            artistCorrect = true,
+            workCorrect = true,
+            hintsUsed = 0
+        )
+        assertEquals(25, result.totalPoints)
+    }
+
+    @Test
+    fun `obra nao reivindicada nao soma pontos`() {
+        val result = useCase("p1", elapsedSeconds = 0, titleCorrect = true, artistCorrect = true, hintsUsed = 0)
+        assertEquals(20, result.totalPoints)
+    }
+
+    @Test
+    fun `pontos disponiveis agora incluem bonus de obra quando aplicavel`() {
+        assertEquals(20, useCase.pointsAvailableNow(elapsedSeconds = 0, hintsUsed = 0, workAvailable = false))
+        assertEquals(25, useCase.pointsAvailableNow(elapsedSeconds = 0, hintsUsed = 0, workAvailable = true))
+    }
 }

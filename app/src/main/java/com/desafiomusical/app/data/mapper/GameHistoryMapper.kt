@@ -50,6 +50,7 @@ fun GameSnapshot.toRoundScoreEntities(): List<RoundScoreEntity> = rounds.flatMap
             timePoints = breakdown.timePoints,
             titlePoints = breakdown.titlePoints,
             artistPoints = breakdown.artistPoints,
+            workPoints = breakdown.workPoints,
             hintPenalty = breakdown.hintPenalty,
             totalPoints = breakdown.totalPoints
         )

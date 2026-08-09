@@ -84,7 +84,8 @@ sealed class GameUiState {
         val song: Song,
         val elapsedSeconds: Int,
         val titleClaimed: Boolean,
-        val artistClaimed: Boolean
+        val artistClaimed: Boolean,
+        val workClaimed: Boolean = false
     ) : GameUiState()
 
     data class StealWindow(

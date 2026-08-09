@@ -15,6 +15,7 @@ object ScoringRules {
 
     const val TITLE_POINTS = 5
     const val ARTIST_POINTS = 5
+    const val WORK_POINTS = 5
 
     const val MAX_HINT_PENALTY = 6
 }
@@ -30,12 +31,14 @@ class CalculateScoreUseCase {
         elapsedSeconds: Int,
         titleCorrect: Boolean,
         artistCorrect: Boolean,
+        workCorrect: Boolean = false,
         hintsUsed: Int
     ): ScoreBreakdown = ScoreBreakdown(
         playerId = playerId,
         timePoints = timePointsFor(elapsedSeconds),
         titlePoints = if (titleCorrect) ScoringRules.TITLE_POINTS else 0,
         artistPoints = if (artistCorrect) ScoringRules.ARTIST_POINTS else 0,
+        workPoints = if (workCorrect) ScoringRules.WORK_POINTS else 0,
         hintPenalty = hintPenaltyFor(hintsUsed)
     )
 
@@ -52,9 +55,13 @@ class CalculateScoreUseCase {
         else -> ScoringRules.MAX_HINT_PENALTY
     }
 
-    /** Pontos que o jogador receberia agora, se acertasse título e artista neste instante. */
-    fun pointsAvailableNow(elapsedSeconds: Int, hintsUsed: Int): Int {
-        val max = timePointsFor(elapsedSeconds) + ScoringRules.TITLE_POINTS + ScoringRules.ARTIST_POINTS
+    /**
+     * Pontos que o jogador receberia agora, se acertasse título, artista e
+     * (quando a música tiver uma obra associada) a obra neste instante.
+     */
+    fun pointsAvailableNow(elapsedSeconds: Int, hintsUsed: Int, workAvailable: Boolean = false): Int {
+        val max = timePointsFor(elapsedSeconds) + ScoringRules.TITLE_POINTS + ScoringRules.ARTIST_POINTS +
+            (if (workAvailable) ScoringRules.WORK_POINTS else 0)
         return (max - hintPenaltyFor(hintsUsed)).coerceAtLeast(0)
     }
 }

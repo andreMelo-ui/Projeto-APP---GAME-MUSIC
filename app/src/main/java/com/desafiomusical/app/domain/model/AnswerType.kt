@@ -15,5 +15,6 @@ enum class AttemptOutcome {
     CORRECT_TITLE,
     CORRECT_ARTIST,
     CORRECT_BOTH,
+    CORRECT_WORK,
     WRONG
 }

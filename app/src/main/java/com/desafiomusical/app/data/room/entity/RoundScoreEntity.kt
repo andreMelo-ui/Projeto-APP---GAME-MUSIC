@@ -23,6 +23,7 @@ data class RoundScoreEntity(
     val timePoints: Int,
     val titlePoints: Int,
     val artistPoints: Int,
+    val workPoints: Int,
     val hintPenalty: Int,
     val totalPoints: Int
 )

@@ -69,7 +69,7 @@ Adicione objetos em `app/src/main/assets/catalog.json` seguindo o schema do `Son
 ## Motor de regras — resumo
 
 - **Tempo**: 0–30s = +10 · 31–60s = +5 · 61–90s = +0 (`CalculateScoreUseCase.timePointsFor`)
-- **Bônus**: +5 título certo, +5 artista certo
+- **Bônus**: +5 título certo, +5 artista certo, +5 obra certa (quando a música tiver uma obra associada — jogo, filme, anime etc.; a opção só aparece para músicas com esse campo preenchido). Acertar só a obra, sem título nem artista, já é suficiente pra vencer a rodada.
 - **Dicas**: dica 1 = -1, dica 2 = -2 (acumulado -3), dica 3 = -3 (acumulado -6, teto)
 - **Papéis**: rodízio simples — a cada rodada o escolhedor avança uma posição e o respondente principal é o próximo jogador da lista (`DistributeRolesUseCase`), garantindo distribuição equilibrada e evitando repetição
 - **Cronômetro**: global de 90s, nunca reinicia em erro/roubo; força o fim da rodada mesmo em uma janela de roubo aberta

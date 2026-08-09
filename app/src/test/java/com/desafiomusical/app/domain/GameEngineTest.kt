@@ -14,12 +14,12 @@ import org.junit.Test
 
 class GameEngineTest {
 
-    private fun song(id: String, category: Category = Category.BRASILEIRA) = Song(
+    private fun song(id: String, category: Category = Category.BRASILEIRA, work: String? = null) = Song(
         id = id,
         title = "Título $id",
         artist = "Artista $id",
         category = category,
-        work = null,
+        work = work,
         difficulty = Difficulty.FACIL,
         youtubeVideoId = "yt-$id",
         hint1 = "dica 1",
@@ -141,6 +141,48 @@ class GameEngineTest {
         val result = (engine.uiState.value as GameUiState.RoundResult).result
         assertNull(result.winner)
         assertEquals(0, result.pointsAwarded)
+    }
+
+    @Test
+    fun `acertar titulo, artista e obra soma 25 pontos`() = runTest {
+        val engine = GameEngine(scope = backgroundScope)
+        engine.setCatalog(listOf(song("s1", work = "Jogo Exemplo")))
+        engine.startGame(GameConfig(players = fourPlayers(), roundCount = 5, stealEnabled = true))
+        advanceToPlaying(engine)
+
+        engine.submitMainAnswer(titleClaimed = true, artistClaimed = true, workClaimed = true)
+        val answering = engine.uiState.value as GameUiState.Answering
+        assertTrue(answering.workClaimed)
+
+        engine.confirmMainAnswer(titleCorrect = true, artistCorrect = true, workCorrect = true)
+        val result = (engine.uiState.value as GameUiState.RoundResult).result
+
+        assertEquals(25, result.pointsAwarded)
+    }
+
+    @Test
+    fun `acertar somente a obra ja vence a rodada`() = runTest {
+        val engine = GameEngine(scope = backgroundScope)
+        engine.setCatalog(listOf(song("s1", work = "Jogo Exemplo")))
+        engine.startGame(GameConfig(players = fourPlayers(), roundCount = 5, stealEnabled = true))
+        advanceToPlaying(engine)
+
+        engine.submitMainAnswer(titleClaimed = false, artistClaimed = false, workClaimed = true)
+        engine.confirmMainAnswer(titleCorrect = false, artistCorrect = false, workCorrect = true)
+        val result = (engine.uiState.value as GameUiState.RoundResult).result
+
+        // Rodada 1: respondente principal = p2 (Maria).
+        assertEquals("p2", result.winner?.id)
+        assertEquals(15, result.pointsAwarded) // 10 (tempo, 0s) + 5 (obra)
+    }
+
+    @Test
+    fun `musica sem obra nao mostra opcao de obra na tela de resposta`() = runTest {
+        val engine = newGame(backgroundScope)
+        advanceToPlaying(engine)
+        val playing = engine.uiState.value as GameUiState.Playing
+
+        assertTrue(!playing.round.maskedSong.hasWork)
     }
 
     @Test
