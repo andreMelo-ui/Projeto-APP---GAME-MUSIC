@@ -67,6 +67,15 @@ abstract class DesafioMusicalDatabase : RoomDatabase() {
             .fallbackToDestructiveMigration()
             .build()
 
+        /**
+         * Só cobre a primeira instalação (a tabela ainda nem existe antes
+         * disso). Reinstalações com `catalog.json` atualizado são cobertas de
+         * forma síncrona por [com.desafiomusical.app.data.repository.SongRepositoryImpl.getCatalog],
+         * que sempre re-sincroniza antes de ler — um `onOpen` assíncrono aqui
+         * criaria uma corrida com a primeira leitura do catálogo ao iniciar
+         * uma partida (a leitura pode vencer o upsert e devolver dados
+         * velhos).
+         */
         private class SeedCatalogCallback(
             private val context: Context,
             private val applicationScope: CoroutineScope

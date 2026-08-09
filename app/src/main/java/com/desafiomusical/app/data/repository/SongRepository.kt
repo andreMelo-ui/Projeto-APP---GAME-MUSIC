@@ -20,16 +20,16 @@ class SongRepositoryImpl(
     override fun observeCatalog(): Flow<List<Song>> =
         songDao.observeActive().map { entities -> entities.map { it.toDomain() } }
 
-    // O seed inicial (RoomDatabase.Callback.onCreate) roda em uma coroutine separada
-    // e pode não ter terminado ainda na primeira leitura (ex.: usuário navega rápido
-    // para "Nova Partida" logo após o primeiro install). Semeia sob demanda para não
-    // depender dessa corrida.
+    // Sempre resincroniza com o asset antes de ler: cobre tanto a primeira
+    // leitura logo após o install (o seed do RoomDatabase.Callback.onCreate
+    // roda numa coroutine separada e pode não ter terminado ainda) quanto
+    // reinstalações em cima de um banco antigo, cujo catalog.json mudou
+    // desde então (novas músicas, IDs do YouTube preenchidos) — sem isso, o
+    // Room nunca resincroniza sozinho depois da primeira vez.
+    // upsertAll é idempotente (REPLACE por id), então repetir é seguro e
+    // nunca apaga músicas que tenham sido removidas do JSON.
     override suspend fun getCatalog(): List<Song> {
-        var entities = songDao.getActiveCatalog()
-        if (entities.isEmpty()) {
-            songDao.upsertAll(catalogAssetSource.loadCatalog())
-            entities = songDao.getActiveCatalog()
-        }
-        return entities.map { it.toDomain() }
+        songDao.upsertAll(catalogAssetSource.loadCatalog())
+        return songDao.getActiveCatalog().map { it.toDomain() }
     }
 }
