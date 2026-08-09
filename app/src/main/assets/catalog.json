@@ -210,5 +210,1898 @@
       "classico"
     ],
     "active": true
+  },
+  {
+    "id": "song-brasileira-003",
+    "title": "Garota de Ipanema",
+    "artist": "Tom Jobim & Vinicius de Moraes",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "FACIL",
+    "youtubeVideoId": "rOAGNjCYprY",
+    "hint1": "Uma bossa nova inspirada por uma jovem que passava todos os dias por um bar em Ipanema.",
+    "hint2": "É uma das canções brasileiras mais gravadas no mundo todo, com versões em várias línguas.",
+    "hint3": "A letra descreve o balanço de quem passa 'cheia de graça'.",
+    "tags": [
+      "bossa_nova",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-004",
+    "title": "Aquarela do Brasil",
+    "artist": "Ary Barroso",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "r3Zjp1AO9lI",
+    "hint1": "Composta na década de 1930, é considerada o primeiro grande samba-exaltação do país.",
+    "hint2": "A letra celebra as belezas e contrastes do Brasil como se fosse uma pintura.",
+    "hint3": "Ficou mundialmente conhecida após aparecer num desenho animado da Disney dos anos 1940.",
+    "tags": [
+      "samba",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-005",
+    "title": "Construção",
+    "artist": "Chico Buarque",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "suia_i5dEZc",
+    "hint1": "Cada verso termina com uma palavra esdrúxula, um recurso raro na música popular.",
+    "hint2": "Conta a história de um operário e sua rotina até um acidente fatal.",
+    "hint3": "É considerada uma das canções mais bem construídas (no sentido literal) da MPB.",
+    "tags": [
+      "mpb",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-006",
+    "title": "A Banda",
+    "artist": "Chico Buarque",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "FACIL",
+    "youtubeVideoId": "n-uywG1_GnI",
+    "hint1": "Fala sobre uma banda de música que passa pela rua e transforma o dia de quem assiste.",
+    "hint2": "Foi um dos maiores sucessos de um dos maiores compositores da MPB, lançada em 1966.",
+    "hint3": "O refrão descreve pessoas tristes que ficam felizes ao ver a banda passar.",
+    "tags": [
+      "mpb",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-007",
+    "title": "Sozinho",
+    "artist": "Caetano Veloso",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "j9UbE1slI-Q",
+    "hint1": "Um dos maiores nomes do Tropicalismo, também conhecido por participar da Bahia dos anos 1960.",
+    "hint2": "A canção fala sobre a solidão e o desejo de companhia.",
+    "hint3": "Ganhou uma versão muito popular na voz de Caetano e também foi regravada por artistas de pagode.",
+    "tags": [
+      "mpb",
+      "tropicalia"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-008",
+    "title": "Aquele Abraço",
+    "artist": "Gilberto Gil",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "zFGMLQ3q15c",
+    "hint1": "Composta quando o autor voltava do exílio imposto pela ditadura militar.",
+    "hint2": "Cita vários bairros e símbolos do Rio de Janeiro.",
+    "hint3": "O título virou uma saudação carinhosa usada até hoje no Brasil.",
+    "tags": [
+      "mpb",
+      "tropicalia"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-009",
+    "title": "Tempo Perdido",
+    "artist": "Legião Urbana",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "zpzoG5KGaHg",
+    "hint1": "Uma das bandas mais importantes do rock brasileiro dos anos 1980, de Brasília.",
+    "hint2": "A letra fala sobre viver o presente sem medo do amanhã.",
+    "hint3": "Tem um dos versos mais citados do rock nacional: 'Todos os dias quando acordo...'.",
+    "tags": [
+      "rock_nacional",
+      "anos_80"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-010",
+    "title": "Que País É Este",
+    "artist": "Legião Urbana",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "vA-3BYOW2wo",
+    "hint1": "Uma crítica direta à situação política e social do Brasil.",
+    "hint2": "É da mesma banda de Brasília responsável por 'Tempo Perdido'.",
+    "hint3": "O título é também a pergunta central repetida ao longo da canção.",
+    "tags": [
+      "rock_nacional",
+      "anos_80"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-011",
+    "title": "Epitáfio",
+    "artist": "Titãs",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "7TunQUJdy1E",
+    "hint1": "Uma balada melancólica de uma banda paulistana formada nos anos 1980.",
+    "hint2": "A letra fala sobre arrependimentos e sonhos não realizados.",
+    "hint3": "O título é a palavra usada para inscrições em túmulos.",
+    "tags": [
+      "rock_nacional",
+      "balada"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-012",
+    "title": "Ideologia",
+    "artist": "Cazuza",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "hfsxcebq5Rc",
+    "hint1": "O artista foi vocalista do Barão Vermelho antes de seguir carreira solo.",
+    "hint2": "A canção critica a falta de posicionamento político das pessoas.",
+    "hint3": "Tem o verso marcante: 'Ideologia, eu quero uma pra viver'.",
+    "tags": [
+      "rock_nacional",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-013",
+    "title": "Ouro de Tolo",
+    "artist": "Raul Seixas",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "7MSCzIxhFKI",
+    "hint1": "Um dos maiores nomes do rock brasileiro, conhecido por misturar rock com maracatu e baião.",
+    "hint2": "A canção critica o consumismo e a busca por riqueza vazia.",
+    "hint3": "O título se refere a um mineral que parece ouro, mas não vale nada.",
+    "tags": [
+      "rock_nacional",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-014",
+    "title": "Emoções",
+    "artist": "Roberto Carlos",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "FACIL",
+    "youtubeVideoId": "sS7dMnE30OM",
+    "hint1": "Um dos artistas mais populares da música romântica brasileira, apelidado de 'Rei'.",
+    "hint2": "A canção fala sobre viver intensamente cada sentimento.",
+    "hint3": "O refrão repete a própria palavra que dá nome à música.",
+    "tags": [
+      "romantico",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-015",
+    "title": "Sorte Grande",
+    "artist": "Ivete Sangalo",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "FACIL",
+    "youtubeVideoId": "ZEaI-ZQ9yMs",
+    "hint1": "Uma das maiores estrelas do axé music, natural da Bahia.",
+    "hint2": "A canção celebra a felicidade de ter encontrado um grande amor.",
+    "hint3": "Virou hino de casamentos por todo o Brasil.",
+    "tags": [
+      "axe",
+      "festa"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-016",
+    "title": "Vai Malandra",
+    "artist": "Anitta",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "kDhptBT_-VI",
+    "hint1": "Uma das cantoras brasileiras mais conhecidas internacionalmente na década de 2010.",
+    "hint2": "A música mistura funk carioca com batidas eletrônicas.",
+    "hint3": "O clipe foi gravado em uma favela do Rio de Janeiro e gerou repercussão nacional.",
+    "tags": [
+      "funk",
+      "anos_2010"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-017",
+    "title": "Ai Se Eu Te Pego",
+    "artist": "Michel Teló",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "FACIL",
+    "youtubeVideoId": "hcm55lU9knw",
+    "hint1": "Um sucesso do sertanejo universitário que estourou também fora do Brasil.",
+    "hint2": "Foi comemorada por jogadores de futebol famosos em campo.",
+    "hint3": "O refrão vira 'Nossa, nossa...' antes da frase-título.",
+    "tags": [
+      "sertanejo",
+      "anos_2010"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-018",
+    "title": "É uma Partida de Futebol",
+    "artist": "Skank",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "kVvhHgWwgWA",
+    "hint1": "Uma banda mineira que mistura rock, reggae e pop.",
+    "hint2": "A letra compara a vida amorosa a uma partida esportiva.",
+    "hint3": "Tem um dos refrões mais dançantes do pop rock brasileiro dos anos 1990.",
+    "tags": [
+      "rock_nacional",
+      "anos_90"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-019",
+    "title": "Minha Alma (A Paz Que Eu Não Quero)",
+    "artist": "O Rappa",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "vF1Ad3hrdzY",
+    "hint1": "Uma banda carioca que mistura rock, reggae e ritmos afro-brasileiros.",
+    "hint2": "A letra fala sobre inquietação e recusa de uma paz que na verdade é acomodação.",
+    "hint3": "O título entre parênteses é quase tão famoso quanto o título principal.",
+    "tags": [
+      "rock_nacional",
+      "reggae"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-brasileira-020",
+    "title": "Como Nossos Pais",
+    "artist": "Elis Regina",
+    "category": "BRASILEIRA",
+    "work": null,
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "HB_H1KgpDoc",
+    "hint1": "Composta por Belchior, ganhou uma das interpretações mais marcantes da música brasileira.",
+    "hint2": "Fala sobre a diferença entre gerações e a repetição de padrões dos pais nos filhos.",
+    "hint3": "É cantada por uma das maiores intérpretes da MPB, que também gravou 'Águas de Março'.",
+    "tags": [
+      "mpb",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-003",
+    "title": "Bohemian Rhapsody",
+    "artist": "Queen",
+    "category": "INTERNACIONAL",
+    "work": "A Night at the Opera",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "fJ9rUzIMcZQ",
+    "hint1": "Uma das canções mais ousadas do rock, com seções de balada, ópera e hard rock na mesma faixa.",
+    "hint2": "O vocalista da banda é considerado um dos maiores frontmen da história do rock.",
+    "hint3": "Tem a famosa pergunta repetida: 'Is this the real life? Is this just fantasy?'.",
+    "tags": [
+      "rock",
+      "anos_70",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-004",
+    "title": "Hotel California",
+    "artist": "Eagles",
+    "category": "INTERNACIONAL",
+    "work": "Hotel California",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "dLl4PZtxia8",
+    "hint1": "Uma banda americana de rock/country dos anos 1970, famosa por harmonias vocais.",
+    "hint2": "A letra descreve um hotel misterioso do qual é impossível sair.",
+    "hint3": "Tem um dos solos de guitarra mais aclamados da história do rock.",
+    "tags": [
+      "rock",
+      "anos_70",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-005",
+    "title": "Imagine",
+    "artist": "John Lennon",
+    "category": "INTERNACIONAL",
+    "work": "Imagine",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "VOgFZfRVaww",
+    "hint1": "Composta por um dos quatro integrantes dos Beatles em carreira solo.",
+    "hint2": "A letra convida a imaginar um mundo sem fronteiras nem religião.",
+    "hint3": "O título é também a primeira palavra da canção.",
+    "tags": [
+      "rock",
+      "anos_70",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-006",
+    "title": "Smells Like Teen Spirit",
+    "artist": "Nirvana",
+    "category": "INTERNACIONAL",
+    "work": "Nevermind",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "hTWKbfoikeg",
+    "hint1": "Definiu o som do grunge no início dos anos 1990.",
+    "hint2": "O vocalista e guitarrista da banda se tornou um símbolo da geração X.",
+    "hint3": "O clipe se passa numa quadra de basquete tomada por um show caótico.",
+    "tags": [
+      "grunge",
+      "anos_90"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-007",
+    "title": "Stairway to Heaven",
+    "artist": "Led Zeppelin",
+    "category": "INTERNACIONAL",
+    "work": "Led Zeppelin IV",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "X791IzOwt3Q",
+    "hint1": "Considerada por muitos críticos a melhor canção de rock já gravada.",
+    "hint2": "Começa suave, com flauta doce, e termina em um clímax elétrico.",
+    "hint3": "O título fala sobre uma escada em direção ao céu.",
+    "tags": [
+      "rock",
+      "anos_70",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-008",
+    "title": "Thriller",
+    "artist": "Michael Jackson",
+    "category": "INTERNACIONAL",
+    "work": "Thriller",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "sOnqjkJTMaA",
+    "hint1": "O clipe dessa música é considerado um dos mais influentes da história, com direção de John Landis.",
+    "hint2": "Tem uma famosa coreografia de zumbis.",
+    "hint3": "É a faixa-título do álbum mais vendido da história.",
+    "tags": [
+      "pop",
+      "anos_80",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-009",
+    "title": "I Want It That Way",
+    "artist": "Backstreet Boys",
+    "category": "INTERNACIONAL",
+    "work": null,
+    "difficulty": "FACIL",
+    "youtubeVideoId": "4fndeDfaWCg",
+    "hint1": "Um dos maiores hinos do boy band pop dos anos 1990.",
+    "hint2": "O grupo é formado por cinco integrantes americanos.",
+    "hint3": "O refrão repete a frase-título diversas vezes.",
+    "tags": [
+      "pop",
+      "anos_90"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-010",
+    "title": "Wonderwall",
+    "artist": "Oasis",
+    "category": "INTERNACIONAL",
+    "work": "(What's the Story) Morning Glory?",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "bx1Bh8ZvH84",
+    "hint1": "Uma banda britânica marcada pela rivalidade entre os irmãos que a lideravam.",
+    "hint2": "É um dos hinos do britpop dos anos 1990.",
+    "hint3": "O título virou até meme sobre gente que aprende violão só pra tocar essa música.",
+    "tags": [
+      "britpop",
+      "anos_90",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-011",
+    "title": "My Heart Will Go On",
+    "artist": "Celine Dion",
+    "category": "INTERNACIONAL",
+    "work": "Titanic",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "9bFHsd3o1w0",
+    "hint1": "Tema de um filme sobre um naufrágio famoso de 1912.",
+    "hint2": "A cantora canadense é conhecida por sua voz potente e baladas românticas.",
+    "hint3": "Toca nos créditos finais de um dos filmes mais assistidos da história do cinema.",
+    "tags": [
+      "pop",
+      "trilha_de_filme",
+      "balada"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-012",
+    "title": "Sweet Child O' Mine",
+    "artist": "Guns N' Roses",
+    "category": "INTERNACIONAL",
+    "work": "Appetite for Destruction",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "1w7OgIMMRc4",
+    "hint1": "Uma banda de hard rock de Los Angeles conhecida por seu vocalista de voz estridente.",
+    "hint2": "Tem um dos riffs de guitarra mais reconhecíveis do rock oitentista.",
+    "hint3": "A letra fala sobre os olhos de uma garota que parecem um céu azul de verão.",
+    "tags": [
+      "hard_rock",
+      "anos_80",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-013",
+    "title": "Africa",
+    "artist": "Toto",
+    "category": "INTERNACIONAL",
+    "work": "Toto IV",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "FTQbiNvZqaY",
+    "hint1": "Uma banda de soft rock/AOR americana formada por músicos de estúdio de Los Angeles.",
+    "hint2": "A canção virou febre de memes décadas depois de seu lançamento.",
+    "hint3": "Fala sobre 'abençoar as chuvas' que caem na África.",
+    "tags": [
+      "soft_rock",
+      "anos_80",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-014",
+    "title": "Livin' on a Prayer",
+    "artist": "Bon Jovi",
+    "category": "INTERNACIONAL",
+    "work": "Slippery When Wet",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "lDK9QqIzhwk",
+    "hint1": "Um clássico do rock americano dos anos 1980 sobre um casal chamado Tommy e Gina.",
+    "hint2": "O vocalista da banda dá nome ao próprio grupo.",
+    "hint3": "O refrão diz que eles estão 'na metade do caminho' e precisam segurar firme.",
+    "tags": [
+      "rock",
+      "anos_80",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-015",
+    "title": "I Will Always Love You",
+    "artist": "Whitney Houston",
+    "category": "INTERNACIONAL",
+    "work": "The Bodyguard",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "3JWTaaS7LdU",
+    "hint1": "Originalmente composta por Dolly Parton, ganhou versão icônica em um filme dos anos 1990.",
+    "hint2": "A intérprete tinha uma das vozes mais potentes da música pop.",
+    "hint3": "Tem uma nota longa e sustentada antes do refrão final que ficou famosa.",
+    "tags": [
+      "pop",
+      "balada",
+      "trilha_de_filme"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-016",
+    "title": "Purple Rain",
+    "artist": "Prince",
+    "category": "INTERNACIONAL",
+    "work": "Purple Rain",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "iSBVeZrDfGY",
+    "hint1": "Um dos artistas mais inovadores do pop/funk, conhecido por misturar rock, soul e R&B.",
+    "hint2": "A faixa-título de um filme semi-autobiográfico de 1984.",
+    "hint3": "O título remete a uma cor associada à identidade visual do artista.",
+    "tags": [
+      "funk",
+      "anos_80",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-017",
+    "title": "Yesterday",
+    "artist": "The Beatles",
+    "category": "INTERNACIONAL",
+    "work": "Help!",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "NrgmdOz227I",
+    "hint1": "Uma das canções mais regravadas da história, com mais de 2 mil versões conhecidas.",
+    "hint2": "É de uma banda britânica formada por quatro rapazes de Liverpool.",
+    "hint3": "A letra fala sobre saudade de um tempo em que os problemas pareciam distantes.",
+    "tags": [
+      "rock",
+      "anos_60",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-018",
+    "title": "Rehab",
+    "artist": "Amy Winehouse",
+    "category": "INTERNACIONAL",
+    "work": "Back to Black",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "KUmZp8pR1uc",
+    "hint1": "Uma cantora britânica de soul conhecida por sua voz rouca e visual marcante.",
+    "hint2": "A letra fala sobre a recusa em entrar numa clínica de reabilitação.",
+    "hint3": "O refrão repete 'They tried to make me go to rehab, but I said no, no, no'.",
+    "tags": [
+      "soul",
+      "anos_2000"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-019",
+    "title": "Uptown Girl",
+    "artist": "Billy Joel",
+    "category": "INTERNACIONAL",
+    "work": "An Innocent Man",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "hCuMWrfXG4E",
+    "hint1": "Um pianista e cantor americano conhecido por composições melódicas dos anos 1970-80.",
+    "hint2": "A letra fala sobre um rapaz simples tentando conquistar uma garota rica.",
+    "hint3": "Foi regravada anos depois pelo grupo Westlife.",
+    "tags": [
+      "pop",
+      "anos_80"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-internacional-020",
+    "title": "Take On Me",
+    "artist": "a-ha",
+    "category": "INTERNACIONAL",
+    "work": "Hunting High and Low",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "djV11Xbc914",
+    "hint1": "Uma banda norueguesa famosa por um clipe que mistura desenho animado e live-action.",
+    "hint2": "O vocalista atinge uma nota extremamente aguda no refrão.",
+    "hint3": "O título convida alguém a 'te levar' para algum lugar.",
+    "tags": [
+      "synth_pop",
+      "anos_80",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-003",
+    "title": "Blinding Lights",
+    "artist": "The Weeknd",
+    "category": "POPULAR",
+    "work": "After Hours",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "4NRXx6U8ABQ",
+    "hint1": "Um cantor canadense conhecido pela mistura de R&B com synth-pop dos anos 1980.",
+    "hint2": "O clipe mostra o artista dirigindo por uma cidade à noite, com um visual quase de terror.",
+    "hint3": "Foi uma das músicas mais tocadas do mundo no início da década de 2020.",
+    "tags": [
+      "pop",
+      "anos_2020"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-004",
+    "title": "Bad Guy",
+    "artist": "Billie Eilish",
+    "category": "POPULAR",
+    "work": "When We All Fall Asleep, Where Do We Go?",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "DyDfgMOUjCI",
+    "hint1": "Uma cantora americana conhecida por um estilo sussurrado e sombrio.",
+    "hint2": "A faixa tem um batidão grave que marca o refrão.",
+    "hint3": "O título é a frase que ela repete dizendo ser o 'vilão' da história.",
+    "tags": [
+      "pop",
+      "anos_2010"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-005",
+    "title": "Levitating",
+    "artist": "Dua Lipa",
+    "category": "POPULAR",
+    "work": "Future Nostalgia",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "TUVcZfQe-Kw",
+    "hint1": "Uma cantora britânica de origem albanesa conhecida pelo estilo disco-pop.",
+    "hint2": "A canção fala sobre uma sensação de estar flutuando de tão apaixonada.",
+    "hint3": "Ganhou uma versão remix com a rapper DaBaby.",
+    "tags": [
+      "pop",
+      "disco",
+      "anos_2020"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-006",
+    "title": "As It Was",
+    "artist": "Harry Styles",
+    "category": "POPULAR",
+    "work": "Harry's House",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "H5v3kku4y6Q",
+    "hint1": "Ex-integrante de uma boy band britânica que estourou como artista solo.",
+    "hint2": "A música fala sobre mudanças e nostalgia de um tempo passado.",
+    "hint3": "O título é também a primeira frase cantada na música.",
+    "tags": [
+      "pop",
+      "anos_2020"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-007",
+    "title": "Anti-Hero",
+    "artist": "Taylor Swift",
+    "category": "POPULAR",
+    "work": "Midnights",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "b1kbLwvqugk",
+    "hint1": "Uma das artistas mais premiadas da década, conhecida por narrar sua vida nas letras.",
+    "hint2": "A canção fala sobre inseguranças e autocrítica.",
+    "hint3": "O clipe mostra a artista literalmente se encarando em situações bizarras.",
+    "tags": [
+      "pop",
+      "anos_2020"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-008",
+    "title": "Flowers",
+    "artist": "Miley Cyrus",
+    "category": "POPULAR",
+    "work": "Endless Summer Vacation",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "G7KNmW9a75Y",
+    "hint1": "Ex-atriz mirim de um canal infantil que se tornou uma das vozes mais fortes do pop.",
+    "hint2": "A letra fala sobre autoamor após o fim de um relacionamento.",
+    "hint3": "O refrão diz que ela mesma pode comprar flores para si.",
+    "tags": [
+      "pop",
+      "anos_2020"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-009",
+    "title": "Espresso",
+    "artist": "Sabrina Carpenter",
+    "category": "POPULAR",
+    "work": "Short n' Sweet",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "eVli-tstM5E",
+    "hint1": "Uma cantora americana que também atuou em séries de TV antes de estourar no pop.",
+    "hint2": "A letra brinca com a ideia de deixar alguém sem dormir, 'que nem cafeína'.",
+    "hint3": "O título é o nome de um tipo de café bem forte.",
+    "tags": [
+      "pop",
+      "anos_2020"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-010",
+    "title": "Peaches",
+    "artist": "Justin Bieber",
+    "category": "POPULAR",
+    "work": "Justice",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "tQ0yjYUFKAE",
+    "hint1": "Um cantor canadense que começou a carreira ainda adolescente no YouTube.",
+    "hint2": "A música tem participação de Daniel Caesar e Giveon.",
+    "hint3": "O refrão fala sobre pêssegos vindos da Geórgia.",
+    "tags": [
+      "pop",
+      "rnb",
+      "anos_2020"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-011",
+    "title": "Old Town Road",
+    "artist": "Lil Nas X",
+    "category": "POPULAR",
+    "work": null,
+    "difficulty": "FACIL",
+    "youtubeVideoId": "r7qovpFAGrQ",
+    "hint1": "Uma mistura inusitada de country com trap que quebrou recordes de permanência nas paradas.",
+    "hint2": "Ganhou uma versão remix com o cantor country Billy Ray Cyrus.",
+    "hint3": "A letra fala sobre andar a cavalo por uma estrada rural.",
+    "tags": [
+      "trap",
+      "country",
+      "anos_2010"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-012",
+    "title": "Havana",
+    "artist": "Camila Cabello",
+    "category": "POPULAR",
+    "work": "Camila",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "BQ0mxQXmLsk",
+    "hint1": "Uma cantora nascida em Cuba que também fez parte de um grupo pop antes da carreira solo.",
+    "hint2": "A música tem participação do rapper Young Thug.",
+    "hint3": "O título é o nome da capital cubana.",
+    "tags": [
+      "pop",
+      "anos_2010"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-013",
+    "title": "Señorita",
+    "artist": "Shawn Mendes & Camila Cabello",
+    "category": "POPULAR",
+    "work": null,
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "Pkh8UtuejGw",
+    "hint1": "Uma dupla de cantores que namoraram na vida real por um tempo depois de gravar essa parceria.",
+    "hint2": "A palavra do título é uma forma educada de se referir a uma moça em espanhol.",
+    "hint3": "O clipe mostra os dois artistas em cenas de romance à beira-mar.",
+    "tags": [
+      "pop",
+      "anos_2010"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-014",
+    "title": "Cheap Thrills",
+    "artist": "Sia",
+    "category": "POPULAR",
+    "work": null,
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "nYh-n7EOtMA",
+    "hint1": "Uma cantora australiana conhecida por esconder o rosto com perucas em suas aparições.",
+    "hint2": "A música fala sobre se divertir sem precisar gastar dinheiro.",
+    "hint3": "Tem uma versão com participação do rapper Sean Paul.",
+    "tags": [
+      "pop",
+      "anos_2010"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-015",
+    "title": "Roar",
+    "artist": "Katy Perry",
+    "category": "POPULAR",
+    "work": "Prism",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "CevxZvSJLk8",
+    "hint1": "Uma cantora americana conhecida por clipes coloridos e cheios de referências pop.",
+    "hint2": "A letra é sobre encontrar a própria força depois de ficar calada por muito tempo.",
+    "hint3": "O título imita o som que um tigre ou leão faz.",
+    "tags": [
+      "pop",
+      "anos_2010"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-016",
+    "title": "Timber",
+    "artist": "Pitbull ft. Kesha",
+    "category": "POPULAR",
+    "work": null,
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "hHUbLv4ThOo",
+    "hint1": "Um rapper cubano-americano conhecido por hits de festa e colaborações internacionais.",
+    "hint2": "A parceira dessa faixa também é conhecida por hits como 'Tik Tok'.",
+    "hint3": "O título é o grito usado por madeireiros quando uma árvore está caindo.",
+    "tags": [
+      "pop",
+      "dance",
+      "anos_2010"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-017",
+    "title": "Umbrella",
+    "artist": "Rihanna",
+    "category": "POPULAR",
+    "work": "Good Girl Gone Bad",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "CvBfHwUxHIk",
+    "hint1": "Uma cantora nascida em Barbados que se tornou uma das maiores estrelas pop do mundo.",
+    "hint2": "A música fala sobre estar ao lado de alguém em momentos difíceis, 'debaixo do guarda-chuva'.",
+    "hint3": "Tem participação do rapper Jay-Z na introdução.",
+    "tags": [
+      "pop",
+      "rnb",
+      "anos_2000"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-018",
+    "title": "Circles",
+    "artist": "Post Malone",
+    "category": "POPULAR",
+    "work": "Hollywood's Bleeding",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "wXhTHyIgQ_U",
+    "hint1": "Um cantor americano conhecido por misturar hip-hop, pop e rock em suas músicas.",
+    "hint2": "A letra fala sobre um relacionamento que parece estar sempre 'dando voltas', sem resolução.",
+    "hint3": "O título remete à forma geométrica que dá nome à música.",
+    "tags": [
+      "pop",
+      "anos_2010"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-019",
+    "title": "Say So",
+    "artist": "Doja Cat",
+    "category": "POPULAR",
+    "work": "Hot Pink",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "pok8H_KF1FA",
+    "hint1": "Uma cantora americana que ficou famosa por músicas virais em redes sociais de dança.",
+    "hint2": "Ganhou uma versão remix com participação da rapper Nicki Minaj.",
+    "hint3": "O título é um convite para que a pessoa amada apenas 'diga assim' o que sente.",
+    "tags": [
+      "pop",
+      "anos_2020"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-popular-020",
+    "title": "Attention",
+    "artist": "Charlie Puth",
+    "category": "POPULAR",
+    "work": "Voicenotes",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "nfs8NYg7yQM",
+    "hint1": "Um cantor e produtor americano que também compôs para vários outros artistas pop.",
+    "hint2": "A letra é sobre perceber que um ex só quer atenção, não reconciliação de verdade.",
+    "hint3": "O título é a própria palavra que ele diz que a pessoa está pedindo.",
+    "tags": [
+      "pop",
+      "anos_2010"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-003",
+    "title": "Tema Principal (Super Mario Bros.)",
+    "artist": "Koji Kondo",
+    "category": "GAMES",
+    "work": "Super Mario Bros.",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "nsff88sufkI",
+    "hint1": "Um dos temas mais reconhecíveis de todos os games, tocado num jogo de plataforma de 1985.",
+    "hint2": "O compositor também assina trilhas de outra franquia famosa de aventura élfica.",
+    "hint3": "Toca enquanto um encanador italiano corre e pula por fases cheias de cogumelos e canos verdes.",
+    "tags": [
+      "plataforma",
+      "nintendo",
+      "instrumental"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-004",
+    "title": "Korobeiniki (Tetris)",
+    "artist": "trad., arr. Hirokazu Tanaka",
+    "category": "GAMES",
+    "work": "Tetris",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "NmCCQxVBfyM",
+    "hint1": "Originalmente é uma canção folclórica russa do século 19.",
+    "hint2": "Ficou mundialmente famosa como trilha de um jogo de encaixar peças geométricas.",
+    "hint3": "É tocada em um dos jogos de quebra-cabeça mais vendidos da história.",
+    "tags": [
+      "puzzle",
+      "instrumental",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-005",
+    "title": "Still Alive",
+    "artist": "Jonathan Coulton",
+    "category": "GAMES",
+    "work": "Portal",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "yDuVYVsif_M",
+    "hint1": "Toca nos créditos finais de um jogo de puzzle em primeira pessoa com portais.",
+    "hint2": "É cantada do ponto de vista de uma inteligência artificial vilã chamada GLaDOS.",
+    "hint3": "O título garante, de forma irônica, que 'ainda está viva'.",
+    "tags": [
+      "puzzle",
+      "indie"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-006",
+    "title": "One-Winged Angel",
+    "artist": "Nobuo Uematsu",
+    "category": "GAMES",
+    "work": "Final Fantasy VII",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "nNms5rOaGlk",
+    "hint1": "Trilha de batalha contra o vilão mais icônico de uma franquia japonesa de RPG.",
+    "hint2": "Mistura coro em latim com orquestra sinfônica, algo raro em jogos da época.",
+    "hint3": "O título faz referência a uma única asa que o vilão ganha na forma final.",
+    "tags": [
+      "rpg",
+      "orquestral"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-007",
+    "title": "Baba Yetu",
+    "artist": "Christopher Tin",
+    "category": "GAMES",
+    "work": "Civilization IV",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "IJiHDmyhE1A",
+    "hint1": "Foi a primeira composição escrita para um videogame a ganhar um prêmio Grammy.",
+    "hint2": "A letra é o Pai Nosso cantado em suaíli.",
+    "hint3": "Toca na tela de abertura de um jogo de estratégia sobre construir uma civilização.",
+    "tags": [
+      "estrategia",
+      "orquestral"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-008",
+    "title": "Song of Storms",
+    "artist": "Koji Kondo",
+    "category": "GAMES",
+    "work": "The Legend of Zelda: Ocarina of Time",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "UtgHZaq0EGs",
+    "hint1": "Uma melodia tocada num instrumento de sopro para fazer chover dentro do jogo.",
+    "hint2": "É de uma franquia de aventura estrelada por um herói vestido de verde.",
+    "hint3": "O título fala sobre uma canção capaz de convocar tempestades.",
+    "tags": [
+      "aventura",
+      "nintendo",
+      "instrumental"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-009",
+    "title": "Sweden",
+    "artist": "C418",
+    "category": "GAMES",
+    "work": "Minecraft – Volume Alpha",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "xIQrC4CerB8",
+    "hint1": "Trilha ambiente de um jogo sandbox onde tudo é feito de blocos.",
+    "hint2": "O compositor é alemão, apesar do título remeter a outro país escandinavo.",
+    "hint3": "É uma das faixas mais reconhecíveis de um jogo sobre construir e explorar mundos com cubos.",
+    "tags": [
+      "sandbox",
+      "ambiente",
+      "instrumental"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-010",
+    "title": "Dragonborn",
+    "artist": "Jeremy Soule",
+    "category": "GAMES",
+    "work": "The Elder Scrolls V: Skyrim",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "813-3iL5OsE",
+    "hint1": "Tema de abertura de um RPG de mundo aberto ambientado numa terra gelada cheia de dragões.",
+    "hint2": "Tem um coro cantando em uma língua fictícia inventada para os dragões do jogo.",
+    "hint3": "O título é o nome dado ao herói capaz de absorver a alma dos dragões.",
+    "tags": [
+      "rpg",
+      "orquestral",
+      "mundo_aberto"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-011",
+    "title": "Halo Theme",
+    "artist": "Martin O'Donnell",
+    "category": "GAMES",
+    "work": "Halo: Combat Evolved",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "UR032e6qJPk",
+    "hint1": "Abre um jogo de tiro em primeira pessoa estrelado por um soldado chamado Master Chief.",
+    "hint2": "Combina canto gregoriano com uma orquestra épica.",
+    "hint3": "O título é o nome do anel espacial gigante que dá nome à franquia.",
+    "tags": [
+      "tiro",
+      "orquestral",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-012",
+    "title": "Snake Eater",
+    "artist": "Norihiko Hibino",
+    "category": "GAMES",
+    "work": "Metal Gear Solid 3: Snake Eater",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "m2OR_JaXDaM",
+    "hint1": "Tema de abertura estilo James Bond de um jogo de espionagem passado na Guerra Fria.",
+    "hint2": "É cantada como se fosse trilha de filme de espião dos anos 1960.",
+    "hint3": "O título faz referência ao codinome do protagonista, que precisa comer cobras para sobreviver.",
+    "tags": [
+      "furtividade",
+      "espionagem"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-013",
+    "title": "To Zanarkand",
+    "artist": "Nobuo Uematsu",
+    "category": "GAMES",
+    "work": "Final Fantasy X",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "4pzxfgzhOvE",
+    "hint1": "Uma peça instrumental melancólica ao piano que abre um RPG japonês.",
+    "hint2": "É tocada por uma personagem chamada Lenne dentro da história do jogo.",
+    "hint3": "O título é o nome de uma cidade que só existe como memória, destruída antes da trama começar.",
+    "tags": [
+      "rpg",
+      "instrumental",
+      "piano"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-014",
+    "title": "Green Hill Zone",
+    "artist": "Masato Nakamura",
+    "category": "GAMES",
+    "work": "Sonic the Hedgehog",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "NaAb1s0MCQQ",
+    "hint1": "Trilha da primeira fase de um jogo estrelado por um ouriço azul supersônico.",
+    "hint2": "O compositor também é integrante de uma banda de rock japonesa chamada Dreams Come True.",
+    "hint3": "O nome da fase remete a colinas verdes cheias de looping e anéis dourados.",
+    "tags": [
+      "plataforma",
+      "classico",
+      "instrumental"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-015",
+    "title": "Gwyn, Lord of Cinder",
+    "artist": "Motoi Sakuraba",
+    "category": "GAMES",
+    "work": "Dark Souls",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "3bqLGebDRIY",
+    "hint1": "Trilha da batalha final contra o último chefe de um RPG conhecido pela dificuldade extrema.",
+    "hint2": "O compositor também assina trilhas de RPGs como Star Ocean e Tales of.",
+    "hint3": "O título é o nome do rei que acendeu a Primeira Chama do jogo.",
+    "tags": [
+      "rpg",
+      "orquestral",
+      "dificil"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-016",
+    "title": "Corridors of Time",
+    "artist": "Yasunori Mitsuda",
+    "category": "GAMES",
+    "work": "Chrono Trigger",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "BXo3DrXHY8w",
+    "hint1": "Trilha etérea de um RPG clássico sobre viagem no tempo, lançado em 1995.",
+    "hint2": "O compositor trabalhou no jogo mesmo estando hospitalizado por exaustão durante a produção.",
+    "hint3": "O título remete a passagens que ligam diferentes épocas da história.",
+    "tags": [
+      "rpg",
+      "classico",
+      "instrumental"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-017",
+    "title": "Pokémon Center",
+    "artist": "Junichi Masuda",
+    "category": "GAMES",
+    "work": "Pokémon Red e Blue",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "MjZIjHu0OfY",
+    "hint1": "Toca no lugar onde os jogadores curam suas criaturinhas de bolso.",
+    "hint2": "É uma das melodias mais nostálgicas para quem jogou os primeiros jogos da franquia nos anos 1990.",
+    "hint3": "O nome do local remete a um 'centro' de cura dentro do universo dos monstrinhos colecionáveis.",
+    "tags": [
+      "rpg",
+      "nintendo",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-018",
+    "title": "At Doom's Gate",
+    "artist": "Bobby Prince",
+    "category": "GAMES",
+    "work": "Doom",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "PEm7uWjXw_Q",
+    "hint1": "Trilha frenética de um dos primeiros grandes jogos de tiro em primeira pessoa, de 1993.",
+    "hint2": "Tem influências claras de bandas de metal como Metallica e Pantera.",
+    "hint3": "O título remete aos 'portões do inferno' que o protagonista precisa enfrentar.",
+    "tags": [
+      "tiro",
+      "metal",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-019",
+    "title": "Bloody Tears",
+    "artist": "Kinuyo Yamashita",
+    "category": "GAMES",
+    "work": "Castlevania II: Simon's Quest",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "r6xpEV-W60I",
+    "hint1": "Trilha de um jogo clássico de plataforma sobre caçadores de vampiros.",
+    "hint2": "É uma das melodias mais remixadas da era 8-bit dos videogames.",
+    "hint3": "O título fala sobre lágrimas de sangue.",
+    "tags": [
+      "plataforma",
+      "classico",
+      "8bit"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-games-020",
+    "title": "Go Straight",
+    "artist": "Yuzo Koshiro",
+    "category": "GAMES",
+    "work": "Streets of Rage",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "xIMbpmyHKMg",
+    "hint1": "Trilha eletrônica de um jogo de luta de rua (beat 'em up) do início dos anos 1990.",
+    "hint2": "O compositor é conhecido por misturar house music com trilhas de videogame.",
+    "hint3": "O título é uma instrução direta: 'siga em frente'.",
+    "tags": [
+      "luta",
+      "eletronica",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-003",
+    "title": "Let It Go",
+    "artist": "Idina Menzel",
+    "category": "PERSONAGENS",
+    "work": "Frozen",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "YVVTZgwYwVo",
+    "hint1": "Canção de uma princesa que decide se libertar dos próprios medos e viver sozinha num castelo de gelo.",
+    "hint2": "Foi um fenômeno mundial após o lançamento de uma animação de 2013.",
+    "hint3": "O título é o comando para simplesmente 'deixar ir' o que a prendia.",
+    "tags": [
+      "animacao",
+      "disney"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-004",
+    "title": "A Whole New World",
+    "artist": "Peabo Bryson & Regina Belle",
+    "category": "PERSONAGENS",
+    "work": "Aladdin",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "4UM55ZuZdNo",
+    "hint1": "Um dueto romântico cantado durante um passeio de tapete voador.",
+    "hint2": "É de uma animação clássica ambientada num reino árabe fictício chamado Agrabah.",
+    "hint3": "O título descreve 'um mundo totalmente novo' que se abre para a protagonista.",
+    "tags": [
+      "animacao",
+      "disney"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-005",
+    "title": "Circle of Life",
+    "artist": "Carmen Twillie & Lebo M",
+    "category": "PERSONAGENS",
+    "work": "O Rei Leão",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "GibiNy4d4gc",
+    "hint1": "Abre uma animação sobre a apresentação de um filhote de leão a todo o reino animal.",
+    "hint2": "Tem trechos cantados em zulu logo no início.",
+    "hint3": "O título fala sobre o 'círculo da vida' que conecta todos os seres.",
+    "tags": [
+      "animacao",
+      "disney"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-006",
+    "title": "Under the Sea",
+    "artist": "Samuel E. Wright",
+    "category": "PERSONAGENS",
+    "work": "A Pequena Sereia",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "GC_mV1IpjWA",
+    "hint1": "Cantada por um caranguejo tentando convencer uma sereia a ficar no oceano.",
+    "hint2": "É de uma animação sobre uma princesa do mar que sonha em ser humana.",
+    "hint3": "O título convida a ficar 'debaixo do mar' em vez de subir à superfície.",
+    "tags": [
+      "animacao",
+      "disney"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-007",
+    "title": "Beauty and the Beast",
+    "artist": "Celine Dion & Peabo Bryson",
+    "category": "PERSONAGENS",
+    "work": "A Bela e a Fera",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "ippaCca4L6A",
+    "hint1": "Tema-título de uma animação sobre uma jovem que se apaixona por um príncipe amaldiçoado.",
+    "hint2": "É cantada durante uma cena de dança clássica num salão de baile.",
+    "hint3": "O título descreve os dois protagonistas: uma moça e uma criatura monstruosa.",
+    "tags": [
+      "animacao",
+      "disney"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-008",
+    "title": "You've Got a Friend in Me",
+    "artist": "Randy Newman",
+    "category": "PERSONAGENS",
+    "work": "Toy Story",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "1MPZRcyTrcU",
+    "hint1": "Tema de amizade de uma animação sobre brinquedos que ganham vida quando ninguém olha.",
+    "hint2": "É associada especialmente a um cowboy de brinquedo chamado Woody.",
+    "hint3": "O título garante que você tem 'um amigo' em quem confiar.",
+    "tags": [
+      "animacao",
+      "pixar"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-009",
+    "title": "I'll Make a Man Out of You",
+    "artist": "Donny Osmond",
+    "category": "PERSONAGENS",
+    "work": "Mulan",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "HOG1evML8vs",
+    "hint1": "Canção de treinamento militar de uma animação inspirada numa lenda chinesa.",
+    "hint2": "É cantada por um capitão tentando transformar recrutas desajeitados em soldados.",
+    "hint3": "O título promete transformar alguém 'num homem', mesmo a protagonista sendo uma mulher disfarçada.",
+    "tags": [
+      "animacao",
+      "disney"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-010",
+    "title": "Friend Like Me",
+    "artist": "Robin Williams",
+    "category": "PERSONAGENS",
+    "work": "Aladdin",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "pF4OH-6NgFY",
+    "hint1": "Cantada por um gênio azul cheio de energia recém-saído de uma lâmpada mágica.",
+    "hint2": "O ator que dá voz ao personagem era famoso por improvisações e imitações.",
+    "hint3": "O título promete que não existe 'um amigo como eu' em lugar nenhum.",
+    "tags": [
+      "animacao",
+      "disney"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-011",
+    "title": "Spider-Man (tema clássico de 1967)",
+    "artist": "Paul Francis Webster & Bob Harris",
+    "category": "PERSONAGENS",
+    "work": "Spider-Man (série animada de 1967)",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "5Z8N9TTvKeQ",
+    "hint1": "Tema de abertura de um super-herói que balança entre prédios usando teias.",
+    "hint2": "Ficou tão famoso que foi regravado por diversas bandas ao longo das décadas.",
+    "hint3": "A letra pergunta repetidamente: será ele forte? Será ele rápido?",
+    "tags": [
+      "heroi",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-012",
+    "title": "Imperial March",
+    "artist": "John Williams",
+    "category": "PERSONAGENS",
+    "work": "Star Wars: O Império Contra-Ataca",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "aMfVH43AP9Y",
+    "hint1": "Tema sombrio associado a um vilão que respira pesado e usa uma capa preta.",
+    "hint2": "É tocado toda vez que esse personagem entra em cena numa saga espacial.",
+    "hint3": "O título remete à marcha de um império galáctico.",
+    "tags": [
+      "cinema",
+      "instrumental",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-013",
+    "title": "Tema do Superman",
+    "artist": "John Williams",
+    "category": "PERSONAGENS",
+    "work": "Superman: O Filme",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "78N2SP6JFaI",
+    "hint1": "Tema orquestral triunfante de um herói que voa e tem força sobre-humana.",
+    "hint2": "O compositor também assina trilhas de outra franquia espacial muito famosa.",
+    "hint3": "O personagem também é conhecido como 'o Homem de Aço'.",
+    "tags": [
+      "heroi",
+      "instrumental",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-014",
+    "title": "Tema de James Bond",
+    "artist": "Monty Norman",
+    "category": "PERSONAGENS",
+    "work": "007 contra o Satânico Dr. No",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "Vr6yscEWPYw",
+    "hint1": "Tema instrumental associado a um espião britânico elegante com licença para matar.",
+    "hint2": "É reconhecido por um riff de guitarra surf característico.",
+    "hint3": "O personagem se identifica sempre pelo sobrenome, seguido do número '007'.",
+    "tags": [
+      "cinema",
+      "instrumental",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-015",
+    "title": "He's a Pirate",
+    "artist": "Klaus Badelt",
+    "category": "PERSONAGENS",
+    "work": "Piratas do Caribe: A Maldição do Pérola Negra",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "BuYf0taXoNw",
+    "hint1": "Tema instrumental épico de um filme sobre piratas amaldiçoados no Caribe.",
+    "hint2": "É associado a um capitão excêntrico interpretado por Johnny Depp.",
+    "hint3": "O título descreve simplesmente que 'ele é um pirata'.",
+    "tags": [
+      "cinema",
+      "instrumental"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-016",
+    "title": "Ghostbusters",
+    "artist": "Ray Parker Jr.",
+    "category": "PERSONAGENS",
+    "work": "Caça-Fantasmas",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "Fe93CLbHjxQ",
+    "hint1": "Tema-título de um filme sobre um grupo que captura fantasmas em Nova York.",
+    "hint2": "A letra pergunta repetidamente: 'quem você vai chamar?'.",
+    "hint3": "O título é o apelido dado à equipe de caçadores de assombrações.",
+    "tags": [
+      "cinema",
+      "anos_80",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-017",
+    "title": "Tema do Ursinho Pooh",
+    "artist": "Richard M. & Robert B. Sherman",
+    "category": "PERSONAGENS",
+    "work": "As Aventuras de Ursinho Pooh",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "C7JvP-iL0tE",
+    "hint1": "Tema de um urso amante de mel que vive na Floresta dos Cem Acres.",
+    "hint2": "Os compositores também assinam canções de outras animações clássicas da Disney.",
+    "hint3": "O personagem principal é conhecido por sua barriga redonda e camiseta vermelha.",
+    "tags": [
+      "animacao",
+      "disney"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-018",
+    "title": "Scooby-Doo, Where Are You!",
+    "artist": "David Mook & Ben Raleigh",
+    "category": "PERSONAGENS",
+    "work": "Scooby-Doo, Where Are You!",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "NZ1YzFVqPQ0",
+    "hint1": "Tema de um cachorro medroso que resolve mistérios ao lado de quatro amigos numa van colorida.",
+    "hint2": "A letra pergunta repetidamente onde o protagonista está.",
+    "hint3": "O nome do cão-título também é uma expressão de surpresa que ele costuma dizer.",
+    "tags": [
+      "animacao",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-019",
+    "title": "Tema de Missão Impossível",
+    "artist": "Lalo Schifrin",
+    "category": "PERSONAGENS",
+    "work": "Missão Impossível (série de TV)",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "O07WucFwdq8",
+    "hint1": "Tema instrumental de suspense com uma contagem de compasso incomum, em 5/4.",
+    "hint2": "É associado a um agente secreto que recebe missões que 'se ele decidir aceitar'.",
+    "hint3": "Ficou ainda mais famoso após virar franquia de filmes estrelada por Tom Cruise.",
+    "tags": [
+      "cinema",
+      "instrumental",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-personagens-020",
+    "title": "Pantera Cor-de-Rosa (Tema)",
+    "artist": "Henry Mancini",
+    "category": "PERSONAGENS",
+    "work": "A Pantera Cor-de-Rosa",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "wDoDYEFIMas",
+    "hint1": "Tema instrumental jazzístico associado a um felino animado cor-de-rosa.",
+    "hint2": "O compositor é um dos nomes mais premiados da música de cinema.",
+    "hint3": "O personagem-título também dá nome a um famoso diamante fictício na trama original.",
+    "tags": [
+      "cinema",
+      "instrumental",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-003",
+    "title": "Guren no Yumiya",
+    "artist": "Linked Horizon",
+    "category": "ANIME",
+    "work": "Attack on Titan",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "2B6nj38AdD0",
+    "hint1": "Abertura enérgica de um anime sobre humanidade cercada por muralhas contra gigantes devoradores.",
+    "hint2": "É cantada em japonês, mas tem trechos com pronúncia estilizada de palavras em alemão.",
+    "hint3": "O título traduz-se como algo próximo de 'flecha carmesim'.",
+    "tags": [
+      "anime",
+      "abertura",
+      "shonen"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-004",
+    "title": "Again",
+    "artist": "Yui",
+    "category": "ANIME",
+    "work": "Fullmetal Alchemist: Brotherhood",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "REPLACE_WITH_YOUTUBE_ID__AGAIN",
+    "hint1": "Abertura de um anime sobre dois irmãos alquimistas em busca de recuperar seus corpos.",
+    "hint2": "A cantora japonesa também é conhecida por trilhas de outros animes populares.",
+    "hint3": "O título em inglês significa simplesmente 'de novo'.",
+    "tags": [
+      "anime",
+      "abertura",
+      "shonen"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-005",
+    "title": "Sign",
+    "artist": "FLOW",
+    "category": "ANIME",
+    "work": "Naruto Shippuden",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "_N5JJ18iv54",
+    "hint1": "Uma das muitas aberturas de um anime sobre um ninja loiro hiperativo.",
+    "hint2": "É de uma banda japonesa de rock conhecida por várias aberturas dessa mesma franquia.",
+    "hint3": "O título é uma palavra em inglês que significa 'sinal'.",
+    "tags": [
+      "anime",
+      "abertura",
+      "shonen"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-006",
+    "title": "We Are!",
+    "artist": "Hiroshi Kitadani",
+    "category": "ANIME",
+    "work": "One Piece",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "YoeP9w5UIlg",
+    "hint1": "Abertura original de um anime sobre piratas em busca de um tesouro lendário.",
+    "hint2": "Está entre as canções de abertura mais duradouras da história dos animes.",
+    "hint3": "O título é a afirmação 'nós somos!', repetida com energia no refrão.",
+    "tags": [
+      "anime",
+      "abertura",
+      "shonen"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-007",
+    "title": "Tank!",
+    "artist": "The Seatbelts",
+    "category": "ANIME",
+    "work": "Cowboy Bebop",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "REPLACE_WITH_YOUTUBE_ID__TANK",
+    "hint1": "Abertura instrumental de jazz de um anime sobre caçadores de recompensas no espaço.",
+    "hint2": "A banda foi formada especialmente para compor a trilha desse anime.",
+    "hint3": "O título é uma palavra curta que também nomeia um tipo de veículo militar.",
+    "tags": [
+      "anime",
+      "abertura",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-008",
+    "title": "Butter-Fly",
+    "artist": "Kōji Wada",
+    "category": "ANIME",
+    "work": "Digimon Adventure",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "REPLACE_WITH_YOUTUBE_ID__BUTTER_FLY",
+    "hint1": "Abertura de um anime sobre crianças que viajam para um mundo digital cheio de monstros.",
+    "hint2": "O cantor faleceu em 2016 e é lembrado como voz definitiva dessa franquia.",
+    "hint3": "O título é escrito com um hífen no meio da palavra 'borboleta' em inglês.",
+    "tags": [
+      "anime",
+      "abertura",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-009",
+    "title": "Unravel",
+    "artist": "TK from Ling tosite sigure",
+    "category": "ANIME",
+    "work": "Tokyo Ghoul",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "Fve_lHIPa-I",
+    "hint1": "Abertura sombria de um anime sobre um estudante que se torna metade humano, metade ghoul.",
+    "hint2": "O cantor também é vocalista de uma banda de rock experimental japonesa.",
+    "hint3": "O título fala sobre algo se 'desfazendo' ou se 'desenrolando'.",
+    "tags": [
+      "anime",
+      "abertura",
+      "seinen"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-010",
+    "title": "The Day",
+    "artist": "Porno Graffitti",
+    "category": "ANIME",
+    "work": "My Hero Academia",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "REPLACE_WITH_YOUTUBE_ID__THE_DAY",
+    "hint1": "Abertura de um anime sobre um mundo onde quase todo mundo nasce com superpoderes.",
+    "hint2": "É de uma banda de rock japonesa formada nos anos 1990.",
+    "hint3": "O título em inglês significa simplesmente 'o dia'.",
+    "tags": [
+      "anime",
+      "abertura",
+      "shonen"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-011",
+    "title": "Idol",
+    "artist": "YOASOBI",
+    "category": "ANIME",
+    "work": "Oshi no Ko",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "ZRtdQ81jPUQ",
+    "hint1": "Abertura de um anime sobre o mundo por trás da indústria de ídolos japoneses.",
+    "hint2": "É de uma dupla japonesa formada por um compositor e uma vocalista, muito popular no streaming.",
+    "hint3": "O título é a palavra em inglês para 'ídolo'.",
+    "tags": [
+      "anime",
+      "abertura",
+      "anos_2020"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-012",
+    "title": "Kick Back",
+    "artist": "Kenshi Yonezu",
+    "category": "ANIME",
+    "work": "Chainsaw Man",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "REPLACE_WITH_YOUTUBE_ID__KICK_BACK",
+    "hint1": "Abertura de um anime sobre um rapaz que pode se transformar num demônio com motosserras.",
+    "hint2": "O artista japonês também compôs 'Peace Sign', outra abertura de anime famosa.",
+    "hint3": "O título é uma expressão em inglês para 'reagir' ou 'dar o troco'.",
+    "tags": [
+      "anime",
+      "abertura",
+      "seinen"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-013",
+    "title": "Zenzenzense",
+    "artist": "RADWIMPS",
+    "category": "ANIME",
+    "work": "Your Name (Kimi no Na wa)",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "Mw66DyjQxBI",
+    "hint1": "Tema central de um filme de animação sobre dois adolescentes que trocam de corpo.",
+    "hint2": "A banda japonesa compôs toda a trilha sonora desse longa dirigido por Makoto Shinkai.",
+    "hint3": "O título pode ser traduzido como algo entre 'vidas passadas' ou 'muito antes'.",
+    "tags": [
+      "anime",
+      "cinema",
+      "trilha_de_filme"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-014",
+    "title": "Cha-La Head-Cha-La",
+    "artist": "Hironobu Kageyama",
+    "category": "ANIME",
+    "work": "Dragon Ball Z",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "pYnLO7MVKno",
+    "hint1": "Abertura clássica de um anime sobre guerreiros que acumulam poder através de batalhas e esferas mágicas.",
+    "hint2": "O refrão tem uma expressão inventada, sem tradução literal, repetida várias vezes.",
+    "hint3": "É uma das aberturas de anime mais reconhecidas fora do Japão.",
+    "tags": [
+      "anime",
+      "abertura",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-015",
+    "title": "Moonlight Densetsu",
+    "artist": "DALI",
+    "category": "ANIME",
+    "work": "Sailor Moon",
+    "difficulty": "FACIL",
+    "youtubeVideoId": "wvfbyYopYnU",
+    "hint1": "Abertura de um anime sobre garotas guerreiras que lutam vestidas de marinheiro.",
+    "hint2": "O título mistura inglês e japonês, e significa algo como 'lenda do luar'.",
+    "hint3": "É uma das aberturas de anime mais icônicas dos anos 1990 no Ocidente.",
+    "tags": [
+      "anime",
+      "abertura",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-016",
+    "title": "Change the World",
+    "artist": "V6",
+    "category": "ANIME",
+    "work": "Inuyasha",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "REPLACE_WITH_YOUTUBE_ID__CHANGE_THE_WORLD",
+    "hint1": "Abertura de um anime sobre uma garota que viaja no tempo até o Japão feudal.",
+    "hint2": "É cantada por um grupo masculino japonês formado por seis integrantes.",
+    "hint3": "O título em inglês significa 'mudar o mundo'.",
+    "tags": [
+      "anime",
+      "abertura",
+      "classico"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-017",
+    "title": "The WORLD",
+    "artist": "Nightmare",
+    "category": "ANIME",
+    "work": "Death Note",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "REPLACE_WITH_YOUTUBE_ID__THE_WORLD",
+    "hint1": "Abertura de um anime sobre um caderno capaz de matar quem tiver o nome escrito nele.",
+    "hint2": "É de uma banda japonesa de visual kei conhecida por trilhas sombrias.",
+    "hint3": "O título, em letras maiúsculas, é a palavra em inglês para 'mundo'.",
+    "tags": [
+      "anime",
+      "abertura",
+      "seinen"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-018",
+    "title": "Snow Fairy",
+    "artist": "FUNKIST",
+    "category": "ANIME",
+    "work": "Fairy Tail",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "sCxyiE1pI0k",
+    "hint1": "Abertura animada de um anime sobre uma guilda de magos aventureiros.",
+    "hint2": "É de uma banda japonesa formada especialmente com influências de reggae e ska.",
+    "hint3": "O título fala sobre uma 'fada da neve'.",
+    "tags": [
+      "anime",
+      "abertura",
+      "shonen"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-019",
+    "title": "Imagination",
+    "artist": "SPYAIR",
+    "category": "ANIME",
+    "work": "Haikyuu!!",
+    "difficulty": "MEDIO",
+    "youtubeVideoId": "REPLACE_WITH_YOUTUBE_ID__IMAGINATION",
+    "hint1": "Abertura de um anime sobre um time colegial de vôlei tentando chegar ao topo.",
+    "hint2": "É de uma banda de rock japonesa que também assina outras aberturas esportivas.",
+    "hint3": "O título em inglês significa 'imaginação'.",
+    "tags": [
+      "anime",
+      "abertura",
+      "esporte"
+    ],
+    "active": true
+  },
+  {
+    "id": "song-anime-020",
+    "title": "Itsumo Nando Demo",
+    "artist": "Youmi Kimura",
+    "category": "ANIME",
+    "work": "A Viagem de Chihiro",
+    "difficulty": "DIFICIL",
+    "youtubeVideoId": "REPLACE_WITH_YOUTUBE_ID__ITSUMO_NANDO_DEMO",
+    "hint1": "Tema de encerramento de um filme do Studio Ghibli sobre uma menina presa num mundo de espíritos.",
+    "hint2": "É uma canção suave, cantada sobre um piano simples.",
+    "hint3": "O título pode ser traduzido como 'sempre, quantas vezes for preciso'.",
+    "tags": [
+      "anime",
+      "cinema",
+      "ghibli"
+    ],
+    "active": true
   }
 ]
