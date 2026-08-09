@@ -73,7 +73,7 @@ fun YoutubeAudioPlayer(
         if (videoId != null && videoId != loadedVideoId) {
             loadedVideoId = videoId
             webView.loadDataWithBaseURL(
-                "https://www.youtube.com",
+                PLAYER_ORIGIN,
                 buildPlayerHtml(videoId),
                 "text/html",
                 "utf-8",
@@ -87,7 +87,8 @@ fun YoutubeAudioPlayer(
 
     LaunchedEffect(isPlaying, loadedVideoId) {
         if (loadedVideoId != null) {
-            webView.evaluateJavascript(if (isPlaying) "playVideo();" else "pauseVideo();", null)
+            val call = if (isPlaying) "playVideo();" else "pauseVideo();"
+            webView.evaluateJavascript("try { $call } catch (e) {}", null)
         }
     }
 
@@ -96,13 +97,13 @@ fun YoutubeAudioPlayer(
         val observer = LifecycleEventObserver { _, event ->
             when (event) {
                 Lifecycle.Event.ON_PAUSE -> {
-                    webView.evaluateJavascript("pauseVideo();", null)
+                    webView.evaluateJavascript("try { pauseVideo(); } catch (e) {}", null)
                     webView.onPause()
                 }
                 Lifecycle.Event.ON_RESUME -> {
                     webView.onResume()
                     if (currentIsPlaying) {
-                        webView.evaluateJavascript("playVideo();", null)
+                        webView.evaluateJavascript("try { playVideo(); } catch (e) {}", null)
                     }
                 }
                 else -> Unit
@@ -117,6 +118,16 @@ fun YoutubeAudioPlayer(
     }
 }
 
+/**
+ * Origem "fake" usada como baseURL do WebView — precisa ser qualquer https
+ * que NÃO seja youtube.com: carregar a página como se já fosse
+ * https://www.youtube.com faz o widget da IFrame API rejeitar o próprio
+ * embed (loop de auto-embedding), retornando `onError` com um código não
+ * documentado (152) quase instantaneamente, antes de qualquer tentativa
+ * real de buffering.
+ */
+private const val PLAYER_ORIGIN = "https://desafiomusical.app"
+
 private fun buildPlayerHtml(videoId: String): String = """
     <!DOCTYPE html>
     <html>
@@ -130,7 +141,7 @@ private fun buildPlayerHtml(videoId: String): String = """
                 height: '1',
                 width: '1',
                 videoId: '$videoId',
-                playerVars: { autoplay: 1, controls: 0, playsinline: 1 },
+                playerVars: { autoplay: 1, controls: 0, playsinline: 1, origin: '$PLAYER_ORIGIN' },
                 events: {
                     'onReady': function(e) { e.target.playVideo(); },
                     'onError': function(e) { AndroidBridge.reportError(e.data); }
