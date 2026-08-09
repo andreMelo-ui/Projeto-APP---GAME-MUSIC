@@ -12,7 +12,7 @@ App Android de party game musical (Kotlin + Jetpack Compose), implementado a par
 | Fluxo pass-and-play (Home → Setup → Rodadas → Placar Final) | ✅ Completo |
 | Testes unitários de regras (pontuação, papéis, máquina de estados) | ✅ Completo |
 | Multiplayer local (NSD/sockets, salas, QR Code) | ⏳ Fase 3 — apenas contratos (`RoomSession`, `GameEvent`) prontos |
-| Player do YouTube embutido | ⏳ Fase 4 — `youtubeVideoId` já modelado, UI de player ainda não |
+| Player do YouTube embutido | ✅ Completo — áudio via IFrame Player API oficial em WebView, sem exibir vídeo/miniatura |
 | Histórico/estatísticas na UI, conquistas | ⏳ Fase 6 — persistência já implementada, tela de histórico é um placeholder |
 
 ## Arquitetura
@@ -56,11 +56,11 @@ A especificação exige que toda pontuação, validação de roubo e transição
 
 Entidades: `PlayerEntity`, `SongEntity`, `GameEntity`, `GamePlayerEntity`, `RoundEntity`, `RoundScoreEntity`, `AttemptEntity` — espelhando a seção 28 da especificação (com o campo adicional `stealEnabled` em `GameEntity`, necessário para reconstruir o histórico da regra "Roubo ON/OFF" da seção 4).
 
-O catálogo inicial vive em **`app/src/main/assets/catalog.json`** (não em código Kotlin) e é carregado por `CatalogAssetSource`, tanto no `RoomDatabase.Callback` (primeira instalação) quanto sob demanda em `SongRepositoryImpl.getCatalog()` (proteção contra corrida caso o app seja usado antes do callback terminar). Hoje traz **12 músicas** (2 por categoria): Brasileira, Internacional, Popular, Games, Personagens, Anime. O formato de cada entrada é o `SongDto` (`data/dto/SongDto.kt`).
+O catálogo inicial vive em **`app/src/main/assets/catalog.json`** (não em código Kotlin) e é carregado por `CatalogAssetSource`, tanto no `RoomDatabase.Callback` (primeira instalação) quanto sob demanda em `SongRepositoryImpl.getCatalog()` (proteção contra corrida caso o app seja usado antes do callback terminar). Hoje traz **120 músicas** (20 por categoria): Brasileira, Internacional, Popular, Games, Personagens, Anime. O formato de cada entrada é o `SongDto` (`data/dto/SongDto.kt`).
 
 ### Sobre os YouTube video IDs do catálogo
 
-Os IDs vêm como placeholder (`REPLACE_WITH_YOUTUBE_ID__...`) — a especificação já antecipa isso ("YouTubeVideoId: configurável"). Eu não inventei IDs de vídeo reais porque um ID incorreto levaria a um vídeo errado ou a um erro de reprodução, o que é pior do que deixar explícito que precisa ser preenchido. **Antes de testar a integração com YouTube (Fase 4), edite `app/src/main/assets/catalog.json`** e substitua cada placeholder pelo ID real do vídeo oficial correspondente. Veja `scripts/catalog-lookup/` para uma ferramenta de busca assistida via YouTube Data API.
+Todos os `youtubeVideoId` do catálogo já estão preenchidos com IDs reais (resolvidos via busca assistida na YouTube Data API — ver `scripts/catalog-lookup/`). Ao adicionar músicas novas, use `"youtubeVideoId": "REPLACE_WITH_YOUTUBE_ID__ALGO_UNICO"` como placeholder e rode o script pra resolver o ID de verdade antes de jogar — um ID incorreto levaria a um vídeo errado ou a um erro de reprodução.
 
 ### Adicionar novas músicas
 
@@ -122,8 +122,7 @@ Compose BOM 2024.10.00, Navigation Compose 2.8, Room 2.6.1 (KSP), Ktor 2.3.12 (c
 ## Limitações conhecidas desta entrega
 
 - **Multiplayer local (Wi-Fi) não está implementado** — apenas os contratos (`RoomSession`, `GameEvent`, `IdempotencyGuard`) que a Fase 3 vai usar para não precisar redesenhar o `GameEngine`.
-- **Player do YouTube não está embutido** — o `youtubeVideoId` já existe no modelo e no catálogo, mas a tela de reprodução (WebView oficial ou YouTube Player SDK) é escopo da Fase 4. Por ora, `startPlayback()` apenas inicia o cronômetro.
-- **IDs de vídeo do catálogo são placeholders** (ver seção acima) — preencher antes de testar a reprodução real.
+- **Player do YouTube só toca áudio** — usa a IFrame Player API oficial num `WebView` quase invisível (1dp), de propósito: o jogo nunca exibe o vídeo, miniatura ou título, só o som, pra não vazar a resposta (mesma regra de privacidade do `MaskedSong`). O áudio toca durante `PLAYING` e para assim que a rodada avança pra `ANSWERING` (não volta durante o roubo). Se um vídeo falhar (removido/bloqueado por região/idade), a rodada segue normalmente — cronômetro e pontuação não dependem do player — só aparece um aviso discreto na tela.
 - **Histórico e estatísticas agregadas** já são persistidos no Room ao final de cada partida (`GameHistoryRepository`), mas a tela de "Histórico" no menu principal ainda é um placeholder ("em breve") — a tela de estatísticas por partida (resultado final) já está completa.
 - **Empate/morte súbita**: `TieBreakUseCase` detecta o empate no placar final, mas o fluxo de rodada extra (sortear música, primeiro a acertar vence) ainda não está integrado à máquina de estados — fica para quando o modo multiplayer também precisar dele.
 - Sem reconhecimento de voz (deliberado, conforme seção 11 da especificação).
@@ -132,6 +131,5 @@ Compose BOM 2024.10.00, Navigation Compose 2.8, Room 2.6.1 (KSP), Ktor 2.3.12 (c
 
 1. **Fase 2**: polir o modo um celular (transições/animações, tratamento de "app em segundo plano" durante uma rodada).
 2. **Fase 3**: implementar `RoomSession` com NSD (descoberta) + Ktor (WebSocket) sobre Wi-Fi, sala com código curto + QR Code (ZXing), reconexão.
-3. **Fase 4**: integrar o YouTube (WebView oficial ou YouTube Player SDK — nunca extração de áudio).
-4. **Fase 5**: acessibilidade (contraste, tamanhos de tela), animações.
-5. **Fase 6**: tela de histórico/estatísticas na UI e conquistas.
+3. **Fase 5**: acessibilidade (contraste, tamanhos de tela), animações.
+4. **Fase 6**: tela de histórico/estatísticas na UI e conquistas.

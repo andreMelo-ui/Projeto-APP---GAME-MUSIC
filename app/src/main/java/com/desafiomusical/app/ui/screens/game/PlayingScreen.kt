@@ -34,7 +34,8 @@ fun PlayingScreen(
     round: ActiveRoundView,
     elapsedSeconds: Int,
     onRequestHint: () -> Unit,
-    onSubmitAnswer: (titleClaimed: Boolean, artistClaimed: Boolean, workClaimed: Boolean) -> Unit
+    onSubmitAnswer: (titleClaimed: Boolean, artistClaimed: Boolean, workClaimed: Boolean) -> Unit,
+    audioUnavailable: Boolean = false
 ) {
     var titleClaimed by remember(round.roundNumber) { mutableStateOf(false) }
     var artistClaimed by remember(round.roundNumber) { mutableStateOf(false) }
@@ -60,6 +61,15 @@ fun PlayingScreen(
         )
 
         NeonTimer(elapsedSeconds = elapsedSeconds, totalSeconds = ScoringRules.ROUND_DURATION_SECONDS)
+
+        if (audioUnavailable) {
+            Text(
+                text = "🔇 Áudio indisponível — julgue de ouvido/memória",
+                style = MaterialTheme.typography.bodyMedium,
+                color = TextSecondary,
+                modifier = Modifier.padding(top = 8.dp)
+            )
+        }
 
         Text(
             text = "${round.pointsAvailableNow} pontos disponíveis agora",
