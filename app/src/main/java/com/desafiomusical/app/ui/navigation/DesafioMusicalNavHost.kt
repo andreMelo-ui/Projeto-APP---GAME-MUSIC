@@ -1,0 +1,57 @@
+package com.desafiomusical.app.ui.navigation
+
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.desafiomusical.app.di.AppContainer
+import com.desafiomusical.app.ui.screens.common.ComingSoonScreen
+import com.desafiomusical.app.ui.screens.game.GameHostScreen
+import com.desafiomusical.app.ui.screens.home.HomeScreen
+import com.desafiomusical.app.ui.screens.setup.PlayerSetupScreen
+
+@Composable
+fun DesafioMusicalNavHost(container: AppContainer) {
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = Routes.Home.route) {
+        composable(Routes.Home.route) {
+            HomeScreen(
+                onNewGame = { navController.navigate(Routes.PlayerSetup.route) },
+                onJoinGame = { navController.navigate(Routes.ComingSoon.build("Entrar em Partida")) },
+                onHistory = { navController.navigate(Routes.ComingSoon.build("Histórico")) },
+                onSettings = { navController.navigate(Routes.ComingSoon.build("Configurações")) }
+            )
+        }
+        composable(Routes.PlayerSetup.route) {
+            PlayerSetupScreen(
+                container = container,
+                onGameStarted = {
+                    navController.navigate(Routes.Game.route) {
+                        popUpTo(Routes.Home.route) { inclusive = false }
+                    }
+                },
+                onBack = { navController.popBackStack() }
+            )
+        }
+        composable(Routes.Game.route) {
+            GameHostScreen(
+                container = container,
+                onExitToHome = {
+                    navController.popBackStack(Routes.Home.route, inclusive = false)
+                }
+            )
+        }
+        composable(
+            route = Routes.ComingSoon.route,
+            arguments = listOf(navArgument("feature") { type = NavType.StringType })
+        ) { backStackEntry ->
+            ComingSoonScreen(
+                feature = backStackEntry.arguments?.getString("feature").orEmpty(),
+                onBack = { navController.popBackStack() }
+            )
+        }
+    }
+}
