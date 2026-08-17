@@ -66,7 +66,7 @@ private fun ThemeValidationPreview() {
                         .background(BrandGradient),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text("Nova Partida", style = MaterialTheme.typography.titleMedium, color = TextPrimary)
+                    Text("Nova Partida", style = MaterialTheme.typography.titleMedium, color = TextOnGradient)
                 }
 
                 SectionLabel("Cores semânticas")

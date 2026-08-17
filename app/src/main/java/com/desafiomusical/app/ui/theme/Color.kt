@@ -36,6 +36,13 @@ val BrandGradient = Brush.linearGradient(
 /** Variante de 2 pontos, para elementos menores (ex.: anel de avatar). */
 fun brandGradient2(): Brush = Brush.linearGradient(colors = listOf(BrandMagenta, BrandCyan))
 
+/**
+ * Cor de texto pra usar SOBRE [BrandGradient] (nunca [TextPrimary]/branco: contra a ponta
+ * ciano do gradiente o contraste cai pra 1.81:1, bem abaixo do mínimo AA de 4.5:1). É o
+ * mesmo tom de [BgBase] — quase preto — que mede ≥4.27:1 em todos os 4 pontos do gradiente.
+ */
+val TextOnGradient = BgBase
+
 // ---------------------------------------------------------------------
 // Cores semânticas
 // ---------------------------------------------------------------------
