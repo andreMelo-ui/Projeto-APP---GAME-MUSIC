@@ -122,6 +122,22 @@ class GameEngine(
         catalog = songs
     }
 
+    /**
+     * Papéis já sorteados da rodada atual — leitura pura, sem efeito colateral.
+     * Existe para quem precisa saber quem é o escolhedor/respondente antes da
+     * rodada expor isso via [uiState] (ex.: a ponte de rede da Fase 3, que
+     * precisa anunciar a rodada a todos antes do escolhedor ver a categoria).
+     */
+    val currentRoundSetup: RoundSetup?
+        get() = roundSetups.getOrNull(currentRoundIndex)
+
+    /** Candidatas disponíveis para [category] neste momento — mesma lógica usada ao montar [GameUiState.SongSelection]. */
+    fun candidatesNow(category: Category): List<Song> =
+        selectSong.candidatesFor(catalog, category, usedSongIds, random)
+
+    /** Busca no catálogo carregado — leitura pura, para quem só recebeu um `songId` (ex.: a ponte de rede). */
+    fun songById(id: String): Song? = catalog.firstOrNull { it.id == id }
+
     // ---- Seleção de categoria e música ----
 
     private fun emitCategorySelection() {

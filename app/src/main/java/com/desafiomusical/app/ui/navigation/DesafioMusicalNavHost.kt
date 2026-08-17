@@ -10,6 +10,8 @@ import com.desafiomusical.app.di.AppContainer
 import com.desafiomusical.app.ui.screens.common.ComingSoonScreen
 import com.desafiomusical.app.ui.screens.game.GameHostScreen
 import com.desafiomusical.app.ui.screens.home.HomeScreen
+import com.desafiomusical.app.ui.screens.lobby.HostLobbyScreen
+import com.desafiomusical.app.ui.screens.lobby.JoinLobbyScreen
 import com.desafiomusical.app.ui.screens.setup.PlayerSetupScreen
 
 @Composable
@@ -20,9 +22,27 @@ fun DesafioMusicalNavHost(container: AppContainer) {
         composable(Routes.Home.route) {
             HomeScreen(
                 onNewGame = { navController.navigate(Routes.PlayerSetup.route) },
-                onJoinGame = { navController.navigate(Routes.ComingSoon.build("Entrar em Partida")) },
+                onHostGame = { navController.navigate(Routes.HostLobby.route) },
+                onJoinGame = { navController.navigate(Routes.JoinLobby.route) },
                 onHistory = { navController.navigate(Routes.ComingSoon.build("Histórico")) },
                 onSettings = { navController.navigate(Routes.ComingSoon.build("Configurações")) }
+            )
+        }
+        composable(Routes.HostLobby.route) {
+            HostLobbyScreen(
+                container = container,
+                onGameStarted = {
+                    navController.navigate(Routes.Game.route) {
+                        popUpTo(Routes.Home.route) { inclusive = false }
+                    }
+                },
+                onBack = { navController.popBackStack() }
+            )
+        }
+        composable(Routes.JoinLobby.route) {
+            JoinLobbyScreen(
+                container = container,
+                onBack = { navController.popBackStack() }
             )
         }
         composable(Routes.PlayerSetup.route) {

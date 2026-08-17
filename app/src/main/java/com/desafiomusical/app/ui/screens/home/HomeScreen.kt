@@ -20,6 +20,7 @@ import com.desafiomusical.app.ui.theme.TextSecondary
 @Composable
 fun HomeScreen(
     onNewGame: () -> Unit,
+    onHostGame: () -> Unit,
     onJoinGame: () -> Unit,
     onHistory: () -> Unit,
     onSettings: () -> Unit
@@ -50,6 +51,11 @@ fun HomeScreen(
         )
 
         PrimaryButton(text = "Nova Partida", onClick = onNewGame, modifier = Modifier.fillMaxWidth())
+        SecondaryButton(
+            text = "Criar Sala (Wi-Fi)",
+            onClick = onHostGame,
+            modifier = Modifier.fillMaxWidth().padding(top = 16.dp)
+        )
         SecondaryButton(
             text = "Entrar em Partida",
             onClick = onJoinGame,

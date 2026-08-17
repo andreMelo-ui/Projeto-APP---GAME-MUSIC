@@ -6,6 +6,12 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Exigida em API 33+ para NsdManager.discoverServices/resolveService funcionarem de
+         verdade (sem ela o SO nega a descoberta silenciosamente). neverForLocation porque
+         a busca é só pelas salas anunciadas via NSD, nunca para inferir localização. -->
+    <uses-permission
+        android:name="android.permission.NEARBY_WIFI_DEVICES"
+        android:usesPermissionFlags="neverForLocation" />
 
     <uses-feature
         android:name="android.hardware.camera"
