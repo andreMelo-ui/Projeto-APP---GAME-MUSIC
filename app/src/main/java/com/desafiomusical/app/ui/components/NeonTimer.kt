@@ -12,10 +12,10 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
-import com.desafiomusical.app.ui.theme.NeonAmber
-import com.desafiomusical.app.ui.theme.NeonGreen
-import com.desafiomusical.app.ui.theme.NeonRed
-import com.desafiomusical.app.ui.theme.SurfaceOutline
+import com.desafiomusical.app.ui.theme.BgSurfaceBorder
+import com.desafiomusical.app.ui.theme.DangerRed
+import com.desafiomusical.app.ui.theme.SuccessGreen
+import com.desafiomusical.app.ui.theme.WarningAmber
 
 /**
  * Cronômetro circular de alto contraste. A cor muda com o tempo restante,
@@ -33,16 +33,16 @@ fun NeonTimer(
     val progress = if (totalSeconds > 0) elapsedSeconds.toFloat() / totalSeconds else 0f
     val ratioLeft = if (totalSeconds > 0) remaining.toFloat() / totalSeconds else 0f
     val color = when {
-        ratioLeft > 0.5f -> NeonGreen
-        ratioLeft > 0.2f -> NeonAmber
-        else -> NeonRed
+        ratioLeft > 0.5f -> SuccessGreen
+        ratioLeft > 0.2f -> WarningAmber
+        else -> DangerRed
     }
 
     Box(modifier = modifier.size(diameter), contentAlignment = Alignment.Center) {
         Canvas(modifier = Modifier.size(diameter)) {
             val strokeWidth = 12.dp.toPx()
             drawArc(
-                color = SurfaceOutline,
+                color = BgSurfaceBorder,
                 startAngle = -90f,
                 sweepAngle = 360f,
                 useCenter = false,
@@ -71,7 +71,7 @@ fun NeonTimer(
 /** Contador regressivo compacto, usado na janela de roubo de 5s. */
 @Composable
 fun CompactCountdown(secondsLeft: Int, modifier: Modifier = Modifier) {
-    val color = if (secondsLeft > 2) NeonAmber else NeonRed
+    val color = if (secondsLeft > 2) WarningAmber else DangerRed
     Text(
         text = "$secondsLeft s",
         style = MaterialTheme.typography.headlineLarge,

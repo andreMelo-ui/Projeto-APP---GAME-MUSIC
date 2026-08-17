@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.desafiomusical.app.domain.model.Category
 import com.desafiomusical.app.domain.model.Player
-import com.desafiomusical.app.ui.theme.NeonPink
+import com.desafiomusical.app.ui.theme.ColorChooser
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 @Composable
@@ -37,7 +37,7 @@ fun CategorySelectionScreen(
         Text(
             text = "${chooser.name} escolhe a categoria",
             style = MaterialTheme.typography.headlineMedium,
-            color = NeonPink,
+            color = ColorChooser,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 4.dp, bottom = 24.dp)
         )

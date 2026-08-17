@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.desafiomusical.app.domain.state.GameResultView
 import com.desafiomusical.app.ui.components.PrimaryButton
 import com.desafiomusical.app.ui.components.ScoreBadge
-import com.desafiomusical.app.ui.theme.NeonGreen
+import com.desafiomusical.app.ui.theme.SuccessGreen
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 @Composable
@@ -33,7 +33,7 @@ fun GameResultScreen(
         Text(
             text = result.winner?.let { "${it.name} venceu!" } ?: "Empate!",
             style = MaterialTheme.typography.headlineMedium,
-            color = NeonGreen,
+            color = SuccessGreen,
             fontWeight = FontWeight.Black,
             modifier = Modifier.padding(top = 8.dp, bottom = 24.dp)
         )

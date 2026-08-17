@@ -19,7 +19,7 @@ import com.desafiomusical.app.domain.model.Category
 import com.desafiomusical.app.domain.model.Player
 import com.desafiomusical.app.domain.model.Song
 import com.desafiomusical.app.ui.components.PrimaryButton
-import com.desafiomusical.app.ui.theme.NeonPink
+import com.desafiomusical.app.ui.theme.ColorChooser
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 @Composable
@@ -41,7 +41,7 @@ fun SongSelectionScreen(
         Text(
             text = "${chooser.name}, escolha a música",
             style = MaterialTheme.typography.headlineMedium,
-            color = NeonPink,
+            color = ColorChooser,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 4.dp, bottom = 16.dp)
         )

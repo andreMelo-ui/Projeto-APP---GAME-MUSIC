@@ -9,8 +9,8 @@ import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.desafiomusical.app.ui.theme.BackgroundDeep
-import com.desafiomusical.app.ui.theme.NeonGreen
+import com.desafiomusical.app.ui.theme.BrandMagenta
+import com.desafiomusical.app.ui.theme.TextPrimary
 
 @Composable
 fun PrimaryButton(
@@ -25,10 +25,10 @@ fun PrimaryButton(
         modifier = modifier.height(56.dp),
         shape = MaterialTheme.shapes.large,
         colors = ButtonDefaults.buttonColors(
-            containerColor = NeonGreen,
-            contentColor = BackgroundDeep,
-            disabledContainerColor = NeonGreen.copy(alpha = 0.3f),
-            disabledContentColor = BackgroundDeep.copy(alpha = 0.6f)
+            containerColor = BrandMagenta,
+            contentColor = TextPrimary,
+            disabledContainerColor = BrandMagenta.copy(alpha = 0.3f),
+            disabledContentColor = TextPrimary.copy(alpha = 0.6f)
         )
     ) {
         Text(text = text, style = MaterialTheme.typography.labelLarge)

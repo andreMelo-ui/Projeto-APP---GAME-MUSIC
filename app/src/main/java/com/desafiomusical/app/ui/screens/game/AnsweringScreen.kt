@@ -21,9 +21,9 @@ import com.desafiomusical.app.domain.model.Player
 import com.desafiomusical.app.domain.model.Song
 import com.desafiomusical.app.ui.components.PrimaryButton
 import com.desafiomusical.app.ui.components.RoleChip
-import com.desafiomusical.app.ui.theme.NeonGreen
-import com.desafiomusical.app.ui.theme.NeonPink
-import com.desafiomusical.app.ui.theme.NeonRed
+import com.desafiomusical.app.ui.theme.SuccessGreen
+import com.desafiomusical.app.ui.theme.ColorChooser
+import com.desafiomusical.app.ui.theme.DangerRed
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 /**
@@ -51,7 +51,7 @@ fun AnsweringScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        RoleChip(label = "Confirmação do juiz", color = NeonPink)
+        RoleChip(label = "Confirmação do juiz", color = ColorChooser)
         Text(
             text = "${respondent.name} disse:",
             style = MaterialTheme.typography.titleMedium,
@@ -111,8 +111,8 @@ private fun ConfirmToggleRow(label: String, value: Boolean, onChange: (Boolean) 
     ) {
         Text(text = label, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.SemiBold)
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            PillToggle(text = "Sim", selected = value, color = NeonGreen, onClick = { onChange(true) })
-            PillToggle(text = "Não", selected = !value, color = NeonRed, onClick = { onChange(false) })
+            PillToggle(text = "Sim", selected = value, color = SuccessGreen, onClick = { onChange(true) })
+            PillToggle(text = "Não", selected = !value, color = DangerRed, onClick = { onChange(false) })
         }
     }
 }

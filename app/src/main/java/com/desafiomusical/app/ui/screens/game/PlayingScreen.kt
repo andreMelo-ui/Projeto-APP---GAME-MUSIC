@@ -25,7 +25,7 @@ import com.desafiomusical.app.domain.usecase.ScoringRules
 import com.desafiomusical.app.ui.components.NeonTimer
 import com.desafiomusical.app.ui.components.PrimaryButton
 import com.desafiomusical.app.ui.components.SecondaryButton
-import com.desafiomusical.app.ui.theme.NeonCyan
+import com.desafiomusical.app.ui.theme.ColorResponder
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -55,7 +55,7 @@ fun PlayingScreen(
         Text(
             text = round.mainResponder.name,
             style = MaterialTheme.typography.headlineMedium,
-            color = NeonCyan,
+            color = ColorResponder,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 4.dp, bottom = 20.dp)
         )

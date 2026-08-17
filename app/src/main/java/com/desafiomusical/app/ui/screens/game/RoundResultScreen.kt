@@ -17,8 +17,8 @@ import androidx.compose.ui.unit.dp
 import com.desafiomusical.app.domain.state.RoundResultView
 import com.desafiomusical.app.ui.components.PrimaryButton
 import com.desafiomusical.app.ui.components.ScoreBadge
-import com.desafiomusical.app.ui.theme.NeonGreen
-import com.desafiomusical.app.ui.theme.NeonRed
+import com.desafiomusical.app.ui.theme.SuccessGreen
+import com.desafiomusical.app.ui.theme.DangerRed
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 @Composable
@@ -33,7 +33,7 @@ fun RoundResultScreen(
         Text(
             text = if (result.winner != null) "${result.winner.name} acertou!" else "Ninguém acertou",
             style = MaterialTheme.typography.headlineMedium,
-            color = if (result.winner != null) NeonGreen else NeonRed,
+            color = if (result.winner != null) SuccessGreen else DangerRed,
             fontWeight = FontWeight.Black
         )
         if (result.winner != null) {

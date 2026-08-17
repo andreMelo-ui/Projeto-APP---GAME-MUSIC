@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.dp
 import com.desafiomusical.app.domain.state.ChooserRoundView
 import com.desafiomusical.app.ui.components.PrimaryButton
 import com.desafiomusical.app.ui.components.RoleChip
-import com.desafiomusical.app.ui.theme.NeonPink
-import com.desafiomusical.app.ui.theme.SurfaceElevated
+import com.desafiomusical.app.ui.theme.ColorChooser
+import com.desafiomusical.app.ui.theme.BgSurfaceElevated
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 /**
@@ -36,7 +36,7 @@ fun ChooserScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        RoleChip(label = "Só você vê isso", color = NeonPink)
+        RoleChip(label = "Só você vê isso", color = ColorChooser)
 
         Text(
             text = "Rodada ${chooserView.roundNumber} de ${chooserView.totalRounds}",
@@ -49,7 +49,7 @@ fun ChooserScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 12.dp)
-                .background(SurfaceElevated, MaterialTheme.shapes.large)
+                .background(BgSurfaceElevated, MaterialTheme.shapes.large)
                 .padding(24.dp)
         ) {
             LabelValue(label = "Título", value = chooserView.song.title)
