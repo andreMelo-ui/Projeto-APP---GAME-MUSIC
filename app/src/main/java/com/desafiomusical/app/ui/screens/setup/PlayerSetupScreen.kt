@@ -34,7 +34,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.desafiomusical.app.di.AppContainer
 import com.desafiomusical.app.ui.components.PrimaryButton
-import com.desafiomusical.app.ui.theme.NeonRed
+import com.desafiomusical.app.ui.theme.DangerRed
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -136,7 +136,7 @@ fun PlayerSetupScreen(
 
             if (state.errorMessage != null) {
                 item {
-                    Text(text = state.errorMessage.orEmpty(), color = NeonRed, style = MaterialTheme.typography.bodyMedium)
+                    Text(text = state.errorMessage.orEmpty(), color = DangerRed, style = MaterialTheme.typography.bodyMedium)
                 }
             }
 

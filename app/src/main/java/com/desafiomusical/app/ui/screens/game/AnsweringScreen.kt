@@ -3,9 +3,12 @@ package com.desafiomusical.app.ui.screens.game
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,9 +24,9 @@ import com.desafiomusical.app.domain.model.Player
 import com.desafiomusical.app.domain.model.Song
 import com.desafiomusical.app.ui.components.PrimaryButton
 import com.desafiomusical.app.ui.components.RoleChip
-import com.desafiomusical.app.ui.theme.NeonGreen
-import com.desafiomusical.app.ui.theme.NeonPink
-import com.desafiomusical.app.ui.theme.NeonRed
+import com.desafiomusical.app.ui.theme.SuccessGreen
+import com.desafiomusical.app.ui.theme.ColorChooser
+import com.desafiomusical.app.ui.theme.DangerRed
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 /**
@@ -47,11 +50,14 @@ fun AnsweringScreen(
     val work = song.work
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(24.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.safeDrawing)
+            .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        RoleChip(label = "Confirmação do juiz", color = NeonPink)
+        RoleChip(label = "Confirmação do juiz", color = ColorChooser)
         Text(
             text = "${respondent.name} disse:",
             style = MaterialTheme.typography.titleMedium,
@@ -111,8 +117,8 @@ private fun ConfirmToggleRow(label: String, value: Boolean, onChange: (Boolean) 
     ) {
         Text(text = label, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.SemiBold)
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            PillToggle(text = "Sim", selected = value, color = NeonGreen, onClick = { onChange(true) })
-            PillToggle(text = "Não", selected = !value, color = NeonRed, onClick = { onChange(false) })
+            PillToggle(text = "Sim", selected = value, color = SuccessGreen, onClick = { onChange(true) })
+            PillToggle(text = "Não", selected = !value, color = DangerRed, onClick = { onChange(false) })
         }
     }
 }

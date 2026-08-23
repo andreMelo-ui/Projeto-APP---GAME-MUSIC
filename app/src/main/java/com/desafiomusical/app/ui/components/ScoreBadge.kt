@@ -9,7 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.desafiomusical.app.ui.theme.SurfaceElevated
+import com.desafiomusical.app.ui.theme.BgSurfaceElevated
 import com.desafiomusical.app.ui.theme.TextPrimary
 import com.desafiomusical.app.ui.theme.TextSecondary
 
@@ -20,7 +20,7 @@ fun ScoreBadge(
     modifier: Modifier = Modifier,
     highlighted: Boolean = false
 ) {
-    val background = if (highlighted) MaterialTheme.colorScheme.primary.copy(alpha = 0.18f) else SurfaceElevated
+    val background = if (highlighted) MaterialTheme.colorScheme.primary.copy(alpha = 0.18f) else BgSurfaceElevated
     Row(
         modifier = modifier
             .background(background, MaterialTheme.shapes.medium)

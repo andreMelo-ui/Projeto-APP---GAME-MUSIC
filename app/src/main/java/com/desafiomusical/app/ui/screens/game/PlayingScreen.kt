@@ -4,9 +4,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.MaterialTheme
@@ -25,7 +28,7 @@ import com.desafiomusical.app.domain.usecase.ScoringRules
 import com.desafiomusical.app.ui.components.NeonTimer
 import com.desafiomusical.app.ui.components.PrimaryButton
 import com.desafiomusical.app.ui.components.SecondaryButton
-import com.desafiomusical.app.ui.theme.NeonCyan
+import com.desafiomusical.app.ui.theme.ColorResponder
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -44,6 +47,7 @@ fun PlayingScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.safeDrawing)
             .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -55,7 +59,7 @@ fun PlayingScreen(
         Text(
             text = round.mainResponder.name,
             style = MaterialTheme.typography.headlineMedium,
-            color = NeonCyan,
+            color = ColorResponder,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 4.dp, bottom = 20.dp)
         )

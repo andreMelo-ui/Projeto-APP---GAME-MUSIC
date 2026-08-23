@@ -2,9 +2,12 @@ package com.desafiomusical.app.ui.screens.game
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
@@ -17,8 +20,8 @@ import androidx.compose.ui.unit.dp
 import com.desafiomusical.app.domain.state.RoundResultView
 import com.desafiomusical.app.ui.components.PrimaryButton
 import com.desafiomusical.app.ui.components.ScoreBadge
-import com.desafiomusical.app.ui.theme.NeonGreen
-import com.desafiomusical.app.ui.theme.NeonRed
+import com.desafiomusical.app.ui.theme.SuccessGreen
+import com.desafiomusical.app.ui.theme.DangerRed
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 @Composable
@@ -27,13 +30,16 @@ fun RoundResultScreen(
     onNextRound: () -> Unit
 ) {
     Column(
-        modifier = Modifier.fillMaxSize().padding(24.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.safeDrawing)
+            .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = if (result.winner != null) "${result.winner.name} acertou!" else "Ninguém acertou",
             style = MaterialTheme.typography.headlineMedium,
-            color = if (result.winner != null) NeonGreen else NeonRed,
+            color = if (result.winner != null) SuccessGreen else DangerRed,
             fontWeight = FontWeight.Black
         )
         if (result.winner != null) {

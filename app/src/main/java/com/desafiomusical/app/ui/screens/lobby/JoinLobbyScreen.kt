@@ -48,7 +48,7 @@ import com.desafiomusical.app.ui.components.PrimaryButton
 import com.desafiomusical.app.ui.components.QrScannerView
 import com.desafiomusical.app.ui.components.rememberPermissionState
 import com.desafiomusical.app.ui.theme.ColorSuccess
-import com.desafiomusical.app.ui.theme.NeonRed
+import com.desafiomusical.app.ui.theme.DangerRed
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -99,7 +99,7 @@ private fun NameInputContent(state: JoinLobbyUiState, viewModel: JoinLobbyViewMo
             modifier = Modifier.fillMaxWidth()
         )
         if (state.errorMessage != null) {
-            Text(state.errorMessage, color = NeonRed, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(top = 8.dp))
+            Text(state.errorMessage, color = DangerRed, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(top = 8.dp))
         }
         PrimaryButton(text = "Continuar", onClick = viewModel::confirmName, modifier = Modifier.fillMaxWidth().padding(top = 16.dp))
     }
@@ -201,7 +201,7 @@ private fun ManualTabContent(state: JoinLobbyUiState, viewModel: JoinLobbyViewMo
             modifier = Modifier.fillMaxWidth()
         )
         if (state.errorMessage != null) {
-            Text(state.errorMessage, color = NeonRed, style = MaterialTheme.typography.bodyMedium)
+            Text(state.errorMessage, color = DangerRed, style = MaterialTheme.typography.bodyMedium)
         }
         PrimaryButton(text = "Conectar", onClick = viewModel::joinManualEntry, modifier = Modifier.fillMaxWidth())
     }

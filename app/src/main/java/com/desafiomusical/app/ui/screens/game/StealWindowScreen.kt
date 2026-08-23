@@ -2,9 +2,12 @@ package com.desafiomusical.app.ui.screens.game
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
@@ -17,8 +20,8 @@ import androidx.compose.ui.unit.dp
 import com.desafiomusical.app.domain.state.ActiveRoundView
 import com.desafiomusical.app.ui.components.BigAnswerButton
 import com.desafiomusical.app.ui.components.CompactCountdown
-import com.desafiomusical.app.ui.theme.BackgroundDeep
-import com.desafiomusical.app.ui.theme.NeonAmber
+import com.desafiomusical.app.ui.theme.BgBase
+import com.desafiomusical.app.ui.theme.WarningAmber
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 @Composable
@@ -30,13 +33,16 @@ fun StealWindowScreen(
     val eligible = round.eligibleStealers.filterNot { it.id in round.eliminatedIds }
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(24.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.safeDrawing)
+            .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = "CHANCE DE ROUBAR",
             style = MaterialTheme.typography.headlineMedium,
-            color = NeonAmber,
+            color = WarningAmber,
             fontWeight = FontWeight.Black
         )
         CompactCountdown(secondsLeft = stealSecondsLeft, modifier = Modifier.padding(vertical = 12.dp))
@@ -62,8 +68,8 @@ fun StealWindowScreen(
                     BigAnswerButton(
                         text = "RESPONDER — ${player.name}",
                         onClick = { onClaim(player.id) },
-                        containerColor = NeonAmber,
-                        contentColor = BackgroundDeep
+                        containerColor = WarningAmber,
+                        contentColor = BgBase
                     )
                 }
             }

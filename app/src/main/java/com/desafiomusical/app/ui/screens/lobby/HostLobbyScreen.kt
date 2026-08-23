@@ -40,7 +40,7 @@ import com.desafiomusical.app.ui.components.PrimaryButton
 import com.desafiomusical.app.ui.components.QrCodeImage
 import com.desafiomusical.app.ui.theme.ColorChooser
 import com.desafiomusical.app.ui.theme.ColorSuccess
-import com.desafiomusical.app.ui.theme.NeonRed
+import com.desafiomusical.app.ui.theme.DangerRed
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -130,7 +130,7 @@ private fun HostSetupContent(state: HostLobbyUiState, viewModel: HostLobbyViewMo
         }
 
         if (state.errorMessage != null) {
-            item { Text(text = state.errorMessage, color = NeonRed, style = MaterialTheme.typography.bodyMedium) }
+            item { Text(text = state.errorMessage, color = DangerRed, style = MaterialTheme.typography.bodyMedium) }
         }
 
         item {
@@ -196,7 +196,7 @@ private fun HostWaitingContent(
         }
 
         if (state.errorMessage != null) {
-            item { Text(text = state.errorMessage, color = NeonRed, style = MaterialTheme.typography.bodyMedium) }
+            item { Text(text = state.errorMessage, color = DangerRed, style = MaterialTheme.typography.bodyMedium) }
         }
 
         item {

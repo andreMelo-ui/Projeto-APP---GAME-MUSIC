@@ -2,9 +2,12 @@ package com.desafiomusical.app.ui.screens.game
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
@@ -17,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.desafiomusical.app.domain.state.GameResultView
 import com.desafiomusical.app.ui.components.PrimaryButton
 import com.desafiomusical.app.ui.components.ScoreBadge
-import com.desafiomusical.app.ui.theme.NeonGreen
+import com.desafiomusical.app.ui.theme.SuccessGreen
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 @Composable
@@ -26,14 +29,17 @@ fun GameResultScreen(
     onBackToHome: () -> Unit
 ) {
     Column(
-        modifier = Modifier.fillMaxSize().padding(24.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.safeDrawing)
+            .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "🏆", style = MaterialTheme.typography.displayLarge)
         Text(
             text = result.winner?.let { "${it.name} venceu!" } ?: "Empate!",
             style = MaterialTheme.typography.headlineMedium,
-            color = NeonGreen,
+            color = SuccessGreen,
             fontWeight = FontWeight.Black,
             modifier = Modifier.padding(top = 8.dp, bottom = 24.dp)
         )

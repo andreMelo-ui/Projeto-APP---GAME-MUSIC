@@ -14,7 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.desafiomusical.app.ui.components.PrimaryButton
 import com.desafiomusical.app.ui.components.SecondaryButton
-import com.desafiomusical.app.ui.theme.NeonCyan
+import com.desafiomusical.app.ui.theme.BrandCyan
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 @Composable
@@ -41,7 +41,7 @@ fun HomeScreen(
             text = "MUSICAL",
             style = MaterialTheme.typography.displayLarge,
             fontWeight = FontWeight.Black,
-            color = NeonCyan
+            color = BrandCyan
         )
         Text(
             text = "Quem sabe mais de música?",

@@ -2,9 +2,12 @@ package com.desafiomusical.app.ui.screens.game
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
@@ -17,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.desafiomusical.app.domain.model.Category
 import com.desafiomusical.app.domain.model.Player
-import com.desafiomusical.app.ui.theme.NeonPink
+import com.desafiomusical.app.ui.theme.ColorChooser
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 @Composable
@@ -28,7 +31,12 @@ fun CategorySelectionScreen(
     categories: List<Category>,
     onCategorySelected: (Category) -> Unit
 ) {
-    Column(modifier = Modifier.fillMaxSize().padding(24.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.safeDrawing)
+            .padding(24.dp)
+    ) {
         Text(
             text = "Rodada $roundNumber de $totalRounds",
             style = MaterialTheme.typography.bodyMedium,
@@ -37,7 +45,7 @@ fun CategorySelectionScreen(
         Text(
             text = "${chooser.name} escolhe a categoria",
             style = MaterialTheme.typography.headlineMedium,
-            color = NeonPink,
+            color = ColorChooser,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 4.dp, bottom = 24.dp)
         )
