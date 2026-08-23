@@ -32,4 +32,20 @@ interface GameDao {
 
     @Query("SELECT * FROM game_players WHERE gameId = :gameId")
     suspend fun getPlayersForGame(gameId: String): List<GamePlayerEntity>
+
+    @Query("SELECT * FROM games WHERE id = :gameId LIMIT 1")
+    suspend fun getGameById(gameId: String): GameEntity?
+
+    @Query(
+        """
+        SELECT games.* FROM games
+        INNER JOIN game_players ON game_players.gameId = games.id
+        WHERE game_players.playerId = :playerId
+        ORDER BY games.createdAt DESC
+        """
+    )
+    suspend fun getGamesForPlayer(playerId: String): List<GameEntity>
+
+    @Query("SELECT * FROM game_players WHERE playerId = :playerId")
+    suspend fun getGamePlayersForPlayer(playerId: String): List<GamePlayerEntity>
 }

@@ -34,7 +34,9 @@ class AppContainer(context: Context) {
     val gameHistoryRepository: GameHistoryRepository = GameHistoryRepositoryImpl(
         gameDao = database.gameDao(),
         roundDao = database.roundDao(),
-        attemptDao = database.attemptDao()
+        attemptDao = database.attemptDao(),
+        playerDao = database.playerDao(),
+        songDao = database.songDao()
     )
 
     val appPreferences: AppPreferences = AppPreferences(context)
