@@ -43,10 +43,11 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-private val playedAtFormatter: DateTimeFormatter =
+// Sem `private`: compartilhado com GameDetailScreen.kt, mesmo pacote.
+val playedAtFormatter: DateTimeFormatter =
     DateTimeFormatter.ofPattern("dd/MM/yyyy 'às' HH:mm", Locale("pt", "BR"))
 
-private fun formatPlayedAt(epochMillis: Long): String =
+fun formatPlayedAt(epochMillis: Long): String =
     Instant.ofEpochMilli(epochMillis).atZone(ZoneId.systemDefault()).format(playedAtFormatter)
 
 @OptIn(ExperimentalMaterial3Api::class)

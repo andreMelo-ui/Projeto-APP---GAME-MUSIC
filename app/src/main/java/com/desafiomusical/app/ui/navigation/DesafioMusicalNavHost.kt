@@ -9,6 +9,7 @@ import androidx.navigation.navArgument
 import com.desafiomusical.app.di.AppContainer
 import com.desafiomusical.app.ui.screens.common.ComingSoonScreen
 import com.desafiomusical.app.ui.screens.game.GameHostScreen
+import com.desafiomusical.app.ui.screens.history.GameDetailScreen
 import com.desafiomusical.app.ui.screens.history.HistoryListScreen
 import com.desafiomusical.app.ui.screens.home.HomeScreen
 import com.desafiomusical.app.ui.screens.lobby.HostLobbyScreen
@@ -69,7 +70,17 @@ fun DesafioMusicalNavHost(container: AppContainer) {
             HistoryListScreen(
                 container = container,
                 onBack = { navController.popBackStack() },
-                onOpenGame = { /* passo 3: navegar pro detalhe da partida */ }
+                onOpenGame = { gameId -> navController.navigate(Routes.GameDetail.build(gameId)) }
+            )
+        }
+        composable(
+            route = Routes.GameDetail.route,
+            arguments = listOf(navArgument("gameId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            GameDetailScreen(
+                container = container,
+                gameId = backStackEntry.arguments?.getString("gameId").orEmpty(),
+                onBack = { navController.popBackStack() }
             )
         }
         composable(
