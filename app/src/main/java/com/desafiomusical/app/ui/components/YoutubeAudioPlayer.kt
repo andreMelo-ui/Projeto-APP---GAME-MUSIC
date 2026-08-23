@@ -57,6 +57,11 @@ fun YoutubeAudioPlayer(
     val webView = remember {
         WebView(context).apply {
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            // Antes do primeiro loadDataWithBaseURL, o WebView recém-criado pinta um
+            // retângulo preto opaco em tela cheia (fundo padrão do Android para um
+            // WebView vazio) em vez de respeitar o tamanho de 1dp do modifier — daí
+            // o fundo preto visto na 1ª rodada antes do vídeo carregar pela 1ª vez.
+            setBackgroundColor(android.graphics.Color.TRANSPARENT)
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
             settings.mediaPlaybackRequiresUserGesture = false

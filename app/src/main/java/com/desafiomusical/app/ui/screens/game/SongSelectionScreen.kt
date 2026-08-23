@@ -2,9 +2,12 @@ package com.desafiomusical.app.ui.screens.game
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
@@ -32,7 +35,12 @@ fun SongSelectionScreen(
     onSongSelected: (Song) -> Unit,
     onRandomSelected: () -> Unit
 ) {
-    Column(modifier = Modifier.fillMaxSize().padding(24.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.safeDrawing)
+            .padding(24.dp)
+    ) {
         Text(
             text = "Rodada $roundNumber de $totalRounds • ${category.displayName}",
             style = MaterialTheme.typography.bodyMedium,
