@@ -48,7 +48,9 @@ class JoinLobbyViewModel(private val container: AppContainer) : ViewModel() {
     private val _uiState = MutableStateFlow(JoinLobbyUiState())
     val uiState: StateFlow<JoinLobbyUiState> = _uiState.asStateFlow()
 
-    private val playerId = UUID.randomUUID().toString()
+    // Resolvido em join(), quando o nome já foi confirmado — reaproveita o id de
+    // quem já jogou antes (por nome), ver KDoc de PlayerRepository.findOrCreatePlayer.
+    private var playerId: String = ""
     private val discoverer = NsdRoomDiscoverer(container.nsdManager)
     private var roomSession: KtorClientRoomSession? = null
     private var discoveryJob: Job? = null
@@ -110,6 +112,7 @@ class JoinLobbyViewModel(private val container: AppContainer) : ViewModel() {
 
         viewModelScope.launch {
             val name = _uiState.value.playerName.trim()
+            playerId = container.playerRepository.findOrCreatePlayer(name).id
             val session = KtorClientRoomSession(
                 roomCode = roomCode,
                 playerId = playerId,

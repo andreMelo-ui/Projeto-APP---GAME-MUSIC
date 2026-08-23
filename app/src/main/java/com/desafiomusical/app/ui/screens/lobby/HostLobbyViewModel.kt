@@ -52,7 +52,6 @@ class HostLobbyViewModel(private val container: AppContainer) : ViewModel() {
     private val _uiState = MutableStateFlow(HostLobbyUiState())
     val uiState: StateFlow<HostLobbyUiState> = _uiState.asStateFlow()
 
-    private val hostPlayerId = UUID.randomUUID().toString()
     private val advertiser = NsdRoomAdvertiser(container.nsdManager)
     private var roomSession: KtorHostRoomSession? = null
     private var gameStarted = false
@@ -86,7 +85,10 @@ class HostLobbyViewModel(private val container: AppContainer) : ViewModel() {
             roomSession = session
             runCatching { advertiser.advertise(code, session.port) }
 
-            val self = RoomPlayerInfo(hostPlayerId, name, ready = true)
+            // Reaproveita o id de quem já jogou antes (por nome) — ver KDoc de
+            // PlayerRepository.findOrCreatePlayer.
+            val hostPlayer = container.playerRepository.findOrCreatePlayer(name)
+            val self = RoomPlayerInfo(hostPlayer.id, hostPlayer.name, ready = true)
             val invite = RoomInvite(roomCode = code, hostAddress = localAddress, port = session.port)
 
             _uiState.update {

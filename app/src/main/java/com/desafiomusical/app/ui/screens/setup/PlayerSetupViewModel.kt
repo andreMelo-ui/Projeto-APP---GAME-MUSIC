@@ -4,14 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.desafiomusical.app.di.AppContainer
 import com.desafiomusical.app.domain.model.GameConfig
-import com.desafiomusical.app.domain.model.Player
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.util.UUID
 
 data class PlayerSetupUiState(
     val playerCount: Int = 2,
@@ -85,14 +83,14 @@ class PlayerSetupViewModel(private val container: AppContainer) : ViewModel() {
                 return@launch
             }
 
-            val players = names.map { name ->
-                Player(id = UUID.randomUUID().toString(), name = name, createdAt = System.currentTimeMillis())
-            }
+            // Reaproveita o id de quem já jogou antes (por nome) — ver KDoc de
+            // findOrCreatePlayer. Sem isso, cada partida gerava um id novo e as
+            // estatísticas agregadas nunca enxergavam mais de uma partida por pessoa.
+            val players = names.map { name -> container.playerRepository.findOrCreatePlayer(name) }
             val config = GameConfig(players = players, roundCount = state.roundCount, stealEnabled = state.stealEnabled)
 
             container.gameEngine.setCatalog(catalog)
             container.gameEngine.startGame(config)
-            container.playerRepository.saveIfNew(players)
             container.appPreferences.saveLastSetup(names, state.stealEnabled)
 
             _uiState.update { it.copy(isStarting = false) }
