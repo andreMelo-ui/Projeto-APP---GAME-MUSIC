@@ -6,6 +6,7 @@ sealed class Routes(val route: String) {
     data object Game : Routes("game")
     data object HostLobby : Routes("host_lobby")
     data object JoinLobby : Routes("join_lobby")
+    data object History : Routes("history")
     data object ComingSoon : Routes("coming_soon/{feature}") {
         fun build(feature: String) = "coming_soon/$feature"
     }
