@@ -5,7 +5,7 @@ enum class Category(val displayName: String) {
     INTERNACIONAL("Internacional"),
     POPULAR("Popular"),
     GAMES("Games"),
-    PERSONAGENS("Personagens"),
+    SERIES_MOVIES("Séries/Filmes"),
     ANIME("Anime"),
     ALEATORIO("Aleatório");
 

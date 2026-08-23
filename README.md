@@ -56,7 +56,7 @@ A especificação exige que toda pontuação, validação de roubo e transição
 
 Entidades: `PlayerEntity`, `SongEntity`, `GameEntity`, `GamePlayerEntity`, `RoundEntity`, `RoundScoreEntity`, `AttemptEntity` — espelhando a seção 28 da especificação (com o campo adicional `stealEnabled` em `GameEntity`, necessário para reconstruir o histórico da regra "Roubo ON/OFF" da seção 4).
 
-O catálogo inicial vive em **`app/src/main/assets/catalog.json`** (não em código Kotlin) e é carregado por `CatalogAssetSource`, tanto no `RoomDatabase.Callback` (primeira instalação) quanto sob demanda em `SongRepositoryImpl.getCatalog()` (proteção contra corrida caso o app seja usado antes do callback terminar). Hoje traz **120 músicas** (20 por categoria): Brasileira, Internacional, Popular, Games, Personagens, Anime. O formato de cada entrada é o `SongDto` (`data/dto/SongDto.kt`).
+O catálogo inicial vive em **`app/src/main/assets/catalog.json`** (não em código Kotlin) e é carregado por `CatalogAssetSource`, tanto no `RoomDatabase.Callback` (primeira instalação) quanto sob demanda em `SongRepositoryImpl.getCatalog()` (proteção contra corrida caso o app seja usado antes do callback terminar). Hoje traz **120 músicas** (20 por categoria): Brasileira, Internacional, Popular, Games, Séries/Filmes, Anime. O formato de cada entrada é o `SongDto` (`data/dto/SongDto.kt`).
 
 ### Sobre os YouTube video IDs do catálogo
 
