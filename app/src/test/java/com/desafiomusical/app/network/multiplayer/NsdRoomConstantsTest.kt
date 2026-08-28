@@ -11,7 +11,6 @@ import org.junit.Test
  * [NsdRoomDiscoverer]).
  */
 class NsdRoomConstantsTest {
-
     @Test
     fun `decodifica roomCode de um TXT record valido`() {
         val attributes = mapOf(NSD_TXT_ROOM_CODE to "ABCD".toByteArray(Charsets.UTF_8))

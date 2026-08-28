@@ -19,26 +19,30 @@ import com.desafiomusical.app.ui.theme.TextSecondary
  * (multiplayer, histórico, configurações) — evita telas mortas ou crashes.
  */
 @Composable
-fun ComingSoonScreen(feature: String, onBack: () -> Unit) {
+fun ComingSoonScreen(
+    feature: String,
+    onBack: () -> Unit,
+) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(32.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         Text(text = "🚧", style = MaterialTheme.typography.displayLarge)
         Text(
             text = feature,
             style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.padding(top = 24.dp)
+            modifier = Modifier.padding(top = 24.dp),
         )
         Text(
             text = "Essa funcionalidade chega em uma próxima fase do Desafio Musical.",
             style = MaterialTheme.typography.bodyLarge,
             color = TextSecondary,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(top = 12.dp, bottom = 32.dp)
+            modifier = Modifier.padding(top = 12.dp, bottom = 32.dp),
         )
         PrimaryButton(text = "Voltar", onClick = onBack)
     }

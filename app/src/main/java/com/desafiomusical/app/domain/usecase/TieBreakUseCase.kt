@@ -8,7 +8,6 @@ import com.desafiomusical.app.domain.model.PlayerScore
  * retornados aqui — orquestrada pelo GameEngine.
  */
 class TieBreakUseCase {
-
     operator fun invoke(scoreboard: List<PlayerScore>): List<PlayerScore> {
         if (scoreboard.isEmpty()) return emptyList()
         val topScore = scoreboard.maxOf { it.totalScore }

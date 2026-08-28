@@ -53,10 +53,14 @@ import com.desafiomusical.app.ui.theme.TextSecondary
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun JoinLobbyScreen(container: AppContainer, onBack: () -> Unit) {
-    val viewModel: JoinLobbyViewModel = viewModel(
-        factory = viewModelFactory { initializer { JoinLobbyViewModel(container) } }
-    )
+fun JoinLobbyScreen(
+    container: AppContainer,
+    onBack: () -> Unit,
+) {
+    val viewModel: JoinLobbyViewModel =
+        viewModel(
+            factory = viewModelFactory { initializer { JoinLobbyViewModel(container) } },
+        )
     val state by viewModel.uiState.collectAsState()
 
     Scaffold(
@@ -64,12 +68,15 @@ fun JoinLobbyScreen(container: AppContainer, onBack: () -> Unit) {
             TopAppBar(
                 title = { Text("Entrar em Partida") },
                 navigationIcon = {
-                    IconButton(onClick = { viewModel.leaveRoom(); onBack() }) {
+                    IconButton(onClick = {
+                        viewModel.leaveRoom()
+                        onBack()
+                    }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Voltar")
                     }
-                }
+                },
             )
-        }
+        },
     ) { padding ->
         val contentModifier = Modifier.padding(padding)
         when (state.phase) {
@@ -77,36 +84,50 @@ fun JoinLobbyScreen(container: AppContainer, onBack: () -> Unit) {
             JoinLobbyPhase.CHOOSING -> ChoosingContent(state, viewModel, contentModifier)
             JoinLobbyPhase.CONNECTING -> CenteredMessage("Conectando...", contentModifier, showSpinner = true)
             JoinLobbyPhase.CONNECTED -> ConnectedContent(state, viewModel, contentModifier)
-            JoinLobbyPhase.GAME_STARTED -> CenteredMessage(
-                "A partida começou! Acompanhe pelo aparelho do host — a tela de jogo em rede chega numa próxima atualização.",
-                contentModifier
-            )
+            JoinLobbyPhase.GAME_STARTED ->
+                CenteredMessage(
+                    "A partida começou! Acompanhe pelo aparelho do host — a tela de jogo em rede chega numa próxima atualização.",
+                    contentModifier,
+                )
         }
     }
 }
 
 @Composable
-private fun NameInputContent(state: JoinLobbyUiState, viewModel: JoinLobbyViewModel, modifier: Modifier = Modifier) {
+private fun NameInputContent(
+    state: JoinLobbyUiState,
+    viewModel: JoinLobbyViewModel,
+    modifier: Modifier = Modifier,
+) {
     Column(
         modifier = modifier.fillMaxSize().padding(horizontal = 24.dp),
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         OutlinedTextField(
             value = state.playerName,
             onValueChange = viewModel::setPlayerName,
             label = { Text("Seu nome") },
             singleLine = true,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         )
         if (state.errorMessage != null) {
-            Text(state.errorMessage, color = DangerRed, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(top = 8.dp))
+            Text(
+                state.errorMessage,
+                color = DangerRed,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(top = 8.dp),
+            )
         }
         PrimaryButton(text = "Continuar", onClick = viewModel::confirmName, modifier = Modifier.fillMaxWidth().padding(top = 16.dp))
     }
 }
 
 @Composable
-private fun ChoosingContent(state: JoinLobbyUiState, viewModel: JoinLobbyViewModel, modifier: Modifier = Modifier) {
+private fun ChoosingContent(
+    state: JoinLobbyUiState,
+    viewModel: JoinLobbyViewModel,
+    modifier: Modifier = Modifier,
+) {
     var selectedTab by remember { mutableIntStateOf(0) }
     val tabs = listOf("Rede", "QR Code", "Manual")
 
@@ -127,12 +148,15 @@ private fun ChoosingContent(state: JoinLobbyUiState, viewModel: JoinLobbyViewMod
 }
 
 @Composable
-private fun NetworkTabContent(state: JoinLobbyUiState, viewModel: JoinLobbyViewModel) {
+private fun NetworkTabContent(
+    state: JoinLobbyUiState,
+    viewModel: JoinLobbyViewModel,
+) {
     val permission = rememberPermissionState(Manifest.permission.NEARBY_WIFI_DEVICES)
     if (!permission.granted) {
         PermissionRequestContent(
             message = "Precisamos da permissão de dispositivos próximos pra buscar salas na rede Wi-Fi.",
-            onRequest = permission.request
+            onRequest = permission.request,
         )
         return
     }
@@ -143,19 +167,29 @@ private fun NetworkTabContent(state: JoinLobbyUiState, viewModel: JoinLobbyViewM
     }
 
     if (state.discoveredRooms.isEmpty()) {
-        Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
             CircularProgressIndicator(modifier = Modifier.size(32.dp))
-            Text("Procurando salas...", style = MaterialTheme.typography.bodyMedium, color = TextSecondary, modifier = Modifier.padding(top = 12.dp))
+            Text(
+                "Procurando salas...",
+                style = MaterialTheme.typography.bodyMedium,
+                color = TextSecondary,
+                modifier = Modifier.padding(top = 12.dp),
+            )
         }
     } else {
         LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             items(state.discoveredRooms, key = DiscoveredRoom::serviceName) { room ->
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { viewModel.joinDiscoveredRoom(room) }
-                        .padding(vertical = 12.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .clickable { viewModel.joinDiscoveredRoom(room) }
+                            .padding(vertical = 12.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text("Sala ${room.roomCode}", style = MaterialTheme.typography.bodyLarge)
                     Text(room.hostAddress, style = MaterialTheme.typography.bodySmall, color = TextSecondary)
@@ -176,21 +210,24 @@ private fun QrTabContent(viewModel: JoinLobbyViewModel) {
 }
 
 @Composable
-private fun ManualTabContent(state: JoinLobbyUiState, viewModel: JoinLobbyViewModel) {
+private fun ManualTabContent(
+    state: JoinLobbyUiState,
+    viewModel: JoinLobbyViewModel,
+) {
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         OutlinedTextField(
             value = state.manualRoomCode,
             onValueChange = viewModel::setManualRoomCode,
             label = { Text("Código da sala") },
             singleLine = true,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         )
         OutlinedTextField(
             value = state.manualHostAddress,
             onValueChange = viewModel::setManualHostAddress,
             label = { Text("IP do host") },
             singleLine = true,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         )
         OutlinedTextField(
             value = state.manualPort,
@@ -198,7 +235,7 @@ private fun ManualTabContent(state: JoinLobbyUiState, viewModel: JoinLobbyViewMo
             label = { Text("Porta") },
             singleLine = true,
             keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = KeyboardType.Number),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         )
         if (state.errorMessage != null) {
             Text(state.errorMessage, color = DangerRed, style = MaterialTheme.typography.bodyMedium)
@@ -208,11 +245,14 @@ private fun ManualTabContent(state: JoinLobbyUiState, viewModel: JoinLobbyViewMo
 }
 
 @Composable
-private fun PermissionRequestContent(message: String, onRequest: () -> Unit) {
+private fun PermissionRequestContent(
+    message: String,
+    onRequest: () -> Unit,
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         Text(message, style = MaterialTheme.typography.bodyMedium, color = TextSecondary)
         PrimaryButton(text = "Permitir", onClick = onRequest, modifier = Modifier.fillMaxWidth().padding(top = 16.dp))
@@ -220,13 +260,17 @@ private fun PermissionRequestContent(message: String, onRequest: () -> Unit) {
 }
 
 @Composable
-private fun ConnectedContent(state: JoinLobbyUiState, viewModel: JoinLobbyViewModel, modifier: Modifier = Modifier) {
+private fun ConnectedContent(
+    state: JoinLobbyUiState,
+    viewModel: JoinLobbyViewModel,
+    modifier: Modifier = Modifier,
+) {
     Column(modifier = modifier.fillMaxSize().padding(horizontal = 24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Text(
             "${state.roundCount} rodadas · roubo ${if (state.stealEnabled) "ativado" else "desativado"}",
             style = MaterialTheme.typography.bodyMedium,
             color = TextSecondary,
-            modifier = Modifier.padding(top = 16.dp)
+            modifier = Modifier.padding(top = 16.dp),
         )
 
         Text("Jogadores (${state.players.size}/4)", style = MaterialTheme.typography.titleMedium)
@@ -236,13 +280,13 @@ private fun ConnectedContent(state: JoinLobbyUiState, viewModel: JoinLobbyViewMo
                 Row(
                     modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(player.playerName, style = MaterialTheme.typography.bodyLarge)
                     Icon(
                         imageVector = if (player.ready) Icons.Default.CheckCircle else Icons.Default.HourglassEmpty,
                         contentDescription = if (player.ready) "Pronto" else "Aguardando",
-                        tint = if (player.ready) ColorSuccess else TextSecondary
+                        tint = if (player.ready) ColorSuccess else TextSecondary,
                     )
                 }
             }
@@ -251,7 +295,7 @@ private fun ConnectedContent(state: JoinLobbyUiState, viewModel: JoinLobbyViewMo
         Row(
             modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text("Estou pronto", style = MaterialTheme.typography.titleMedium)
             Switch(checked = state.isReady, onCheckedChange = { viewModel.toggleReady() })
@@ -260,17 +304,21 @@ private fun ConnectedContent(state: JoinLobbyUiState, viewModel: JoinLobbyViewMo
         Text(
             "Aguardando o host iniciar a partida...",
             style = MaterialTheme.typography.bodyMedium,
-            color = TextSecondary
+            color = TextSecondary,
         )
     }
 }
 
 @Composable
-private fun CenteredMessage(message: String, modifier: Modifier = Modifier, showSpinner: Boolean = false) {
+private fun CenteredMessage(
+    message: String,
+    modifier: Modifier = Modifier,
+    showSpinner: Boolean = false,
+) {
     Column(
         modifier = modifier.fillMaxSize().padding(horizontal = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         if (showSpinner) {
             CircularProgressIndicator(modifier = Modifier.size(32.dp).padding(bottom = 16.dp))

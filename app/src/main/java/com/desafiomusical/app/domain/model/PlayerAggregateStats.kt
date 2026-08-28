@@ -24,26 +24,27 @@ data class PlayerAggregateStats(
     val hintsUsed: Int,
     val stealsAttempted: Int,
     val stealsWon: Int,
-    val categoryBreakdown: List<CategoryStats>
+    val categoryBreakdown: List<CategoryStats>,
 ) {
     companion object {
         /** Estado neutro para um jogador sem nenhuma partida salva — nunca divide por zero. */
-        fun empty(playerId: String): PlayerAggregateStats = PlayerAggregateStats(
-            playerId = playerId,
-            gamesPlayed = 0,
-            wins = 0,
-            losses = 0,
-            winRate = 0.0,
-            songsAnswered = 0,
-            correctAnswers = 0,
-            averagePoints = 0.0,
-            bestScore = 0,
-            bestTimeSeconds = null,
-            hintsUsed = 0,
-            stealsAttempted = 0,
-            stealsWon = 0,
-            categoryBreakdown = Category.concrete.map { CategoryStats(category = it, songsAnswered = 0, correctAnswers = 0) }
-        )
+        fun empty(playerId: String): PlayerAggregateStats =
+            PlayerAggregateStats(
+                playerId = playerId,
+                gamesPlayed = 0,
+                wins = 0,
+                losses = 0,
+                winRate = 0.0,
+                songsAnswered = 0,
+                correctAnswers = 0,
+                averagePoints = 0.0,
+                bestScore = 0,
+                bestTimeSeconds = null,
+                hintsUsed = 0,
+                stealsAttempted = 0,
+                stealsWon = 0,
+                categoryBreakdown = Category.concrete.map { CategoryStats(category = it, songsAnswered = 0, correctAnswers = 0) },
+            )
     }
 }
 
@@ -51,5 +52,5 @@ data class PlayerAggregateStats(
 data class CategoryStats(
     val category: Category,
     val songsAnswered: Int,
-    val correctAnswers: Int
+    val correctAnswers: Int,
 )

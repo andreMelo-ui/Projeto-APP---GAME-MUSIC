@@ -5,7 +5,6 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class GameStateMachineTest {
-
     @Test
     fun `fluxo feliz completo de uma rodada e valido`() {
         assertTrue(GameStateMachine.canTransition(GamePhase.LOBBY, GamePhase.PLAYER_SETUP))

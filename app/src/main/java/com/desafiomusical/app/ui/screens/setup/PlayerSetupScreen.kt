@@ -42,11 +42,12 @@ import com.desafiomusical.app.ui.theme.TextSecondary
 fun PlayerSetupScreen(
     container: AppContainer,
     onGameStarted: () -> Unit,
-    onBack: () -> Unit
+    onBack: () -> Unit,
 ) {
-    val viewModel: PlayerSetupViewModel = viewModel(
-        factory = viewModelFactory { initializer { PlayerSetupViewModel(container) } }
-    )
+    val viewModel: PlayerSetupViewModel =
+        viewModel(
+            factory = viewModelFactory { initializer { PlayerSetupViewModel(container) } },
+        )
     val state by viewModel.uiState.collectAsState()
 
     Scaffold(
@@ -57,16 +58,17 @@ fun PlayerSetupScreen(
                     IconButton(onClick = onBack) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Voltar")
                     }
-                }
+                },
             )
-        }
+        },
     ) { padding ->
         LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .padding(horizontal = 24.dp),
-            verticalArrangement = Arrangement.spacedBy(20.dp)
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(padding)
+                    .padding(horizontal = 24.dp),
+            verticalArrangement = Arrangement.spacedBy(20.dp),
         ) {
             item {
                 Text("Quantos jogadores?", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(top = 16.dp))
@@ -76,10 +78,11 @@ fun PlayerSetupScreen(
                             selected = state.playerCount == count,
                             onClick = { viewModel.setPlayerCount(count) },
                             label = { Text("$count") },
-                            colors = FilterChipDefaults.filterChipColors(
-                                selectedContainerColor = MaterialTheme.colorScheme.primary,
-                                selectedLabelColor = MaterialTheme.colorScheme.onPrimary
-                            )
+                            colors =
+                                FilterChipDefaults.filterChipColors(
+                                    selectedContainerColor = MaterialTheme.colorScheme.primary,
+                                    selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                                ),
                         )
                     }
                 }
@@ -95,7 +98,7 @@ fun PlayerSetupScreen(
                     onValueChange = { viewModel.setPlayerName(index, it) },
                     label = { Text("Jogador ${index + 1}") },
                     singleLine = true,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 )
             }
 
@@ -107,10 +110,11 @@ fun PlayerSetupScreen(
                             selected = state.roundCount == count,
                             onClick = { viewModel.setRoundCount(count) },
                             label = { Text("$count") },
-                            colors = FilterChipDefaults.filterChipColors(
-                                selectedContainerColor = MaterialTheme.colorScheme.primary,
-                                selectedLabelColor = MaterialTheme.colorScheme.onPrimary
-                            )
+                            colors =
+                                FilterChipDefaults.filterChipColors(
+                                    selectedContainerColor = MaterialTheme.colorScheme.primary,
+                                    selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                                ),
                         )
                     }
                 }
@@ -120,14 +124,14 @@ fun PlayerSetupScreen(
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Column {
                         Text("Roubo", style = MaterialTheme.typography.titleMedium)
                         Text(
                             "Quando o respondente erra, outros podem tentar roubar a resposta.",
                             style = MaterialTheme.typography.bodyMedium,
-                            color = TextSecondary
+                            color = TextSecondary,
                         )
                     }
                     Switch(checked = state.stealEnabled, onCheckedChange = viewModel::setStealEnabled)
@@ -147,9 +151,10 @@ fun PlayerSetupScreen(
                     PrimaryButton(
                         text = "Começar Partida",
                         onClick = { viewModel.startGame(onGameStarted) },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 32.dp)
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 32.dp),
                     )
                 }
             }

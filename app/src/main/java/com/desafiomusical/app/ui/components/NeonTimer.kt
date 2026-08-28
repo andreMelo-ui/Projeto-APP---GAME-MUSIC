@@ -27,16 +27,17 @@ fun NeonTimer(
     elapsedSeconds: Int,
     totalSeconds: Int,
     modifier: Modifier = Modifier,
-    diameter: androidx.compose.ui.unit.Dp = 140.dp
+    diameter: androidx.compose.ui.unit.Dp = 140.dp,
 ) {
     val remaining = (totalSeconds - elapsedSeconds).coerceIn(0, totalSeconds)
     val progress = if (totalSeconds > 0) elapsedSeconds.toFloat() / totalSeconds else 0f
     val ratioLeft = if (totalSeconds > 0) remaining.toFloat() / totalSeconds else 0f
-    val color = when {
-        ratioLeft > 0.5f -> SuccessGreen
-        ratioLeft > 0.2f -> WarningAmber
-        else -> DangerRed
-    }
+    val color =
+        when {
+            ratioLeft > 0.5f -> SuccessGreen
+            ratioLeft > 0.2f -> WarningAmber
+            else -> DangerRed
+        }
 
     Box(modifier = modifier.size(diameter), contentAlignment = Alignment.Center) {
         Canvas(modifier = Modifier.size(diameter)) {
@@ -48,7 +49,7 @@ fun NeonTimer(
                 useCenter = false,
                 style = Stroke(width = strokeWidth, cap = StrokeCap.Round),
                 size = Size(size.width - strokeWidth, size.height - strokeWidth),
-                topLeft = androidx.compose.ui.geometry.Offset(strokeWidth / 2, strokeWidth / 2)
+                topLeft = androidx.compose.ui.geometry.Offset(strokeWidth / 2, strokeWidth / 2),
             )
             drawArc(
                 color = color,
@@ -57,25 +58,28 @@ fun NeonTimer(
                 useCenter = false,
                 style = Stroke(width = strokeWidth, cap = StrokeCap.Round),
                 size = Size(size.width - strokeWidth, size.height - strokeWidth),
-                topLeft = androidx.compose.ui.geometry.Offset(strokeWidth / 2, strokeWidth / 2)
+                topLeft = androidx.compose.ui.geometry.Offset(strokeWidth / 2, strokeWidth / 2),
             )
         }
         Text(
             text = remaining.toString(),
             style = MaterialTheme.typography.displayLarge,
-            color = color
+            color = color,
         )
     }
 }
 
 /** Contador regressivo compacto, usado na janela de roubo de 5s. */
 @Composable
-fun CompactCountdown(secondsLeft: Int, modifier: Modifier = Modifier) {
+fun CompactCountdown(
+    secondsLeft: Int,
+    modifier: Modifier = Modifier,
+) {
     val color = if (secondsLeft > 2) WarningAmber else DangerRed
     Text(
         text = "$secondsLeft s",
         style = MaterialTheme.typography.headlineLarge,
         color = color,
-        modifier = modifier
+        modifier = modifier,
     )
 }

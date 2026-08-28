@@ -12,10 +12,10 @@ import androidx.room.Index
             entity = RoundEntity::class,
             parentColumns = ["id"],
             childColumns = ["roundId"],
-            onDelete = ForeignKey.CASCADE
-        )
+            onDelete = ForeignKey.CASCADE,
+        ),
     ],
-    indices = [Index("roundId"), Index("playerId")]
+    indices = [Index("roundId"), Index("playerId")],
 )
 data class RoundScoreEntity(
     val roundId: String,
@@ -25,5 +25,5 @@ data class RoundScoreEntity(
     val artistPoints: Int,
     val workPoints: Int,
     val hintPenalty: Int,
-    val totalPoints: Int
+    val totalPoints: Int,
 )

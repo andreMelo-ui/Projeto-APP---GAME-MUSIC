@@ -6,12 +6,12 @@ import org.junit.Assert.assertNotEquals
 import org.junit.Test
 
 class DistributeRolesUseCaseTest {
-
     private val useCase = DistributeRolesUseCase()
 
-    private fun players(vararg names: String) = names.mapIndexed { index, name ->
-        Player(id = "p$index", name = name, createdAt = 0L)
-    }
+    private fun players(vararg names: String) =
+        names.mapIndexed { index, name ->
+            Player(id = "p$index", name = name, createdAt = 0L)
+        }
 
     @Test
     fun `escolhedor nunca e o respondente da propria rodada`() {

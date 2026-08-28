@@ -13,21 +13,30 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-private fun testGame(id: String, createdAt: Long, winnerId: String?) = GameEntity(
+private fun testGame(
+    id: String,
+    createdAt: Long,
+    winnerId: String?,
+) = GameEntity(
     id = id,
     createdAt = createdAt,
     playerCount = 3,
     roundCount = 5,
     stealEnabled = true,
     winnerId = winnerId,
-    finishedAt = createdAt + 60_000
+    finishedAt = createdAt + 60_000,
 )
 
-private fun testGamePlayer(gameId: String, playerId: String, seatOrder: Int, finalScore: Int) = GamePlayerEntity(
+private fun testGamePlayer(
+    gameId: String,
+    playerId: String,
+    seatOrder: Int,
+    finalScore: Int,
+) = GamePlayerEntity(
     gameId = gameId,
     playerId = playerId,
     seatOrder = seatOrder,
-    finalScore = finalScore
+    finalScore = finalScore,
 )
 
 private fun testRound(
@@ -40,7 +49,7 @@ private fun testRound(
     startedAt: Long,
     endedAt: Long?,
     winnerId: String?,
-    hintsUsed: Int = 0
+    hintsUsed: Int = 0,
 ) = RoundEntity(
     id = id,
     gameId = gameId,
@@ -51,20 +60,27 @@ private fun testRound(
     startedAt = startedAt,
     endedAt = endedAt,
     winnerId = winnerId,
-    hintsUsed = hintsUsed
+    hintsUsed = hintsUsed,
 )
 
-private fun testAttempt(id: String, roundId: String, playerId: String) = AttemptEntity(
+private fun testAttempt(
+    id: String,
+    roundId: String,
+    playerId: String,
+) = AttemptEntity(
     id = id,
     roundId = roundId,
     playerId = playerId,
     attemptType = "STEAL_ANSWER",
     timestamp = 0L,
     correct = false,
-    eliminated = true
+    eliminated = true,
 )
 
-private fun testSong(id: String, category: Category) = SongEntity(
+private fun testSong(
+    id: String,
+    category: Category,
+) = SongEntity(
     id = id,
     title = "Song $id",
     artist = "Artist",
@@ -78,20 +94,23 @@ private fun testSong(id: String, category: Category) = SongEntity(
     tagsCsv = "",
     active = true,
     createdAt = 0L,
-    updatedAt = 0L
+    updatedAt = 0L,
 )
 
-private fun testPlayer(id: String, name: String) = PlayerEntity(id = id, name = name, createdAt = 0L)
+private fun testPlayer(
+    id: String,
+    name: String,
+) = PlayerEntity(id = id, name = name, createdAt = 0L)
 
 class GameHistoryCalculationsTest {
-
     private val song1Brasileira = testSong("song1", Category.BRASILEIRA)
     private val song2Games = testSong("song2", Category.GAMES)
     private val song3Popular = testSong("song3", Category.POPULAR)
     private val song4Brasileira = testSong("song4", Category.BRASILEIRA)
     private val song5Anime = testSong("song5", Category.ANIME)
-    private val songsById = listOf(song1Brasileira, song2Games, song3Popular, song4Brasileira, song5Anime)
-        .associateBy { it.id }
+    private val songsById =
+        listOf(song1Brasileira, song2Games, song3Popular, song4Brasileira, song5Anime)
+            .associateBy { it.id }
 
     /**
      * Cenário principal: p1 vence a rodada 1 roubando (não é chooser nem
@@ -99,40 +118,42 @@ class GameHistoryCalculationsTest {
      * um roubo na rodada 3, erra como respondente principal na rodada 4, e
      * está de fora da rodada 5 inteiramente.
      */
-    private val gameARounds = listOf(
-        testRound(
-            id = "r1", gameId = "gameA", roundNumber = 1, chooserId = "p2", responderId = "p3",
-            songId = song1Brasileira.id, startedAt = 0L, endedAt = 8_000L, winnerId = "p1"
-        ),
-        testRound(
-            id = "r2", gameId = "gameA", roundNumber = 2, chooserId = "p3", responderId = "p1",
-            songId = song2Games.id, startedAt = 10_000L, endedAt = 16_000L, winnerId = "p1"
-        ),
-        testRound(
-            id = "r3", gameId = "gameA", roundNumber = 3, chooserId = "p2", responderId = "p3",
-            songId = song3Popular.id, startedAt = 20_000L, endedAt = 27_000L, winnerId = null
-        ),
-        testRound(
-            id = "r4", gameId = "gameA", roundNumber = 4, chooserId = "p2", responderId = "p1",
-            songId = song4Brasileira.id, startedAt = 30_000L, endedAt = 35_000L, winnerId = null, hintsUsed = 2
-        ),
-        testRound(
-            id = "r5", gameId = "gameA", roundNumber = 5, chooserId = "p3", responderId = "p2",
-            songId = song5Anime.id, startedAt = 40_000L, endedAt = 44_000L, winnerId = "p3"
+    private val gameARounds =
+        listOf(
+            testRound(
+                id = "r1", gameId = "gameA", roundNumber = 1, chooserId = "p2", responderId = "p3",
+                songId = song1Brasileira.id, startedAt = 0L, endedAt = 8_000L, winnerId = "p1",
+            ),
+            testRound(
+                id = "r2", gameId = "gameA", roundNumber = 2, chooserId = "p3", responderId = "p1",
+                songId = song2Games.id, startedAt = 10_000L, endedAt = 16_000L, winnerId = "p1",
+            ),
+            testRound(
+                id = "r3", gameId = "gameA", roundNumber = 3, chooserId = "p2", responderId = "p3",
+                songId = song3Popular.id, startedAt = 20_000L, endedAt = 27_000L, winnerId = null,
+            ),
+            testRound(
+                id = "r4", gameId = "gameA", roundNumber = 4, chooserId = "p2", responderId = "p1",
+                songId = song4Brasileira.id, startedAt = 30_000L, endedAt = 35_000L, winnerId = null, hintsUsed = 2,
+            ),
+            testRound(
+                id = "r5", gameId = "gameA", roundNumber = 5, chooserId = "p3", responderId = "p2",
+                songId = song5Anime.id, startedAt = 40_000L, endedAt = 44_000L, winnerId = "p3",
+            ),
         )
-    )
     private val gameAAttempts = listOf(testAttempt(id = "a1", roundId = "r3", playerId = "p1"))
 
     @Test
     fun `no games played never divides by zero and returns a zeroed-out stats block`() {
-        val stats = calculatePlayerAggregateStats(
-            playerId = "p1",
-            games = emptyList(),
-            gamePlayerRows = emptyList(),
-            rounds = emptyList(),
-            attempts = emptyList(),
-            songsById = emptyMap()
-        )
+        val stats =
+            calculatePlayerAggregateStats(
+                playerId = "p1",
+                games = emptyList(),
+                gamePlayerRows = emptyList(),
+                rounds = emptyList(),
+                attempts = emptyList(),
+                songsById = emptyMap(),
+            )
 
         assertEquals(0, stats.gamesPlayed)
         assertEquals(0.0, stats.winRate, 0.0)
@@ -146,10 +167,11 @@ class GameHistoryCalculationsTest {
     @Test
     fun `wins losses and win rate are computed across every game played`() {
         val games = listOf(testGame("gameA", createdAt = 1_000L, winnerId = "p1"), testGame("gameB", createdAt = 2_000L, winnerId = "p2"))
-        val gamePlayerRows = listOf(
-            testGamePlayer("gameA", "p1", seatOrder = 0, finalScore = 40),
-            testGamePlayer("gameB", "p1", seatOrder = 1, finalScore = 90)
-        )
+        val gamePlayerRows =
+            listOf(
+                testGamePlayer("gameA", "p1", seatOrder = 0, finalScore = 40),
+                testGamePlayer("gameB", "p1", seatOrder = 1, finalScore = 90),
+            )
 
         val stats = calculatePlayerAggregateStats("p1", games, gamePlayerRows, gameARounds, gameAAttempts, songsById)
 
@@ -162,10 +184,11 @@ class GameHistoryCalculationsTest {
     @Test
     fun `best score and average points are taken across multiple games, not a single round`() {
         val games = listOf(testGame("gameA", createdAt = 1_000L, winnerId = "p1"), testGame("gameB", createdAt = 2_000L, winnerId = "p2"))
-        val gamePlayerRows = listOf(
-            testGamePlayer("gameA", "p1", seatOrder = 0, finalScore = 40),
-            testGamePlayer("gameB", "p1", seatOrder = 1, finalScore = 90)
-        )
+        val gamePlayerRows =
+            listOf(
+                testGamePlayer("gameA", "p1", seatOrder = 0, finalScore = 40),
+                testGamePlayer("gameB", "p1", seatOrder = 1, finalScore = 90),
+            )
 
         val stats = calculatePlayerAggregateStats("p1", games, gamePlayerRows, gameARounds, gameAAttempts, songsById)
 
@@ -232,11 +255,12 @@ class GameHistoryCalculationsTest {
     @Test
     fun `game history entry sorts the scoreboard by score and resolves the winner`() {
         val game = testGame("gameA", createdAt = 1_000L, winnerId = "p1")
-        val gamePlayers = listOf(
-            testGamePlayer("gameA", "p1", seatOrder = 0, finalScore = 40),
-            testGamePlayer("gameA", "p2", seatOrder = 1, finalScore = 70),
-            testGamePlayer("gameA", "p3", seatOrder = 2, finalScore = 10)
-        )
+        val gamePlayers =
+            listOf(
+                testGamePlayer("gameA", "p1", seatOrder = 0, finalScore = 40),
+                testGamePlayer("gameA", "p2", seatOrder = 1, finalScore = 70),
+                testGamePlayer("gameA", "p3", seatOrder = 2, finalScore = 10),
+            )
         val playersById = listOf(testPlayer("p1", "Andre"), testPlayer("p2", "Maria"), testPlayer("p3", "Joao")).associateBy { it.id }
 
         val entry = buildGameHistoryEntry(game.copy(winnerId = "p2"), gamePlayers, playersById)
@@ -253,17 +277,30 @@ class GameHistoryCalculationsTest {
         val gamePlayers = listOf(testGamePlayer("gameA", "p1", seatOrder = 0, finalScore = 40))
         val playersById = listOf(testPlayer("p1", "Andre"), testPlayer("p3", "Joao")).associateBy { it.id }
         val entry = buildGameHistoryEntry(game, gamePlayers, playersById)
-        val scoresByRoundId = mapOf(
-            "r1" to RoundScoreEntity("r1", "p1", timePoints = 10, titlePoints = 5, artistPoints = 5, workPoints = 0, hintPenalty = 0, totalPoints = 20)
-        )
+        val scoresByRoundId =
+            mapOf(
+                "r1" to
+                    RoundScoreEntity(
+                        "r1",
+                        "p1",
+                        timePoints = 10,
+                        titlePoints = 5,
+                        artistPoints = 5,
+                        workPoints = 0,
+                        hintPenalty = 0,
+                        totalPoints = 20,
+                    ),
+            )
 
-        val detail = buildGameHistoryDetail(
-            entry = entry,
-            rounds = gameARounds.reversed(), // fora de ordem de propósito
-            songsById = songsById,
-            playersById = playersById,
-            scoresByRoundId = scoresByRoundId
-        )
+        // rounds passados fora de ordem de propósito
+        val detail =
+            buildGameHistoryDetail(
+                entry = entry,
+                rounds = gameARounds.reversed(),
+                songsById = songsById,
+                playersById = playersById,
+                scoresByRoundId = scoresByRoundId,
+            )
 
         assertEquals(listOf(1, 2, 3, 4, 5), detail.rounds.map { it.roundNumber })
         val round1 = detail.rounds.first { it.roundNumber == 1 }

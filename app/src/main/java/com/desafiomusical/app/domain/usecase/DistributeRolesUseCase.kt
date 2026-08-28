@@ -9,8 +9,10 @@ import com.desafiomusical.app.domain.model.RoundSetup
  * todos os jogadores passem por ambos os papéis um número parecido de vezes.
  */
 class DistributeRolesUseCase {
-
-    operator fun invoke(players: List<Player>, roundCount: Int): List<RoundSetup> {
+    operator fun invoke(
+        players: List<Player>,
+        roundCount: Int,
+    ): List<RoundSetup> {
         require(players.size in 2..4) { "A partida precisa de 2 a 4 jogadores." }
         require(roundCount > 0) { "roundCount deve ser positivo." }
 
@@ -20,15 +22,16 @@ class DistributeRolesUseCase {
             val responderIndex = (index + 1) % playerCount
             val chooser = players[chooserIndex]
             val responder = players[responderIndex]
-            val eligibleStealers = players
-                .filterNot { it.id == chooser.id || it.id == responder.id }
-                .map { it.id }
+            val eligibleStealers =
+                players
+                    .filterNot { it.id == chooser.id || it.id == responder.id }
+                    .map { it.id }
 
             RoundSetup(
                 roundNumber = index + 1,
                 chooserId = chooser.id,
                 mainResponderId = responder.id,
-                eligibleStealerIds = eligibleStealers
+                eligibleStealerIds = eligibleStealers,
             )
         }
     }

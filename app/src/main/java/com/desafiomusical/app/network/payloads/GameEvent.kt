@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 data class RoomPlayerInfo(
     val playerId: String,
     val playerName: String,
-    val ready: Boolean
+    val ready: Boolean,
 )
 
 /**
@@ -29,7 +29,7 @@ sealed class GameEvent {
         override val timestamp: Long,
         override val playerId: String,
         val roundCount: Int,
-        val stealEnabled: Boolean
+        val stealEnabled: Boolean,
     ) : GameEvent() {
         override val roundId: String? = null
     }
@@ -40,7 +40,7 @@ sealed class GameEvent {
         override val timestamp: Long,
         override val playerId: String,
         val playerName: String,
-        val roomCode: String
+        val roomCode: String,
     ) : GameEvent() {
         override val roundId: String? = null
     }
@@ -50,7 +50,7 @@ sealed class GameEvent {
         override val eventId: String,
         override val timestamp: Long,
         override val playerId: String,
-        val ready: Boolean
+        val ready: Boolean,
     ) : GameEvent() {
         override val roundId: String? = null
     }
@@ -69,7 +69,7 @@ sealed class GameEvent {
         override val timestamp: Long,
         val roundCount: Int,
         val stealEnabled: Boolean,
-        val players: List<RoomPlayerInfo>
+        val players: List<RoomPlayerInfo>,
     ) : GameEvent() {
         override val roundId: String? = null
         override val playerId: String? = null
@@ -78,7 +78,7 @@ sealed class GameEvent {
     @Serializable
     data class GameStart(
         override val eventId: String,
-        override val timestamp: Long
+        override val timestamp: Long,
     ) : GameEvent() {
         override val roundId: String? = null
         override val playerId: String? = null
@@ -91,7 +91,7 @@ sealed class GameEvent {
         override val roundId: String,
         val roundNumber: Int,
         val chooserId: String,
-        val mainResponderId: String
+        val mainResponderId: String,
     ) : GameEvent() {
         override val playerId: String? = null
     }
@@ -102,7 +102,7 @@ sealed class GameEvent {
         override val timestamp: Long,
         override val roundId: String,
         override val playerId: String,
-        val songId: String
+        val songId: String,
     ) : GameEvent()
 
     /**
@@ -118,7 +118,7 @@ sealed class GameEvent {
         val category: String,
         val difficulty: String,
         val youtubeVideoId: String,
-        val hasWork: Boolean
+        val hasWork: Boolean,
     ) : GameEvent() {
         override val playerId: String? = null
     }
@@ -136,7 +136,7 @@ sealed class GameEvent {
         override val roundId: String,
         override val playerId: String,
         val categories: List<String>,
-        val candidateSongIdsByCategory: Map<String, List<String>>
+        val candidateSongIdsByCategory: Map<String, List<String>>,
     ) : GameEvent()
 
     @Serializable
@@ -144,7 +144,7 @@ sealed class GameEvent {
         override val eventId: String,
         override val timestamp: Long,
         override val roundId: String,
-        val elapsedSeconds: Int
+        val elapsedSeconds: Int,
     ) : GameEvent() {
         override val playerId: String? = null
     }
@@ -161,7 +161,7 @@ sealed class GameEvent {
         override val timestamp: Long,
         override val roundId: String,
         val hintLevel: Int,
-        val hintText: String = ""
+        val hintText: String = "",
     ) : GameEvent() {
         override val playerId: String? = null
     }
@@ -173,7 +173,7 @@ sealed class GameEvent {
         override val roundId: String,
         override val playerId: String,
         val titleClaimed: Boolean,
-        val artistClaimed: Boolean
+        val artistClaimed: Boolean,
     ) : GameEvent()
 
     @Serializable
@@ -185,7 +185,7 @@ sealed class GameEvent {
         val titleCorrect: Boolean,
         val artistCorrect: Boolean,
         val pointsAwarded: Int,
-        val workCorrect: Boolean = false
+        val workCorrect: Boolean = false,
     ) : GameEvent()
 
     /**
@@ -202,7 +202,7 @@ sealed class GameEvent {
         override val playerId: String,
         val titleCorrect: Boolean,
         val artistCorrect: Boolean,
-        val workCorrect: Boolean = false
+        val workCorrect: Boolean = false,
     ) : GameEvent()
 
     @Serializable
@@ -211,7 +211,7 @@ sealed class GameEvent {
         override val timestamp: Long,
         override val roundId: String,
         val eligiblePlayerIds: List<String>,
-        val windowSeconds: Int
+        val windowSeconds: Int,
     ) : GameEvent() {
         override val playerId: String? = null
     }
@@ -221,7 +221,7 @@ sealed class GameEvent {
         override val eventId: String,
         override val timestamp: Long,
         override val roundId: String,
-        override val playerId: String
+        override val playerId: String,
     ) : GameEvent()
 
     @Serializable
@@ -231,7 +231,7 @@ sealed class GameEvent {
         override val roundId: String,
         override val playerId: String,
         val correct: Boolean,
-        val pointsAwarded: Int
+        val pointsAwarded: Int,
     ) : GameEvent()
 
     /**
@@ -248,7 +248,7 @@ sealed class GameEvent {
         override val playerId: String,
         val titleCorrect: Boolean,
         val artistCorrect: Boolean,
-        val workCorrect: Boolean = false
+        val workCorrect: Boolean = false,
     ) : GameEvent()
 
     /**
@@ -262,7 +262,7 @@ sealed class GameEvent {
         override val timestamp: Long,
         override val roundId: String,
         val winnerId: String?,
-        val songId: String
+        val songId: String,
     ) : GameEvent() {
         override val playerId: String? = null
     }
@@ -271,7 +271,7 @@ sealed class GameEvent {
     data class GameEnd(
         override val eventId: String,
         override val timestamp: Long,
-        val winnerId: String?
+        val winnerId: String?,
     ) : GameEvent() {
         override val roundId: String? = null
         override val playerId: String? = null

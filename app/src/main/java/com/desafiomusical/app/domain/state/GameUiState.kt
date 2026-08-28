@@ -22,7 +22,7 @@ data class ActiveRoundView(
     val eligibleStealers: List<Player>,
     val eliminatedIds: Set<String>,
     val hintsRevealedCount: Int,
-    val pointsAvailableNow: Int
+    val pointsAvailableNow: Int,
 )
 
 /** Visão privada, exclusiva do escolhedor: contém a resposta completa. */
@@ -30,7 +30,7 @@ data class ChooserRoundView(
     val roundNumber: Int,
     val totalRounds: Int,
     val song: Song,
-    val mainResponder: Player
+    val mainResponder: Player,
 )
 
 data class RoundResultView(
@@ -40,13 +40,13 @@ data class RoundResultView(
     val winner: Player?,
     val pointsAwarded: Int,
     val elapsedSeconds: Int,
-    val scoreboard: List<PlayerScore>
+    val scoreboard: List<PlayerScore>,
 )
 
 data class GameResultView(
     val finalScoreboard: List<PlayerScore>,
     val winner: Player?,
-    val stats: List<PlayerGameStats>
+    val stats: List<PlayerGameStats>,
 )
 
 sealed class GameUiState {
@@ -58,7 +58,7 @@ sealed class GameUiState {
         val chooser: Player,
         val roundNumber: Int,
         val totalRounds: Int,
-        val categories: List<Category> = Category.selectable
+        val categories: List<Category> = Category.selectable,
     ) : GameUiState()
 
     data class SongSelection(
@@ -66,7 +66,7 @@ sealed class GameUiState {
         val roundNumber: Int,
         val totalRounds: Int,
         val category: Category,
-        val candidates: List<Song>
+        val candidates: List<Song>,
     ) : GameUiState()
 
     data class Ready(val chooserView: ChooserRoundView) : GameUiState()
@@ -85,20 +85,20 @@ sealed class GameUiState {
         val elapsedSeconds: Int,
         val titleClaimed: Boolean,
         val artistClaimed: Boolean,
-        val workClaimed: Boolean = false
+        val workClaimed: Boolean = false,
     ) : GameUiState()
 
     data class StealWindow(
         val round: ActiveRoundView,
         val elapsedSeconds: Int,
-        val stealSecondsLeft: Int
+        val stealSecondsLeft: Int,
     ) : GameUiState()
 
     data class StealAnswer(
         val round: ActiveRoundView,
         val song: Song,
         val elapsedSeconds: Int,
-        val stealerId: String
+        val stealerId: String,
     ) : GameUiState()
 
     data class RoundResult(val result: RoundResultView) : GameUiState()

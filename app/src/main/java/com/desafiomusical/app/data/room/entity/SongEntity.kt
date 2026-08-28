@@ -18,5 +18,5 @@ data class SongEntity(
     val tagsCsv: String,
     val active: Boolean,
     val createdAt: Long,
-    val updatedAt: Long
+    val updatedAt: Long,
 )

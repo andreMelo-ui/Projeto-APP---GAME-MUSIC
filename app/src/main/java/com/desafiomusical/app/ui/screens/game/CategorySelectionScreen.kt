@@ -29,25 +29,26 @@ fun CategorySelectionScreen(
     roundNumber: Int,
     totalRounds: Int,
     categories: List<Category>,
-    onCategorySelected: (Category) -> Unit
+    onCategorySelected: (Category) -> Unit,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .windowInsetsPadding(WindowInsets.safeDrawing)
-            .padding(24.dp)
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .windowInsetsPadding(WindowInsets.safeDrawing)
+                .padding(24.dp),
     ) {
         Text(
             text = "Rodada $roundNumber de $totalRounds",
             style = MaterialTheme.typography.bodyMedium,
-            color = TextSecondary
+            color = TextSecondary,
         )
         Text(
             text = "${chooser.name} escolhe a categoria",
             style = MaterialTheme.typography.headlineMedium,
             color = ColorChooser,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(top = 4.dp, bottom = 24.dp)
+            modifier = Modifier.padding(top = 4.dp, bottom = 24.dp),
         )
 
         LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -55,14 +56,14 @@ fun CategorySelectionScreen(
                 Card(
                     onClick = { onCategorySelected(category) },
                     modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
                 ) {
                     Text(
                         text = category.displayName,
                         style = MaterialTheme.typography.titleLarge,
                         modifier = Modifier.padding(20.dp),
                         textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
             }

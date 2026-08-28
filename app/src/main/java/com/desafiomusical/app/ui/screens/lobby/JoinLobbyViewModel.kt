@@ -10,7 +10,6 @@ import com.desafiomusical.app.network.multiplayer.RoomInvite
 import com.desafiomusical.app.network.multiplayer.RoomSession
 import com.desafiomusical.app.network.payloads.GameEvent
 import com.desafiomusical.app.network.payloads.RoomPlayerInfo
-import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -19,6 +18,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.UUID
 
 enum class JoinLobbyPhase { NAME_INPUT, CHOOSING, CONNECTING, CONNECTED, GAME_STARTED }
 
@@ -33,7 +33,7 @@ data class JoinLobbyUiState(
     val stealEnabled: Boolean = true,
     val players: List<RoomPlayerInfo> = emptyList(),
     val isReady: Boolean = false,
-    val errorMessage: String? = null
+    val errorMessage: String? = null,
 )
 
 /**
@@ -44,7 +44,6 @@ data class JoinLobbyUiState(
  * do host (roster do lobby, início de partida).
  */
 class JoinLobbyViewModel(private val container: AppContainer) : ViewModel() {
-
     private val _uiState = MutableStateFlow(JoinLobbyUiState())
     val uiState: StateFlow<JoinLobbyUiState> = _uiState.asStateFlow()
 
@@ -72,11 +71,12 @@ class JoinLobbyViewModel(private val container: AppContainer) : ViewModel() {
     /** Chamado quando a aba de busca automática entra em composição — para de buscar sozinho ao sair dela (ver [stopDiscovering]). */
     fun startDiscovering() {
         if (discoveryJob?.isActive == true) return
-        discoveryJob = viewModelScope.launch {
-            discoverer.discoverRooms().collect { rooms ->
-                _uiState.update { it.copy(discoveredRooms = rooms) }
+        discoveryJob =
+            viewModelScope.launch {
+                discoverer.discoverRooms().collect { rooms ->
+                    _uiState.update { it.copy(discoveredRooms = rooms) }
+                }
             }
-        }
     }
 
     fun stopDiscovering() {
@@ -106,24 +106,32 @@ class JoinLobbyViewModel(private val container: AppContainer) : ViewModel() {
         return true
     }
 
-    private fun join(roomCode: String, hostAddress: String, port: Int) {
+    private fun join(
+        roomCode: String,
+        hostAddress: String,
+        port: Int,
+    ) {
         discoveryJob?.cancel()
         _uiState.update { it.copy(phase = JoinLobbyPhase.CONNECTING, errorMessage = null) }
 
         viewModelScope.launch {
             val name = _uiState.value.playerName.trim()
             playerId = container.playerRepository.findOrCreatePlayer(name).id
-            val session = KtorClientRoomSession(
-                roomCode = roomCode,
-                playerId = playerId,
-                playerName = name,
-                hostAddress = hostAddress,
-                hostPort = port
-            )
+            val session =
+                KtorClientRoomSession(
+                    roomCode = roomCode,
+                    playerId = playerId,
+                    playerName = name,
+                    hostAddress = hostAddress,
+                    hostPort = port,
+                )
             val connected = runCatching { session.start() }.isSuccess
             if (!connected) {
                 _uiState.update {
-                    it.copy(phase = JoinLobbyPhase.NAME_INPUT, errorMessage = "Não foi possível conectar. Confira o código, o IP e a porta.")
+                    it.copy(
+                        phase = JoinLobbyPhase.NAME_INPUT,
+                        errorMessage = "Não foi possível conectar. Confira o código, o IP e a porta.",
+                    )
                 }
                 return@launch
             }
@@ -138,9 +146,10 @@ class JoinLobbyViewModel(private val container: AppContainer) : ViewModel() {
         viewModelScope.launch {
             session.observeIncoming().collect { event ->
                 when (event) {
-                    is GameEvent.RoomRoster -> _uiState.update {
-                        it.copy(players = event.players, roundCount = event.roundCount, stealEnabled = event.stealEnabled)
-                    }
+                    is GameEvent.RoomRoster ->
+                        _uiState.update {
+                            it.copy(players = event.players, roundCount = event.roundCount, stealEnabled = event.stealEnabled)
+                        }
                     is GameEvent.GameStart -> _uiState.update { it.copy(phase = JoinLobbyPhase.GAME_STARTED) }
                     else -> Unit
                 }

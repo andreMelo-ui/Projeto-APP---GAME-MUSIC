@@ -26,17 +26,18 @@ import com.desafiomusical.app.domain.model.PlayerScore
 internal fun buildGameHistoryEntry(
     game: GameEntity,
     gamePlayers: List<GamePlayerEntity>,
-    playersById: Map<String, PlayerEntity>
+    playersById: Map<String, PlayerEntity>,
 ): GameHistoryEntry {
-    val scoreboard = gamePlayers
-        .sortedByDescending { it.finalScore }
-        .mapNotNull { gp -> playersById[gp.playerId]?.let { PlayerScore(player = it.toDomain(), totalScore = gp.finalScore) } }
+    val scoreboard =
+        gamePlayers
+            .sortedByDescending { it.finalScore }
+            .mapNotNull { gp -> playersById[gp.playerId]?.let { PlayerScore(player = it.toDomain(), totalScore = gp.finalScore) } }
     return GameHistoryEntry(
         gameId = game.id,
         playedAt = game.createdAt,
         roundCount = game.roundCount,
         scoreboard = scoreboard,
-        winner = game.winnerId?.let { playersById[it]?.toDomain() }
+        winner = game.winnerId?.let { playersById[it]?.toDomain() },
     )
 }
 
@@ -45,18 +46,19 @@ internal fun buildGameHistoryDetail(
     rounds: List<RoundEntity>,
     songsById: Map<String, SongEntity>,
     playersById: Map<String, PlayerEntity>,
-    scoresByRoundId: Map<String, RoundScoreEntity>
+    scoresByRoundId: Map<String, RoundScoreEntity>,
 ): GameHistoryDetail {
-    val roundEntries = rounds.sortedBy { it.roundNumber }.mapNotNull { round ->
-        val song = songsById[round.songId]?.toDomain() ?: return@mapNotNull null
-        GameHistoryRound(
-            roundNumber = round.roundNumber,
-            song = song,
-            winner = round.winnerId?.let { playersById[it]?.toDomain() },
-            pointsAwarded = scoresByRoundId[round.id]?.totalPoints ?: 0,
-            elapsedSeconds = round.endedAt?.let { ((it - round.startedAt) / 1000).toInt() } ?: 0
-        )
-    }
+    val roundEntries =
+        rounds.sortedBy { it.roundNumber }.mapNotNull { round ->
+            val song = songsById[round.songId]?.toDomain() ?: return@mapNotNull null
+            GameHistoryRound(
+                roundNumber = round.roundNumber,
+                song = song,
+                winner = round.winnerId?.let { playersById[it]?.toDomain() },
+                pointsAwarded = scoresByRoundId[round.id]?.totalPoints ?: 0,
+                elapsedSeconds = round.endedAt?.let { ((it - round.startedAt) / 1000).toInt() } ?: 0,
+            )
+        }
     return GameHistoryDetail(entry = entry, rounds = roundEntries)
 }
 
@@ -80,7 +82,7 @@ internal fun calculatePlayerAggregateStats(
     gamePlayerRows: List<GamePlayerEntity>,
     rounds: List<RoundEntity>,
     attempts: List<AttemptEntity>,
-    songsById: Map<String, SongEntity>
+    songsById: Map<String, SongEntity>,
 ): PlayerAggregateStats {
     if (games.isEmpty()) return PlayerAggregateStats.empty(playerId)
 
@@ -96,30 +98,35 @@ internal fun calculatePlayerAggregateStats(
     val roundsById = rounds.associateBy { it.id }
     val respondedRounds = rounds.filter { it.responderId == playerId }
     val stealWinRounds = rounds.filter { it.winnerId == playerId && it.responderId != playerId }
-    val stealLossAttempts = attempts.filter { attempt ->
-        val round = roundsById[attempt.roundId]
-        round != null && round.responderId != playerId
-    }
+    val stealLossAttempts =
+        attempts.filter { attempt ->
+            val round = roundsById[attempt.roundId]
+            round != null && round.responderId != playerId
+        }
 
     val stealsWon = stealWinRounds.size
     val stealsAttempted = stealsWon + stealLossAttempts.size
     val correctAnswers = rounds.count { it.winnerId == playerId }
     val songsAnswered = respondedRounds.size + stealsAttempted
     val hintsUsed = respondedRounds.sumOf { it.hintsUsed }
-    val bestTimeSeconds = rounds
-        .filter { it.winnerId == playerId && it.endedAt != null }
-        .minOfOrNull { ((it.endedAt!! - it.startedAt) / 1000).toInt() }
+    val bestTimeSeconds =
+        rounds
+            .filter { it.winnerId == playerId && it.endedAt != null }
+            .minOfOrNull { ((it.endedAt!! - it.startedAt) / 1000).toInt() }
 
-    val categoryBreakdown = Category.concrete.map { category ->
-        val categoryRoundIds = rounds
-            .filter { songsById[it.songId]?.category == category.name }
-            .mapTo(mutableSetOf()) { it.id }
-        val categorySongsAnswered = respondedRounds.count { it.id in categoryRoundIds } +
-            stealWinRounds.count { it.id in categoryRoundIds } +
-            stealLossAttempts.count { roundsById[it.roundId]?.id in categoryRoundIds }
-        val categoryCorrect = rounds.count { it.winnerId == playerId && it.id in categoryRoundIds }
-        CategoryStats(category = category, songsAnswered = categorySongsAnswered, correctAnswers = categoryCorrect)
-    }
+    val categoryBreakdown =
+        Category.concrete.map { category ->
+            val categoryRoundIds =
+                rounds
+                    .filter { songsById[it.songId]?.category == category.name }
+                    .mapTo(mutableSetOf()) { it.id }
+            val categorySongsAnswered =
+                respondedRounds.count { it.id in categoryRoundIds } +
+                    stealWinRounds.count { it.id in categoryRoundIds } +
+                    stealLossAttempts.count { roundsById[it.roundId]?.id in categoryRoundIds }
+            val categoryCorrect = rounds.count { it.winnerId == playerId && it.id in categoryRoundIds }
+            CategoryStats(category = category, songsAnswered = categorySongsAnswered, correctAnswers = categoryCorrect)
+        }
 
     return PlayerAggregateStats(
         playerId = playerId,
@@ -135,6 +142,6 @@ internal fun calculatePlayerAggregateStats(
         hintsUsed = hintsUsed,
         stealsAttempted = stealsAttempted,
         stealsWon = stealsWon,
-        categoryBreakdown = categoryBreakdown
+        categoryBreakdown = categoryBreakdown,
     )
 }

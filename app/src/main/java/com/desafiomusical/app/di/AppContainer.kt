@@ -23,7 +23,6 @@ import kotlinx.coroutines.SupervisorJob
  * ler e testar.
  */
 class AppContainer(context: Context) {
-
     val applicationScope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
     private val database: DesafioMusicalDatabase =
@@ -31,13 +30,14 @@ class AppContainer(context: Context) {
 
     val songRepository: SongRepository = SongRepositoryImpl(database.songDao(), CatalogAssetSource(context))
     val playerRepository: PlayerRepository = PlayerRepositoryImpl(database.playerDao())
-    val gameHistoryRepository: GameHistoryRepository = GameHistoryRepositoryImpl(
-        gameDao = database.gameDao(),
-        roundDao = database.roundDao(),
-        attemptDao = database.attemptDao(),
-        playerDao = database.playerDao(),
-        songDao = database.songDao()
-    )
+    val gameHistoryRepository: GameHistoryRepository =
+        GameHistoryRepositoryImpl(
+            gameDao = database.gameDao(),
+            roundDao = database.roundDao(),
+            attemptDao = database.attemptDao(),
+            playerDao = database.playerDao(),
+            songDao = database.songDao(),
+        )
 
     val appPreferences: AppPreferences = AppPreferences(context)
 

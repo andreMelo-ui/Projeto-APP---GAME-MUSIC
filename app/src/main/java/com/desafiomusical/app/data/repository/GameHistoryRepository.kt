@@ -37,9 +37,8 @@ class GameHistoryRepositoryImpl(
     private val roundDao: RoundDao,
     private val attemptDao: AttemptDao,
     private val playerDao: PlayerDao,
-    private val songDao: SongDao
+    private val songDao: SongDao,
 ) : GameHistoryRepository {
-
     override suspend fun saveFinishedGame(snapshot: GameSnapshot) {
         gameDao.saveNewGame(snapshot.toGameEntity(), snapshot.toGamePlayerEntities())
         snapshot.toRoundEntities().forEach { roundDao.upsertRound(it) }
@@ -47,8 +46,7 @@ class GameHistoryRepositoryImpl(
         attemptDao.insertAll(snapshot.toAttemptEntities())
     }
 
-    override fun observeHistory(): Flow<List<GameHistoryEntry>> =
-        gameDao.observeHistory().map { games -> games.map { buildEntry(it) } }
+    override fun observeHistory(): Flow<List<GameHistoryEntry>> = gameDao.observeHistory().map { games -> games.map { buildEntry(it) } }
 
     override suspend fun getGameDetail(gameId: String): GameHistoryDetail? {
         val game = gameDao.getGameById(gameId) ?: return null

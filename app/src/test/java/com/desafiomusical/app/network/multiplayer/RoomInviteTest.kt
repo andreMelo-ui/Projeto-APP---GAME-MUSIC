@@ -5,7 +5,6 @@ import org.junit.Assert.assertNull
 import org.junit.Test
 
 class RoomInviteTest {
-
     @Test
     fun `codifica e decodifica corretamente`() {
         val invite = RoomInvite(roomCode = "AB12", hostAddress = "192.168.0.42", port = 54231)

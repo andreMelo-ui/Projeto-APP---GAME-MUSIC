@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PlayerDao {
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertIgnoringConflicts(players: List<PlayerEntity>): List<Long>
 

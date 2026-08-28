@@ -16,14 +16,15 @@ fun QrCodeImage(
     payload: String,
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
-    size: Int = 512
+    size: Int = 512,
 ) {
-    val imageBitmap = remember(payload, size) {
-        QrCodeEncoder.encode(payload, size).toBitmap().asImageBitmap()
-    }
+    val imageBitmap =
+        remember(payload, size) {
+            QrCodeEncoder.encode(payload, size).toBitmap().asImageBitmap()
+        }
     Image(
         bitmap = imageBitmap,
         contentDescription = contentDescription,
-        modifier = modifier.size(240.dp)
+        modifier = modifier.size(240.dp),
     )
 }

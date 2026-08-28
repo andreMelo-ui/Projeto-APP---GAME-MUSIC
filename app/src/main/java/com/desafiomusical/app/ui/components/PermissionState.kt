@@ -26,8 +26,9 @@ fun rememberPermissionState(permission: String): PermissionState {
     var granted by remember {
         mutableStateOf(ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED)
     }
-    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-        granted = isGranted
-    }
+    val launcher =
+        rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            granted = isGranted
+        }
     return PermissionState(granted = granted, request = { launcher.launch(permission) })
 }

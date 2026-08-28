@@ -17,7 +17,7 @@ data class PlayerSetupUiState(
     val roundCount: Int = 10,
     val stealEnabled: Boolean = true,
     val isStarting: Boolean = false,
-    val errorMessage: String? = null
+    val errorMessage: String? = null,
 ) {
     companion object {
         const val MAX_PLAYERS = 4
@@ -25,7 +25,6 @@ data class PlayerSetupUiState(
 }
 
 class PlayerSetupViewModel(private val container: AppContainer) : ViewModel() {
-
     private val _uiState = MutableStateFlow(PlayerSetupUiState())
     val uiState: StateFlow<PlayerSetupUiState> = _uiState.asStateFlow()
 
@@ -36,7 +35,7 @@ class PlayerSetupViewModel(private val container: AppContainer) : ViewModel() {
             _uiState.update { state ->
                 state.copy(
                     playerNames = List(PlayerSetupUiState.MAX_PLAYERS) { index -> savedNames.getOrNull(index).orEmpty() },
-                    stealEnabled = stealDefault
+                    stealEnabled = stealDefault,
                 )
             }
         }
@@ -46,7 +45,10 @@ class PlayerSetupViewModel(private val container: AppContainer) : ViewModel() {
         _uiState.update { it.copy(playerCount = count, errorMessage = null) }
     }
 
-    fun setPlayerName(index: Int, name: String) {
+    fun setPlayerName(
+        index: Int,
+        name: String,
+    ) {
         _uiState.update { state ->
             val updated = state.playerNames.toMutableList().apply { this[index] = name }
             state.copy(playerNames = updated, errorMessage = null)

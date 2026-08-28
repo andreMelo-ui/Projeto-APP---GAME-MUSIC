@@ -12,13 +12,18 @@ import com.desafiomusical.app.ui.theme.TextPrimary
 
 /** Selo colorido para indicar visualmente o papel do jogador na rodada. */
 @Composable
-fun RoleChip(label: String, color: Color, modifier: Modifier = Modifier) {
+fun RoleChip(
+    label: String,
+    color: Color,
+    modifier: Modifier = Modifier,
+) {
     Text(
         text = label.uppercase(),
         style = MaterialTheme.typography.labelLarge,
         color = TextPrimary,
-        modifier = modifier
-            .background(color, MaterialTheme.shapes.small)
-            .padding(horizontal = 12.dp, vertical = 6.dp)
+        modifier =
+            modifier
+                .background(color, MaterialTheme.shapes.small)
+                .padding(horizontal = 12.dp, vertical = 6.dp),
     )
 }

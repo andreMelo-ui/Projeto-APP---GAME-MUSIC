@@ -47,11 +47,12 @@ import com.desafiomusical.app.ui.theme.TextSecondary
 fun GameDetailScreen(
     container: AppContainer,
     gameId: String,
-    onBack: () -> Unit
+    onBack: () -> Unit,
 ) {
-    val viewModel: GameDetailViewModel = viewModel(
-        factory = viewModelFactory { initializer { GameDetailViewModel(container, gameId) } }
-    )
+    val viewModel: GameDetailViewModel =
+        viewModel(
+            factory = viewModelFactory { initializer { GameDetailViewModel(container, gameId) } },
+        )
     val state by viewModel.uiState.collectAsState()
 
     Scaffold(
@@ -62,18 +63,19 @@ fun GameDetailScreen(
                     IconButton(onClick = onBack) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Voltar")
                     }
-                }
+                },
             )
-        }
+        },
     ) { padding ->
         val detail = state.detail
         when {
-            state.isLoading -> Box(
-                modifier = Modifier.fillMaxSize().padding(padding),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator()
-            }
+            state.isLoading ->
+                Box(
+                    modifier = Modifier.fillMaxSize().padding(padding),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    CircularProgressIndicator()
+                }
 
             detail == null -> GameNotFoundMessage(onBack = onBack, modifier = Modifier.fillMaxSize().padding(padding))
 
@@ -83,43 +85,49 @@ fun GameDetailScreen(
 }
 
 @Composable
-private fun GameNotFoundMessage(onBack: () -> Unit, modifier: Modifier = Modifier) {
+private fun GameNotFoundMessage(
+    onBack: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Column(
         modifier = modifier.padding(32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         Text(text = "🔍", style = MaterialTheme.typography.displayLarge)
         Text(
             text = "Partida não encontrada",
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(top = 16.dp)
+            modifier = Modifier.padding(top = 16.dp),
         )
         Text(
             text = "Ela pode ter sido removida do histórico.",
             style = MaterialTheme.typography.bodyLarge,
             color = TextSecondary,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(top = 8.dp, bottom = 24.dp)
+            modifier = Modifier.padding(top = 8.dp, bottom = 24.dp),
         )
         PrimaryButton(text = "Voltar", onClick = onBack)
     }
 }
 
 @Composable
-private fun GameDetailContent(detail: GameHistoryDetail, modifier: Modifier = Modifier) {
+private fun GameDetailContent(
+    detail: GameHistoryDetail,
+    modifier: Modifier = Modifier,
+) {
     val entry = detail.entry
     LazyColumn(
         modifier = modifier.padding(horizontal = 24.dp),
         contentPadding = PaddingValues(vertical = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         item {
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text(text = formatPlayedAt(entry.playedAt), style = MaterialTheme.typography.bodyMedium, color = TextSecondary)
                     Text(text = "${entry.roundCount} rodadas", style = MaterialTheme.typography.bodyMedium, color = TextSecondary)
@@ -129,14 +137,14 @@ private fun GameDetailContent(detail: GameHistoryDetail, modifier: Modifier = Mo
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     color = SuccessGreen,
-                    modifier = Modifier.padding(top = 4.dp, bottom = 4.dp)
+                    modifier = Modifier.padding(top = 4.dp, bottom = 4.dp),
                 )
                 entry.scoreboard.forEach { playerScore ->
                     ScoreBadge(
                         playerName = playerScore.player.name,
                         score = playerScore.totalScore,
                         modifier = Modifier.fillMaxWidth(),
-                        highlighted = entry.winner?.id == playerScore.player.id
+                        highlighted = entry.winner?.id == playerScore.player.id,
                     )
                 }
             }
@@ -147,7 +155,7 @@ private fun GameDetailContent(detail: GameHistoryDetail, modifier: Modifier = Mo
                 text = "Rodadas",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 12.dp, bottom = 4.dp)
+                modifier = Modifier.padding(top = 12.dp, bottom = 4.dp),
             )
         }
 
@@ -162,17 +170,18 @@ private fun RoundDetailCard(round: GameHistoryRound) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = MaterialTheme.shapes.large,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 Text(text = "Rodada ${round.roundNumber}", style = MaterialTheme.typography.labelLarge, color = TextSecondary)
                 Text(text = round.song.category.displayName, style = MaterialTheme.typography.labelLarge, color = TextSecondary)
@@ -180,22 +189,23 @@ private fun RoundDetailCard(round: GameHistoryRound) {
             Text(text = round.song.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
             Text(text = round.song.artist, style = MaterialTheme.typography.bodyMedium, color = TextSecondary)
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 6.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(top = 6.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 Text(
                     text = round.winner?.let { "${it.name} acertou" } ?: "Ninguém acertou",
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.SemiBold,
-                    color = if (round.winner != null) SuccessGreen else DangerRed
+                    color = if (round.winner != null) SuccessGreen else DangerRed,
                 )
                 if (round.winner != null) {
                     Text(
                         text = "+${round.pointsAwarded} pts em ${round.elapsedSeconds}s",
                         style = MaterialTheme.typography.bodyMedium,
-                        color = TextSecondary
+                        color = TextSecondary,
                     )
                 }
             }

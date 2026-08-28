@@ -42,11 +42,12 @@ import com.desafiomusical.app.ui.theme.TextSecondary
 fun PlayerStatsScreen(
     container: AppContainer,
     playerId: String,
-    onBack: () -> Unit
+    onBack: () -> Unit,
 ) {
-    val viewModel: PlayerStatsViewModel = viewModel(
-        factory = viewModelFactory { initializer { PlayerStatsViewModel(container, playerId) } }
-    )
+    val viewModel: PlayerStatsViewModel =
+        viewModel(
+            factory = viewModelFactory { initializer { PlayerStatsViewModel(container, playerId) } },
+        )
     val state by viewModel.uiState.collectAsState()
 
     Scaffold(
@@ -57,15 +58,15 @@ fun PlayerStatsScreen(
                     IconButton(onClick = onBack) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Voltar")
                     }
-                }
+                },
             )
-        }
+        },
     ) { padding ->
         val stats = state.stats
         if (stats == null) {
             Box(
                 modifier = Modifier.fillMaxSize().padding(padding),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 CircularProgressIndicator()
             }
@@ -76,23 +77,27 @@ fun PlayerStatsScreen(
 }
 
 @Composable
-private fun PlayerStatsContent(stats: PlayerAggregateStats, modifier: Modifier = Modifier) {
+private fun PlayerStatsContent(
+    stats: PlayerAggregateStats,
+    modifier: Modifier = Modifier,
+) {
     LazyColumn(
         modifier = modifier.padding(horizontal = 24.dp),
         contentPadding = PaddingValues(vertical = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         item {
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = MaterialTheme.shapes.large,
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
             ) {
                 Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(20.dp),
-                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(20.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp),
                 ) {
                     StatRow("Partidas jogadas", "${stats.gamesPlayed}")
                     StatRow("Vitórias", "${stats.wins}")
@@ -114,7 +119,7 @@ private fun PlayerStatsContent(stats: PlayerAggregateStats, modifier: Modifier =
                 text = "Por categoria",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 8.dp, bottom = 4.dp)
+                modifier = Modifier.padding(top = 8.dp, bottom = 4.dp),
             )
         }
 
@@ -125,10 +130,13 @@ private fun PlayerStatsContent(stats: PlayerAggregateStats, modifier: Modifier =
 }
 
 @Composable
-private fun StatRow(label: String, value: String) {
+private fun StatRow(
+    label: String,
+    value: String,
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Text(text = label, style = MaterialTheme.typography.bodyLarge, color = TextSecondary)
         Text(text = value, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
@@ -140,24 +148,25 @@ private fun CategoryStatsRow(categoryStats: CategoryStats) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = MaterialTheme.shapes.large,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
                 text = categoryStats.category.displayName,
                 style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
             )
             Text(
                 text = "${categoryStats.correctAnswers}/${categoryStats.songsAnswered} acertos",
                 style = MaterialTheme.typography.bodyMedium,
-                color = TextSecondary
+                color = TextSecondary,
             )
         }
     }

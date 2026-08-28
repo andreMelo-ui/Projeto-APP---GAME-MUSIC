@@ -4,12 +4,13 @@ import com.desafiomusical.app.data.mapper.toDomain
 import com.desafiomusical.app.data.mapper.toEntity
 import com.desafiomusical.app.data.room.dao.PlayerDao
 import com.desafiomusical.app.domain.model.Player
-import java.util.UUID
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import java.util.UUID
 
 interface PlayerRepository {
     fun observeKnownPlayers(): Flow<List<Player>>
+
     suspend fun saveIfNew(players: List<Player>)
 
     /**
@@ -34,9 +35,7 @@ interface PlayerRepository {
 }
 
 class PlayerRepositoryImpl(private val playerDao: PlayerDao) : PlayerRepository {
-
-    override fun observeKnownPlayers(): Flow<List<Player>> =
-        playerDao.observeAll().map { entities -> entities.map { it.toDomain() } }
+    override fun observeKnownPlayers(): Flow<List<Player>> = playerDao.observeAll().map { entities -> entities.map { it.toDomain() } }
 
     override suspend fun saveIfNew(players: List<Player>) {
         playerDao.upsertAll(players.map { it.toEntity() })

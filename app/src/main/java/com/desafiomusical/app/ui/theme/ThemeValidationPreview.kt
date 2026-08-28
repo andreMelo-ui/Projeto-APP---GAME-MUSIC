@@ -33,10 +33,11 @@ private fun ThemeValidationPreview() {
     DesafioMusicalTheme {
         Surface(color = BgBase) {
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(LocalSpacing.current.xl),
-                verticalArrangement = Arrangement.spacedBy(LocalSpacing.current.xl)
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(LocalSpacing.current.xl),
+                verticalArrangement = Arrangement.spacedBy(LocalSpacing.current.xl),
             ) {
                 SectionLabel("Tipografia")
                 Text("Desafio Musical", style = MaterialTheme.typography.displayLarge, color = TextPrimary)
@@ -59,12 +60,13 @@ private fun ThemeValidationPreview() {
 
                 SectionLabel("Gradiente de marca")
                 Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(56.dp)
-                        .clip(ShapeButton)
-                        .background(BrandGradient),
-                    contentAlignment = Alignment.Center
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .height(56.dp)
+                            .clip(ShapeButton)
+                            .background(BrandGradient),
+                    contentAlignment = Alignment.Center,
                 ) {
                     Text("Nova Partida", style = MaterialTheme.typography.titleMedium, color = TextOnGradient)
                 }
@@ -101,12 +103,15 @@ private fun SectionLabel(text: String) {
         text = text.uppercase(),
         style = MaterialTheme.typography.labelLarge,
         color = BrandCyan,
-        modifier = Modifier.padding(top = 8.dp)
+        modifier = Modifier.padding(top = 8.dp),
     )
 }
 
 @Composable
-private fun ColorSwatch(color: Color, label: String) {
+private fun ColorSwatch(
+    color: Color,
+    label: String,
+) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Box(Modifier.size(56.dp).clip(CircleShape).background(color))
         Text(label, style = MaterialTheme.typography.labelSmall, color = TextTertiary)
@@ -114,12 +119,17 @@ private fun ColorSwatch(color: Color, label: String) {
 }
 
 @Composable
-private fun DifficultyChip(label: String, bg: Color, fg: Color) {
+private fun DifficultyChip(
+    label: String,
+    bg: Color,
+    fg: Color,
+) {
     Box(
-        modifier = Modifier
-            .clip(ShapePill)
-            .background(bg)
-            .padding(horizontal = 14.dp, vertical = 6.dp)
+        modifier =
+            Modifier
+                .clip(ShapePill)
+                .background(bg)
+                .padding(horizontal = 14.dp, vertical = 6.dp),
     ) {
         Text(label, style = MaterialTheme.typography.labelMedium, color = fg)
     }

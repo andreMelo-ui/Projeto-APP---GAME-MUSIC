@@ -9,7 +9,6 @@ import com.desafiomusical.app.data.room.entity.RoundScoreEntity
 
 @Dao
 interface RoundDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertRound(round: RoundEntity)
 

@@ -49,8 +49,7 @@ import java.util.Locale
 val playedAtFormatter: DateTimeFormatter =
     DateTimeFormatter.ofPattern("dd/MM/yyyy 'às' HH:mm", Locale("pt", "BR"))
 
-fun formatPlayedAt(epochMillis: Long): String =
-    Instant.ofEpochMilli(epochMillis).atZone(ZoneId.systemDefault()).format(playedAtFormatter)
+fun formatPlayedAt(epochMillis: Long): String = Instant.ofEpochMilli(epochMillis).atZone(ZoneId.systemDefault()).format(playedAtFormatter)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,11 +57,12 @@ fun HistoryListScreen(
     container: AppContainer,
     onBack: () -> Unit,
     onOpenGame: (gameId: String) -> Unit,
-    onOpenPlayerStats: (playerId: String) -> Unit
+    onOpenPlayerStats: (playerId: String) -> Unit,
 ) {
-    val viewModel: HistoryListViewModel = viewModel(
-        factory = viewModelFactory { initializer { HistoryListViewModel(container) } }
-    )
+    val viewModel: HistoryListViewModel =
+        viewModel(
+            factory = viewModelFactory { initializer { HistoryListViewModel(container) } },
+        )
     val state by viewModel.uiState.collectAsState()
 
     Scaffold(
@@ -73,58 +73,61 @@ fun HistoryListScreen(
                     IconButton(onClick = onBack) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Voltar")
                     }
-                }
+                },
             )
-        }
+        },
     ) { padding ->
         when {
-            state.isLoading -> Box(
-                modifier = Modifier.fillMaxSize().padding(padding),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator()
-            }
+            state.isLoading ->
+                Box(
+                    modifier = Modifier.fillMaxSize().padding(padding),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    CircularProgressIndicator()
+                }
 
             state.entries.isEmpty() -> EmptyHistoryMessage(modifier = Modifier.fillMaxSize().padding(padding))
 
-            else -> LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(padding)
-                    .padding(horizontal = 24.dp),
-                contentPadding = PaddingValues(vertical = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                if (state.players.isNotEmpty()) {
-                    item {
-                        Text(
-                            text = "Jogadores",
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                    item {
-                        LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                            items(state.players, key = { it.id }) { player ->
-                                PlayerChip(player = player, onClick = { onOpenPlayerStats(player.id) })
+            else ->
+                LazyColumn(
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .padding(padding)
+                            .padding(horizontal = 24.dp),
+                    contentPadding = PaddingValues(vertical = 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    if (state.players.isNotEmpty()) {
+                        item {
+                            Text(
+                                text = "Jogadores",
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold,
+                            )
+                        }
+                        item {
+                            LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                items(state.players, key = { it.id }) { player ->
+                                    PlayerChip(player = player, onClick = { onOpenPlayerStats(player.id) })
+                                }
                             }
                         }
                     }
-                }
 
-                item {
-                    Text(
-                        text = "Partidas",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(top = if (state.players.isNotEmpty()) 8.dp else 0.dp)
-                    )
-                }
+                    item {
+                        Text(
+                            text = "Partidas",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(top = if (state.players.isNotEmpty()) 8.dp else 0.dp),
+                        )
+                    }
 
-                items(state.entries, key = { it.gameId }) { entry ->
-                    GameHistoryCard(entry = entry, onClick = { onOpenGame(entry.gameId) })
+                    items(state.entries, key = { it.gameId }) { entry ->
+                        GameHistoryCard(entry = entry, onClick = { onOpenGame(entry.gameId) })
+                    }
                 }
-            }
         }
     }
 }
@@ -134,58 +137,65 @@ private fun EmptyHistoryMessage(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.padding(32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         Text(text = "🎵", style = MaterialTheme.typography.displayLarge)
         Text(
             text = "Nenhuma partida ainda",
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(top = 16.dp)
+            modifier = Modifier.padding(top = 16.dp),
         )
         Text(
             text = "Jogue uma partida pra ver o histórico aqui.",
             style = MaterialTheme.typography.bodyLarge,
             color = TextSecondary,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(top = 8.dp)
+            modifier = Modifier.padding(top = 8.dp),
         )
     }
 }
 
 @Composable
-private fun PlayerChip(player: Player, onClick: () -> Unit) {
+private fun PlayerChip(
+    player: Player,
+    onClick: () -> Unit,
+) {
     Card(
         onClick = onClick,
         shape = MaterialTheme.shapes.medium,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
     ) {
         Text(
             text = player.name,
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)
+            modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp),
         )
     }
 }
 
 @Composable
-private fun GameHistoryCard(entry: GameHistoryEntry, onClick: () -> Unit) {
+private fun GameHistoryCard(
+    entry: GameHistoryEntry,
+    onClick: () -> Unit,
+) {
     Card(
         onClick = onClick,
         modifier = Modifier.fillMaxWidth(),
         shape = MaterialTheme.shapes.large,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(6.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 Text(text = formatPlayedAt(entry.playedAt), style = MaterialTheme.typography.bodyMedium, color = TextSecondary)
                 Text(text = "${entry.roundCount} rodadas", style = MaterialTheme.typography.bodyMedium, color = TextSecondary)
@@ -195,14 +205,14 @@ private fun GameHistoryCard(entry: GameHistoryEntry, onClick: () -> Unit) {
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 color = SuccessGreen,
-                modifier = Modifier.padding(top = 4.dp, bottom = 4.dp)
+                modifier = Modifier.padding(top = 4.dp, bottom = 4.dp),
             )
             entry.scoreboard.forEach { playerScore ->
                 ScoreBadge(
                     playerName = playerScore.player.name,
                     score = playerScore.totalScore,
                     modifier = Modifier.fillMaxWidth(),
-                    highlighted = entry.winner?.id == playerScore.player.id
+                    highlighted = entry.winner?.id == playerScore.player.id,
                 )
             }
         }

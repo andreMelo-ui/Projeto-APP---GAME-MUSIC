@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface GameDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertGame(game: GameEntity)
 
@@ -19,10 +18,17 @@ interface GameDao {
     suspend fun upsertGamePlayers(players: List<GamePlayerEntity>)
 
     @Query("UPDATE games SET winnerId = :winnerId, finishedAt = :finishedAt WHERE id = :gameId")
-    suspend fun finishGame(gameId: String, winnerId: String?, finishedAt: Long)
+    suspend fun finishGame(
+        gameId: String,
+        winnerId: String?,
+        finishedAt: Long,
+    )
 
     @Transaction
-    suspend fun saveNewGame(game: GameEntity, players: List<GamePlayerEntity>) {
+    suspend fun saveNewGame(
+        game: GameEntity,
+        players: List<GamePlayerEntity>,
+    ) {
         upsertGame(game)
         upsertGamePlayers(players)
     }
@@ -42,7 +48,7 @@ interface GameDao {
         INNER JOIN game_players ON game_players.gameId = games.id
         WHERE game_players.playerId = :playerId
         ORDER BY games.createdAt DESC
-        """
+        """,
     )
     suspend fun getGamesForPlayer(playerId: String): List<GameEntity>
 

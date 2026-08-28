@@ -17,13 +17,17 @@ interface RoomSession {
     val connectedPlayerIds: StateFlow<List<String>>
 
     suspend fun start()
+
     suspend fun stop()
 
     /** Envia um evento para todos os participantes (uso do host). */
     suspend fun broadcast(event: GameEvent)
 
     /** Envia um evento para um único participante (ex.: payload secreto do escolhedor). */
-    suspend fun sendTo(playerId: String, event: GameEvent)
+    suspend fun sendTo(
+        playerId: String,
+        event: GameEvent,
+    )
 
     /** Eventos recebidos da rede, já deduplicados por eventId antes de chegar aqui. */
     fun observeIncoming(): Flow<GameEvent>

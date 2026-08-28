@@ -11,5 +11,5 @@ data class GameEntity(
     val roundCount: Int,
     val stealEnabled: Boolean,
     val winnerId: String?,
-    val finishedAt: Long?
+    val finishedAt: Long?,
 )

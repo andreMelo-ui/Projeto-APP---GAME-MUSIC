@@ -10,12 +10,11 @@ import kotlin.random.Random
  * e excluindo músicas já usadas na partida corrente.
  */
 class SelectSongUseCase {
-
     fun candidatesFor(
         catalog: List<Song>,
         category: Category,
         usedSongIds: Set<String>,
-        random: Random = Random.Default
+        random: Random = Random.Default,
     ): List<Song> {
         val active = catalog.filter { it.active && it.id !in usedSongIds }
         val pool = if (category == Category.ALEATORIO) active else active.filter { it.category == category }
@@ -26,12 +25,16 @@ class SelectSongUseCase {
         catalog: List<Song>,
         category: Category,
         usedSongIds: Set<String>,
-        random: Random = Random.Default
+        random: Random = Random.Default,
     ): Song? = candidatesFor(catalog, category, usedSongIds, random).firstOrNull()
 
-    fun availableCategories(catalog: List<Song>, usedSongIds: Set<String>): List<Category> =
-        Category.concrete.filter { candidatesFor(catalog, it, usedSongIds).isNotEmpty() }
+    fun availableCategories(
+        catalog: List<Song>,
+        usedSongIds: Set<String>,
+    ): List<Category> = Category.concrete.filter { candidatesFor(catalog, it, usedSongIds).isNotEmpty() }
 
-    fun randomCategory(categories: List<Category>, random: Random = Random.Default): Category =
-        categories[random.nextInt(categories.size)]
+    fun randomCategory(
+        categories: List<Category>,
+        random: Random = Random.Default,
+    ): Category = categories[random.nextInt(categories.size)]
 }

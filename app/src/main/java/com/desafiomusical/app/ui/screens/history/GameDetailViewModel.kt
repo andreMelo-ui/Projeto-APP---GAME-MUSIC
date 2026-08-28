@@ -12,11 +12,10 @@ import kotlinx.coroutines.launch
 /** [detail] só é `null` depois de carregado ([isLoading] `false`) se [gameId] não existir mais no histórico. */
 data class GameDetailUiState(
     val isLoading: Boolean = true,
-    val detail: GameHistoryDetail? = null
+    val detail: GameHistoryDetail? = null,
 )
 
 class GameDetailViewModel(container: AppContainer, gameId: String) : ViewModel() {
-
     private val _uiState = MutableStateFlow(GameDetailUiState())
     val uiState: StateFlow<GameDetailUiState> = _uiState.asStateFlow()
 

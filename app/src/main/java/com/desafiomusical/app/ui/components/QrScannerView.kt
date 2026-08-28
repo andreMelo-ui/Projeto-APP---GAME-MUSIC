@@ -23,7 +23,10 @@ import com.desafiomusical.app.network.multiplayer.RoomInvite
  * `CAMERA` já foi concedida antes de compor isto (ver [rememberPermissionState]).
  */
 @Composable
-fun QrScannerView(modifier: Modifier = Modifier, onInviteFound: (RoomInvite) -> Unit) {
+fun QrScannerView(
+    modifier: Modifier = Modifier,
+    onInviteFound: (RoomInvite) -> Unit,
+) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val analyzer = remember { QrCodeAnalyzer(onInviteFound) }
@@ -37,10 +40,11 @@ fun QrScannerView(modifier: Modifier = Modifier, onInviteFound: (RoomInvite) -> 
                 {
                     val cameraProvider = cameraProviderFuture.get()
                     val preview = Preview.Builder().build().also { it.surfaceProvider = previewView.surfaceProvider }
-                    val imageAnalysis = ImageAnalysis.Builder()
-                        .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                        .build()
-                        .also { it.setAnalyzer(ContextCompat.getMainExecutor(ctx), analyzer) }
+                    val imageAnalysis =
+                        ImageAnalysis.Builder()
+                            .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                            .build()
+                            .also { it.setAnalyzer(ContextCompat.getMainExecutor(ctx), analyzer) }
 
                     runCatching {
                         cameraProvider.unbindAll()
@@ -48,14 +52,14 @@ fun QrScannerView(modifier: Modifier = Modifier, onInviteFound: (RoomInvite) -> 
                             lifecycleOwner,
                             CameraSelector.DEFAULT_BACK_CAMERA,
                             preview,
-                            imageAnalysis
+                            imageAnalysis,
                         )
                     }
                 },
-                ContextCompat.getMainExecutor(ctx)
+                ContextCompat.getMainExecutor(ctx),
             )
             previewView
-        }
+        },
     )
 
     DisposableEffect(Unit) {

@@ -4,7 +4,7 @@ data class RoundSetup(
     val roundNumber: Int,
     val chooserId: String,
     val mainResponderId: String,
-    val eligibleStealerIds: List<String>
+    val eligibleStealerIds: List<String>,
 )
 
 data class RoundOutcome(
@@ -17,5 +17,5 @@ data class RoundOutcome(
     val endedAt: Long,
     val scores: List<ScoreBreakdown>,
     val hintsUsed: Int,
-    val eliminatedIds: List<String>
+    val eliminatedIds: List<String>,
 )

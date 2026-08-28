@@ -10,5 +10,5 @@ data class GameHistoryEntry(
     val playedAt: Long,
     val roundCount: Int,
     val scoreboard: List<PlayerScore>,
-    val winner: Player?
+    val winner: Player?,
 )

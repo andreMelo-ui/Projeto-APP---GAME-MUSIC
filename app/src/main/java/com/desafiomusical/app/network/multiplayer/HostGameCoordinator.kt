@@ -6,10 +6,10 @@ import com.desafiomusical.app.domain.model.GameConfig
 import com.desafiomusical.app.domain.model.Song
 import com.desafiomusical.app.domain.state.GameUiState
 import com.desafiomusical.app.network.payloads.GameEvent
-import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import java.util.UUID
 
 /**
  * Ponte entre o [GameEngine] (autoridade de estado, alheia à rede) e a
@@ -28,7 +28,7 @@ import kotlinx.coroutines.flow.onEach
 class HostGameCoordinator(
     private val gameEngine: GameEngine,
     private val roomSession: RoomSession,
-    scope: CoroutineScope
+    scope: CoroutineScope,
 ) {
     private var currentRoundId: String = ""
 
@@ -68,8 +68,8 @@ class HostGameCoordinator(
                 category = masked.category.name,
                 difficulty = masked.difficulty.name,
                 youtubeVideoId = masked.youtubeVideoId,
-                hasWork = masked.hasWork
-            )
+                hasWork = masked.hasWork,
+            ),
         )
     }
 
@@ -82,21 +82,35 @@ class HostGameCoordinator(
         roomSession.broadcast(GameEvent.HintUsed(newId(), now(), currentRoundId, level, song.hintFor(level)))
     }
 
-    suspend fun submitMainAnswer(titleClaimed: Boolean, artistClaimed: Boolean, workClaimed: Boolean = false) {
+    suspend fun submitMainAnswer(
+        titleClaimed: Boolean,
+        artistClaimed: Boolean,
+        workClaimed: Boolean = false,
+    ) {
         gameEngine.submitMainAnswer(titleClaimed, artistClaimed, workClaimed)
         // Answering não é uma tela pública (mostra a música completa) — nada é
         // transportado aqui; o julgamento em si chega por confirmMainAnswer.
     }
 
-    suspend fun confirmMainAnswer(titleCorrect: Boolean, artistCorrect: Boolean, workCorrect: Boolean = false) {
+    suspend fun confirmMainAnswer(
+        titleCorrect: Boolean,
+        artistCorrect: Boolean,
+        workCorrect: Boolean = false,
+    ) {
         val setup = gameEngine.currentRoundSetup ?: return
         gameEngine.confirmMainAnswer(titleCorrect, artistCorrect, workCorrect)
         val pointsAwarded = pointsAwardedIfSettled(titleCorrect || artistCorrect || workCorrect)
         roomSession.broadcast(
             GameEvent.AnswerResult(
-                newId(), now(), currentRoundId, setup.mainResponderId,
-                titleCorrect, artistCorrect, pointsAwarded, workCorrect
-            )
+                newId(),
+                now(),
+                currentRoundId,
+                setup.mainResponderId,
+                titleCorrect,
+                artistCorrect,
+                pointsAwarded,
+                workCorrect,
+            ),
         )
         afterJudgement()
     }
@@ -105,7 +119,11 @@ class HostGameCoordinator(
         runCatching { gameEngine.claimSteal(playerId) }
     }
 
-    suspend fun confirmStealAnswer(titleCorrect: Boolean, artistCorrect: Boolean, workCorrect: Boolean = false) {
+    suspend fun confirmStealAnswer(
+        titleCorrect: Boolean,
+        artistCorrect: Boolean,
+        workCorrect: Boolean = false,
+    ) {
         val stealerId = (gameEngine.uiState.value as? GameUiState.StealAnswer)?.stealerId ?: return
         gameEngine.confirmStealAnswer(titleCorrect, artistCorrect, workCorrect)
         val correct = titleCorrect || artistCorrect || workCorrect
@@ -182,21 +200,30 @@ class HostGameCoordinator(
 
         roomSession.sendTo(
             playerId,
-            GameEvent.RoundStart(newId(), now(), currentRoundId, setup.roundNumber, setup.chooserId, setup.mainResponderId)
+            GameEvent.RoundStart(newId(), now(), currentRoundId, setup.roundNumber, setup.chooserId, setup.mainResponderId),
         )
         when (val state = gameEngine.uiState.value) {
             is GameUiState.Playing -> {
                 val masked = state.round.maskedSong
                 roomSession.sendTo(
                     playerId,
-                    GameEvent.SongPlaying(newId(), now(), currentRoundId, masked.category.name, masked.difficulty.name, masked.youtubeVideoId, masked.hasWork)
+                    GameEvent.SongPlaying(
+                        newId(),
+                        now(),
+                        currentRoundId,
+                        masked.category.name,
+                        masked.difficulty.name,
+                        masked.youtubeVideoId,
+                        masked.hasWork,
+                    ),
                 )
                 roomSession.sendTo(playerId, GameEvent.TimerSync(newId(), now(), currentRoundId, state.elapsedSeconds))
             }
-            is GameUiState.StealWindow -> roomSession.sendTo(
-                playerId,
-                GameEvent.StealOpen(newId(), now(), currentRoundId, state.round.eligibleStealers.map { it.id }, state.stealSecondsLeft)
-            )
+            is GameUiState.StealWindow ->
+                roomSession.sendTo(
+                    playerId,
+                    GameEvent.StealOpen(newId(), now(), currentRoundId, state.round.eligibleStealers.map { it.id }, state.stealSecondsLeft),
+                )
             else -> Unit // CategorySelection/SongSelection/Ready/Answering/StealAnswer/RoundResult/GameResult:
             // estados transitórios ou já exclusivos do julgador local — o RoundStart acima já basta.
         }
@@ -208,31 +235,34 @@ class HostGameCoordinator(
         val setup = gameEngine.currentRoundSetup ?: return
         currentRoundId = UUID.randomUUID().toString()
         roomSession.broadcast(
-            GameEvent.RoundStart(newId(), now(), currentRoundId, setup.roundNumber, setup.chooserId, setup.mainResponderId)
+            GameEvent.RoundStart(newId(), now(), currentRoundId, setup.roundNumber, setup.chooserId, setup.mainResponderId),
         )
         sendSongOptions(setup.chooserId)
     }
 
     private suspend fun sendSongOptions(chooserId: String) {
         val categories = Category.concrete.filter { gameEngine.candidatesNow(it).isNotEmpty() }
-        val candidatesByCategory = categories.associate { category ->
-            category.name to gameEngine.candidatesNow(category).map { it.id }
-        }
+        val candidatesByCategory =
+            categories.associate { category ->
+                category.name to gameEngine.candidatesNow(category).map { it.id }
+            }
         roomSession.sendTo(
             chooserId,
-            GameEvent.SongOptions(newId(), now(), currentRoundId, chooserId, categories.map { it.name }, candidatesByCategory)
+            GameEvent.SongOptions(newId(), now(), currentRoundId, chooserId, categories.map { it.name }, candidatesByCategory),
         )
     }
 
     /** Depois de um julgamento (resposta principal ou roubo), decide se abre a próxima janela de roubo ou encerra a rodada. */
     private suspend fun afterJudgement() {
         when (val state = gameEngine.uiState.value) {
-            is GameUiState.StealWindow -> roomSession.broadcast(
-                GameEvent.StealOpen(newId(), now(), currentRoundId, state.round.eligibleStealers.map { it.id }, state.stealSecondsLeft)
-            )
-            is GameUiState.RoundResult -> roomSession.broadcast(
-                GameEvent.RoundEnd(newId(), now(), currentRoundId, state.result.winner?.id, state.result.song.id)
-            )
+            is GameUiState.StealWindow ->
+                roomSession.broadcast(
+                    GameEvent.StealOpen(newId(), now(), currentRoundId, state.round.eligibleStealers.map { it.id }, state.stealSecondsLeft),
+                )
+            is GameUiState.RoundResult ->
+                roomSession.broadcast(
+                    GameEvent.RoundEnd(newId(), now(), currentRoundId, state.result.winner?.id, state.result.song.id),
+                )
             else -> Unit
         }
     }
@@ -241,5 +271,6 @@ class HostGameCoordinator(
         if (settled) (gameEngine.uiState.value as GameUiState.RoundResult).result.pointsAwarded else 0
 
     private fun newId() = UUID.randomUUID().toString()
+
     private fun now() = System.currentTimeMillis()
 }

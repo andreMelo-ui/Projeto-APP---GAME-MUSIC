@@ -11,7 +11,6 @@ import com.desafiomusical.app.ui.navigation.DesafioMusicalNavHost
 import com.desafiomusical.app.ui.theme.DesafioMusicalTheme
 
 class MainActivity : ComponentActivity() {
-
     private val container by lazy { (application as DesafioMusicalApp).container }
 
     override fun onCreate(savedInstanceState: Bundle?) {

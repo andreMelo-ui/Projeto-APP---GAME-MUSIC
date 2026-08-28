@@ -3,7 +3,7 @@ package com.desafiomusical.app.domain.model
 data class PlayerScore(
     val player: Player,
     val totalScore: Int,
-    val role: PlayerRole? = null
+    val role: PlayerRole? = null,
 )
 
 data class PlayerGameStats(
@@ -14,5 +14,5 @@ data class PlayerGameStats(
     val bestRoundPoints: Int,
     val hintsUsed: Int,
     val stealsAttempted: Int,
-    val stealsWon: Int
+    val stealsWon: Int,
 )

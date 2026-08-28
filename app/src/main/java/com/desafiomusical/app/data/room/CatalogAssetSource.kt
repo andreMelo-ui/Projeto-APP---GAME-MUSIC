@@ -15,7 +15,6 @@ import kotlinx.serialization.json.Json
  * remoto, no roadmap V2) sem tocar em código Kotlin — só o JSON muda.
  */
 class CatalogAssetSource(private val context: Context) {
-
     private val json = Json { ignoreUnknownKeys = true }
 
     suspend fun loadCatalog(fileName: String = "catalog.json"): List<SongEntity> =

@@ -12,16 +12,16 @@ import androidx.room.PrimaryKey
             entity = GameEntity::class,
             parentColumns = ["id"],
             childColumns = ["gameId"],
-            onDelete = ForeignKey.CASCADE
+            onDelete = ForeignKey.CASCADE,
         ),
         ForeignKey(
             entity = SongEntity::class,
             parentColumns = ["id"],
             childColumns = ["songId"],
-            onDelete = ForeignKey.RESTRICT
-        )
+            onDelete = ForeignKey.RESTRICT,
+        ),
     ],
-    indices = [Index("gameId"), Index("songId")]
+    indices = [Index("gameId"), Index("songId")],
 )
 data class RoundEntity(
     @PrimaryKey val id: String,
@@ -33,5 +33,5 @@ data class RoundEntity(
     val startedAt: Long,
     val endedAt: Long?,
     val winnerId: String?,
-    val hintsUsed: Int
+    val hintsUsed: Int,
 )

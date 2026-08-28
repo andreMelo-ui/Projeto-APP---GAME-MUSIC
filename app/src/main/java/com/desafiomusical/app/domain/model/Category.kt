@@ -7,7 +7,8 @@ enum class Category(val displayName: String) {
     GAMES("Games"),
     SERIES_MOVIES("Séries/Filmes"),
     ANIME("Anime"),
-    ALEATORIO("Aleatório");
+    ALEATORIO("Aleatório"),
+    ;
 
     companion object {
         val selectable: List<Category> = entries

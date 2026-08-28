@@ -21,22 +21,23 @@ data class SongDto(
     val hint2: String,
     val hint3: String,
     val tags: List<String> = emptyList(),
-    val active: Boolean = true
+    val active: Boolean = true,
 )
 
-fun SongDto.toEntity(now: Long): SongEntity = SongEntity(
-    id = id,
-    title = title,
-    artist = artist,
-    category = category,
-    work = work,
-    difficulty = difficulty,
-    youtubeVideoId = youtubeVideoId,
-    hint1 = hint1,
-    hint2 = hint2,
-    hint3 = hint3,
-    tagsCsv = tags.joinToString(","),
-    active = active,
-    createdAt = now,
-    updatedAt = now
-)
+fun SongDto.toEntity(now: Long): SongEntity =
+    SongEntity(
+        id = id,
+        title = title,
+        artist = artist,
+        category = category,
+        work = work,
+        difficulty = difficulty,
+        youtubeVideoId = youtubeVideoId,
+        hint1 = hint1,
+        hint2 = hint2,
+        hint3 = hint3,
+        tagsCsv = tags.joinToString(","),
+        active = active,
+        createdAt = now,
+        updatedAt = now,
+    )

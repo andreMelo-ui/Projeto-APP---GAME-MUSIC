@@ -14,11 +14,10 @@ import kotlinx.coroutines.launch
 data class HistoryListUiState(
     val isLoading: Boolean = true,
     val entries: List<GameHistoryEntry> = emptyList(),
-    val players: List<Player> = emptyList()
+    val players: List<Player> = emptyList(),
 )
 
 class HistoryListViewModel(container: AppContainer) : ViewModel() {
-
     private val _uiState = MutableStateFlow(HistoryListUiState())
     val uiState: StateFlow<HistoryListUiState> = _uiState.asStateFlow()
 
@@ -26,7 +25,7 @@ class HistoryListViewModel(container: AppContainer) : ViewModel() {
         viewModelScope.launch {
             combine(
                 container.gameHistoryRepository.observeHistory(),
-                container.playerRepository.observeKnownPlayers()
+                container.playerRepository.observeKnownPlayers(),
             ) { entries, players -> HistoryListUiState(isLoading = false, entries = entries, players = players) }
                 .collect { _uiState.value = it }
         }

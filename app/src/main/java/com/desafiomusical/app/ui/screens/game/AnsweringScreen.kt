@@ -24,9 +24,9 @@ import com.desafiomusical.app.domain.model.Player
 import com.desafiomusical.app.domain.model.Song
 import com.desafiomusical.app.ui.components.PrimaryButton
 import com.desafiomusical.app.ui.components.RoleChip
-import com.desafiomusical.app.ui.theme.SuccessGreen
 import com.desafiomusical.app.ui.theme.ColorChooser
 import com.desafiomusical.app.ui.theme.DangerRed
+import com.desafiomusical.app.ui.theme.SuccessGreen
 import com.desafiomusical.app.ui.theme.TextSecondary
 
 /**
@@ -42,7 +42,7 @@ fun AnsweringScreen(
     titleClaimed: Boolean,
     artistClaimed: Boolean,
     workClaimed: Boolean = false,
-    onConfirm: (titleCorrect: Boolean, artistCorrect: Boolean, workCorrect: Boolean) -> Unit
+    onConfirm: (titleCorrect: Boolean, artistCorrect: Boolean, workCorrect: Boolean) -> Unit,
 ) {
     var titleCorrect by remember { mutableStateOf(titleClaimed) }
     var artistCorrect by remember { mutableStateOf(artistClaimed) }
@@ -50,70 +50,75 @@ fun AnsweringScreen(
     val work = song.work
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .windowInsetsPadding(WindowInsets.safeDrawing)
-            .padding(24.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .windowInsetsPadding(WindowInsets.safeDrawing)
+                .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         RoleChip(label = "Confirmação do juiz", color = ColorChooser)
         Text(
             text = "${respondent.name} disse:",
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(top = 20.dp)
+            modifier = Modifier.padding(top = 20.dp),
         )
         Text(
             text = "Título: ${song.title}",
             style = MaterialTheme.typography.bodyMedium,
-            color = TextSecondary
+            color = TextSecondary,
         )
         Text(
             text = "Artista: ${song.artist}",
             style = MaterialTheme.typography.bodyMedium,
             color = TextSecondary,
-            modifier = Modifier.padding(bottom = if (work.isNullOrBlank()) 24.dp else 4.dp)
+            modifier = Modifier.padding(bottom = if (work.isNullOrBlank()) 24.dp else 4.dp),
         )
         if (!work.isNullOrBlank()) {
             Text(
                 text = "Obra: $work",
                 style = MaterialTheme.typography.bodyMedium,
                 color = TextSecondary,
-                modifier = Modifier.padding(bottom = 24.dp)
+                modifier = Modifier.padding(bottom = 24.dp),
             )
         }
 
         ConfirmToggleRow(
             label = "Acertou o título?",
             value = titleCorrect,
-            onChange = { titleCorrect = it }
+            onChange = { titleCorrect = it },
         )
         ConfirmToggleRow(
             label = "Acertou o artista?",
             value = artistCorrect,
-            onChange = { artistCorrect = it }
+            onChange = { artistCorrect = it },
         )
         if (!work.isNullOrBlank()) {
             ConfirmToggleRow(
                 label = "Acertou a obra?",
                 value = workCorrect,
-                onChange = { workCorrect = it }
+                onChange = { workCorrect = it },
             )
         }
 
         PrimaryButton(
             text = "Confirmar",
             onClick = { onConfirm(titleCorrect, artistCorrect, workCorrect && !work.isNullOrBlank()) },
-            modifier = Modifier.fillMaxWidth().padding(top = 24.dp)
+            modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
         )
     }
 }
 
 @Composable
-private fun ConfirmToggleRow(label: String, value: Boolean, onChange: (Boolean) -> Unit) {
+private fun ConfirmToggleRow(
+    label: String,
+    value: Boolean,
+    onChange: (Boolean) -> Unit,
+) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Text(text = label, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.SemiBold)
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -124,14 +129,20 @@ private fun ConfirmToggleRow(label: String, value: Boolean, onChange: (Boolean) 
 }
 
 @Composable
-private fun PillToggle(text: String, selected: Boolean, color: androidx.compose.ui.graphics.Color, onClick: () -> Unit) {
+private fun PillToggle(
+    text: String,
+    selected: Boolean,
+    color: androidx.compose.ui.graphics.Color,
+    onClick: () -> Unit,
+) {
     androidx.compose.material3.FilterChip(
         selected = selected,
         onClick = onClick,
         label = { Text(text) },
-        colors = androidx.compose.material3.FilterChipDefaults.filterChipColors(
-            selectedContainerColor = color,
-            selectedLabelColor = androidx.compose.ui.graphics.Color.Black
-        )
+        colors =
+            androidx.compose.material3.FilterChipDefaults.filterChipColors(
+                selectedContainerColor = color,
+                selectedLabelColor = androidx.compose.ui.graphics.Color.Black,
+            ),
     )
 }

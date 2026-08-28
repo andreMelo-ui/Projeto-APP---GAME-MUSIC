@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SongDao {
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertIgnoringConflicts(songs: List<SongEntity>): List<Long>
 

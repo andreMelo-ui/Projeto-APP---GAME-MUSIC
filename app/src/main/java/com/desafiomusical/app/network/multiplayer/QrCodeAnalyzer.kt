@@ -19,9 +19,8 @@ import java.nio.ByteBuffer
  * dispositivo/emulador real — não roda em teste de unidade.
  */
 class QrCodeAnalyzer(
-    private val onInviteFound: (RoomInvite) -> Unit
+    private val onInviteFound: (RoomInvite) -> Unit,
 ) : ImageAnalysis.Analyzer {
-
     private val reader = MultiFormatReader()
 
     @Volatile
@@ -32,16 +31,17 @@ class QrCodeAnalyzer(
             if (lastPayload != null) return
 
             val yPlane = image.planes[0]
-            val source = PlanarYUVLuminanceSource(
-                yPlane.buffer.toByteArray(),
-                yPlane.rowStride,
-                image.height,
-                0,
-                0,
-                image.width,
-                image.height,
-                false
-            )
+            val source =
+                PlanarYUVLuminanceSource(
+                    yPlane.buffer.toByteArray(),
+                    yPlane.rowStride,
+                    image.height,
+                    0,
+                    0,
+                    image.width,
+                    image.height,
+                    false,
+                )
             val binaryBitmap = BinaryBitmap(HybridBinarizer(source))
             val payload = runCatching { reader.decode(binaryBitmap).text }.getOrNull() ?: return
             val invite = RoomInvite.fromQrPayload(payload) ?: return

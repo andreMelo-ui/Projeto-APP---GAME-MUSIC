@@ -14,14 +14,15 @@ data class Song(
     val tags: List<String>,
     val active: Boolean,
     val createdAt: Long,
-    val updatedAt: Long
+    val updatedAt: Long,
 ) {
-    fun hintFor(level: Int): String = when (level) {
-        1 -> hint1
-        2 -> hint2
-        3 -> hint3
-        else -> error("Nível de dica inválido: $level")
-    }
+    fun hintFor(level: Int): String =
+        when (level) {
+            1 -> hint1
+            2 -> hint2
+            3 -> hint3
+            else -> error("Nível de dica inválido: $level")
+        }
 }
 
 /**
@@ -34,14 +35,15 @@ data class MaskedSong(
     val difficulty: Difficulty,
     val youtubeVideoId: String,
     val hintsRevealed: List<String>,
-    val hasWork: Boolean
+    val hasWork: Boolean,
 )
 
-fun Song.mask(hintsRevealedCount: Int): MaskedSong = MaskedSong(
-    id = id,
-    category = category,
-    difficulty = difficulty,
-    youtubeVideoId = youtubeVideoId,
-    hintsRevealed = (1..hintsRevealedCount).map { hintFor(it) },
-    hasWork = !work.isNullOrBlank()
-)
+fun Song.mask(hintsRevealedCount: Int): MaskedSong =
+    MaskedSong(
+        id = id,
+        category = category,
+        difficulty = difficulty,
+        youtubeVideoId = youtubeVideoId,
+        hintsRevealed = (1..hintsRevealedCount).map { hintFor(it) },
+        hasWork = !work.isNullOrBlank(),
+    )

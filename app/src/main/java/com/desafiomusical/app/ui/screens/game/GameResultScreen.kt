@@ -26,14 +26,15 @@ import com.desafiomusical.app.ui.theme.TextSecondary
 @Composable
 fun GameResultScreen(
     result: GameResultView,
-    onBackToHome: () -> Unit
+    onBackToHome: () -> Unit,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .windowInsetsPadding(WindowInsets.safeDrawing)
-            .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .windowInsetsPadding(WindowInsets.safeDrawing)
+                .padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(text = "🏆", style = MaterialTheme.typography.displayLarge)
         Text(
@@ -41,20 +42,20 @@ fun GameResultScreen(
             style = MaterialTheme.typography.headlineMedium,
             color = SuccessGreen,
             fontWeight = FontWeight.Black,
-            modifier = Modifier.padding(top = 8.dp, bottom = 24.dp)
+            modifier = Modifier.padding(top = 8.dp, bottom = 24.dp),
         )
 
         Text(text = "Placar final", style = MaterialTheme.typography.titleMedium)
         Column(
             modifier = Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 24.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             result.finalScoreboard.forEachIndexed { index, entry ->
                 ScoreBadge(
                     playerName = "${index + 1}. ${entry.player.name}",
                     score = entry.totalScore,
                     modifier = Modifier.fillMaxWidth(),
-                    highlighted = index == 0
+                    highlighted = index == 0,
                 )
             }
         }
@@ -62,21 +63,22 @@ fun GameResultScreen(
         Text(text = "Estatísticas", style = MaterialTheme.typography.titleMedium)
         LazyColumn(
             modifier = Modifier.fillMaxWidth().weight(1f, fill = false).padding(top = 8.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             items(result.stats, key = { it.player.id }) { stats ->
                 Column {
                     Text(text = stats.player.name, style = MaterialTheme.typography.titleMedium)
                     Text(
-                        text = "Acertos: ${stats.correctAnswers} • Erros: ${stats.wrongAnswers} • " +
-                            "Média: ${"%.1f".format(stats.averagePoints)} • Melhor rodada: ${stats.bestRoundPoints}",
+                        text =
+                            "Acertos: ${stats.correctAnswers} • Erros: ${stats.wrongAnswers} • " +
+                                "Média: ${"%.1f".format(stats.averagePoints)} • Melhor rodada: ${stats.bestRoundPoints}",
                         style = MaterialTheme.typography.bodyMedium,
-                        color = TextSecondary
+                        color = TextSecondary,
                     )
                     Text(
                         text = "Dicas usadas: ${stats.hintsUsed} • Roubos vencidos: ${stats.stealsWon}/${stats.stealsAttempted}",
                         style = MaterialTheme.typography.bodyMedium,
-                        color = TextSecondary
+                        color = TextSecondary,
                     )
                 }
             }
@@ -85,7 +87,7 @@ fun GameResultScreen(
         PrimaryButton(
             text = "Menu Principal",
             onClick = onBackToHome,
-            modifier = Modifier.fillMaxWidth().padding(top = 16.dp)
+            modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
         )
     }
 }

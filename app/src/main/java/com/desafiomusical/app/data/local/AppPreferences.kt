@@ -16,21 +16,25 @@ private val Context.dataStore by preferencesDataStore(name = "desafio_musical_pr
  * criação de uma nova partida.
  */
 class AppPreferences(private val context: Context) {
-
     private object Keys {
         val LAST_PLAYER_NAMES = stringPreferencesKey("last_player_names")
         val STEAL_ENABLED_DEFAULT = booleanPreferencesKey("steal_enabled_default")
     }
 
-    val lastPlayerNames: Flow<List<String>> = context.dataStore.data.map { prefs ->
-        prefs[Keys.LAST_PLAYER_NAMES]?.split("|")?.filter { it.isNotBlank() } ?: emptyList()
-    }
+    val lastPlayerNames: Flow<List<String>> =
+        context.dataStore.data.map { prefs ->
+            prefs[Keys.LAST_PLAYER_NAMES]?.split("|")?.filter { it.isNotBlank() } ?: emptyList()
+        }
 
-    val stealEnabledDefault: Flow<Boolean> = context.dataStore.data.map { prefs ->
-        prefs[Keys.STEAL_ENABLED_DEFAULT] ?: true
-    }
+    val stealEnabledDefault: Flow<Boolean> =
+        context.dataStore.data.map { prefs ->
+            prefs[Keys.STEAL_ENABLED_DEFAULT] ?: true
+        }
 
-    suspend fun saveLastSetup(playerNames: List<String>, stealEnabled: Boolean) {
+    suspend fun saveLastSetup(
+        playerNames: List<String>,
+        stealEnabled: Boolean,
+    ) {
         context.dataStore.edit { prefs ->
             prefs[Keys.LAST_PLAYER_NAMES] = playerNames.joinToString("|")
             prefs[Keys.STEAL_ENABLED_DEFAULT] = stealEnabled
