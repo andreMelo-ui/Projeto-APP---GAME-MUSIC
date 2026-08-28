@@ -11,9 +11,9 @@ App Android de party game musical (Kotlin + Jetpack Compose), implementado a par
 | `GameEngine` (pontuação, papéis, cronômetro, roubo, máquina de estados) | ✅ Completo |
 | Fluxo pass-and-play (Home → Setup → Rodadas → Placar Final) | ✅ Completo |
 | Testes unitários de regras (pontuação, papéis, máquina de estados) | ✅ Completo |
-| Multiplayer local (NSD/sockets, salas, QR Code) | ⏳ Fase 3 — apenas contratos (`RoomSession`, `GameEvent`) prontos |
+| Multiplayer local (NSD/sockets, salas, QR Code) | ✅ Completo |
 | Player do YouTube embutido | ✅ Completo — áudio via IFrame Player API oficial em WebView, sem exibir vídeo/miniatura |
-| Histórico/estatísticas na UI, conquistas | ⏳ Fase 6 — persistência já implementada, tela de histórico é um placeholder |
+| Histórico/estatísticas na UI, conquistas | ✅ Completo — lista de histórico, detalhe da partida e estatísticas por jogador |
 
 ## Arquitetura
 
