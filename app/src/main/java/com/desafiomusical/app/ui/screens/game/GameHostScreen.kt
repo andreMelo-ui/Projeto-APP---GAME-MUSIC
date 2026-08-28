@@ -27,10 +27,14 @@ import com.desafiomusical.app.ui.components.YoutubeAudioPlayer
  * NavHost só entra/sai deste destino "game".
  */
 @Composable
-fun GameHostScreen(container: AppContainer, onExitToHome: () -> Unit) {
-    val viewModel: GameViewModel = viewModel(
-        factory = viewModelFactory { initializer { GameViewModel(container) } }
-    )
+fun GameHostScreen(
+    container: AppContainer,
+    onExitToHome: () -> Unit,
+) {
+    val viewModel: GameViewModel =
+        viewModel(
+            factory = viewModelFactory { initializer { GameViewModel(container) } },
+        )
     val state by viewModel.uiState.collectAsState()
     val elapsedSeconds by viewModel.elapsedSeconds.collectAsState()
     val stealSecondsLeft by viewModel.stealSecondsLeft.collectAsState()
@@ -42,62 +46,69 @@ fun GameHostScreen(container: AppContainer, onExitToHome: () -> Unit) {
         YoutubeAudioPlayer(
             videoId = videoId,
             isPlaying = state is GameUiState.Playing,
-            onError = { audioUnavailable = true }
+            onError = { audioUnavailable = true },
         )
 
         // Fundo explícito e opaco antes de qualquer composable filho: nunca depende do
         // que está por trás (WebView do player, frame de transição do NavHost, etc.).
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background),
         ) {
             when (val current = state) {
-                is GameUiState.CategorySelection -> CategorySelectionScreen(
-                    chooser = current.chooser,
-                    roundNumber = current.roundNumber,
-                    totalRounds = current.totalRounds,
-                    categories = current.categories,
-                    onCategorySelected = viewModel::selectCategory
-                )
+                is GameUiState.CategorySelection ->
+                    CategorySelectionScreen(
+                        chooser = current.chooser,
+                        roundNumber = current.roundNumber,
+                        totalRounds = current.totalRounds,
+                        categories = current.categories,
+                        onCategorySelected = viewModel::selectCategory,
+                    )
 
-                is GameUiState.SongSelection -> SongSelectionScreen(
-                    chooser = current.chooser,
-                    roundNumber = current.roundNumber,
-                    totalRounds = current.totalRounds,
-                    category = current.category,
-                    candidates = current.candidates,
-                    onSongSelected = viewModel::selectSong,
-                    onRandomSelected = viewModel::selectRandomSong
-                )
+                is GameUiState.SongSelection ->
+                    SongSelectionScreen(
+                        chooser = current.chooser,
+                        roundNumber = current.roundNumber,
+                        totalRounds = current.totalRounds,
+                        category = current.category,
+                        candidates = current.candidates,
+                        onSongSelected = viewModel::selectSong,
+                        onRandomSelected = viewModel::selectRandomSong,
+                    )
 
-                is GameUiState.Ready -> ChooserScreen(
-                    chooserView = current.chooserView,
-                    onStartPlayback = viewModel::startPlayback
-                )
+                is GameUiState.Ready ->
+                    ChooserScreen(
+                        chooserView = current.chooserView,
+                        onStartPlayback = viewModel::startPlayback,
+                    )
 
-                is GameUiState.Playing -> PlayingScreen(
-                    round = current.round,
-                    elapsedSeconds = elapsedSeconds,
-                    audioUnavailable = audioUnavailable,
-                    onRequestHint = viewModel::requestHint,
-                    onSubmitAnswer = viewModel::submitMainAnswer
-                )
+                is GameUiState.Playing ->
+                    PlayingScreen(
+                        round = current.round,
+                        elapsedSeconds = elapsedSeconds,
+                        audioUnavailable = audioUnavailable,
+                        onRequestHint = viewModel::requestHint,
+                        onSubmitAnswer = viewModel::submitMainAnswer,
+                    )
 
-                is GameUiState.Answering -> AnsweringScreen(
-                    respondent = current.round.mainResponder,
-                    song = current.song,
-                    titleClaimed = current.titleClaimed,
-                    artistClaimed = current.artistClaimed,
-                    workClaimed = current.workClaimed,
-                    onConfirm = viewModel::confirmMainAnswer
-                )
+                is GameUiState.Answering ->
+                    AnsweringScreen(
+                        respondent = current.round.mainResponder,
+                        song = current.song,
+                        titleClaimed = current.titleClaimed,
+                        artistClaimed = current.artistClaimed,
+                        workClaimed = current.workClaimed,
+                        onConfirm = viewModel::confirmMainAnswer,
+                    )
 
-                is GameUiState.StealWindow -> StealWindowScreen(
-                    round = current.round,
-                    stealSecondsLeft = stealSecondsLeft,
-                    onClaim = viewModel::claimSteal
-                )
+                is GameUiState.StealWindow ->
+                    StealWindowScreen(
+                        round = current.round,
+                        stealSecondsLeft = stealSecondsLeft,
+                        onClaim = viewModel::claimSteal,
+                    )
 
                 is GameUiState.StealAnswer -> {
                     val stealer = current.round.eligibleStealers.firstOrNull { it.id == current.stealerId }
@@ -107,15 +118,16 @@ fun GameHostScreen(container: AppContainer, onExitToHome: () -> Unit) {
                             song = current.song,
                             titleClaimed = false,
                             artistClaimed = false,
-                            onConfirm = viewModel::confirmStealAnswer
+                            onConfirm = viewModel::confirmStealAnswer,
                         )
                     }
                 }
 
-                is GameUiState.RoundResult -> RoundResultScreen(
-                    result = current.result,
-                    onNextRound = viewModel::goToNextRound
-                )
+                is GameUiState.RoundResult ->
+                    RoundResultScreen(
+                        result = current.result,
+                        onNextRound = viewModel::goToNextRound,
+                    )
 
                 is GameUiState.GameResult -> {
                     LaunchedEffect(current) { viewModel.persistHistoryIfNeeded() }

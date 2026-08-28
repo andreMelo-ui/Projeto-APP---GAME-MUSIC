@@ -15,12 +15,13 @@ import org.junit.Test
  * Android (nem [android.graphics.Bitmap] nem CameraX entram aqui).
  */
 class QrCodeEncoderTest {
-
     /** Adapta a [BitMatrix] (módulos preto/branco) para o formato de luminância que o decoder do ZXing espera. */
     private class BitMatrixLuminanceSource(private val matrix: BitMatrix) :
         LuminanceSource(matrix.width, matrix.height) {
-
-        override fun getRow(y: Int, row: ByteArray?): ByteArray {
+        override fun getRow(
+            y: Int,
+            row: ByteArray?,
+        ): ByteArray {
             val out = row?.takeIf { it.size >= width } ?: ByteArray(width)
             for (x in 0 until width) out[x] = if (matrix.get(x, y)) 0.toByte() else 0xFF.toByte()
             return out

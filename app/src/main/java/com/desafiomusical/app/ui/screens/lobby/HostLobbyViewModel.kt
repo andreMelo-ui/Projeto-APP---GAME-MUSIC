@@ -13,7 +13,6 @@ import com.desafiomusical.app.network.multiplayer.RoomSession
 import com.desafiomusical.app.network.multiplayer.findLocalIpv4Address
 import com.desafiomusical.app.network.payloads.GameEvent
 import com.desafiomusical.app.network.payloads.RoomPlayerInfo
-import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,6 +20,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.UUID
 
 enum class HostLobbyPhase { SETUP, CREATING, WAITING, STARTING }
 
@@ -32,7 +32,7 @@ data class HostLobbyUiState(
     val roomCode: String = "",
     val qrPayload: String = "",
     val players: List<RoomPlayerInfo> = emptyList(),
-    val errorMessage: String? = null
+    val errorMessage: String? = null,
 ) {
     val canStart: Boolean get() = phase == HostLobbyPhase.WAITING && players.size in 2..4
 }
@@ -48,11 +48,9 @@ data class HostLobbyUiState(
  * de `viewModelScope`, seus coletores em segundo plano morreriam junto.
  */
 class HostLobbyViewModel(private val container: AppContainer) : ViewModel() {
-
     private val _uiState = MutableStateFlow(HostLobbyUiState())
     val uiState: StateFlow<HostLobbyUiState> = _uiState.asStateFlow()
 
-    private val hostPlayerId = UUID.randomUUID().toString()
     private val advertiser = NsdRoomAdvertiser(container.nsdManager)
     private var roomSession: KtorHostRoomSession? = null
     private var gameStarted = false
@@ -75,7 +73,10 @@ class HostLobbyViewModel(private val container: AppContainer) : ViewModel() {
             val localAddress = findLocalIpv4Address()
             if (localAddress == null) {
                 _uiState.update {
-                    it.copy(phase = HostLobbyPhase.SETUP, errorMessage = "Não foi possível detectar a rede Wi-Fi. Verifique se está conectado.")
+                    it.copy(
+                        phase = HostLobbyPhase.SETUP,
+                        errorMessage = "Não foi possível detectar a rede Wi-Fi. Verifique se está conectado.",
+                    )
                 }
                 return@launch
             }
@@ -86,7 +87,10 @@ class HostLobbyViewModel(private val container: AppContainer) : ViewModel() {
             roomSession = session
             runCatching { advertiser.advertise(code, session.port) }
 
-            val self = RoomPlayerInfo(hostPlayerId, name, ready = true)
+            // Reaproveita o id de quem já jogou antes (por nome) — ver KDoc de
+            // PlayerRepository.findOrCreatePlayer.
+            val hostPlayer = container.playerRepository.findOrCreatePlayer(name)
+            val self = RoomPlayerInfo(hostPlayer.id, hostPlayer.name, ready = true)
             val invite = RoomInvite(roomCode = code, hostAddress = localAddress, port = session.port)
 
             _uiState.update {
@@ -94,7 +98,7 @@ class HostLobbyViewModel(private val container: AppContainer) : ViewModel() {
                     phase = HostLobbyPhase.WAITING,
                     roomCode = code,
                     qrPayload = invite.toQrPayload(),
-                    players = listOf(self)
+                    players = listOf(self),
                 )
             }
 
@@ -129,7 +133,10 @@ class HostLobbyViewModel(private val container: AppContainer) : ViewModel() {
         }
     }
 
-    private fun updateReady(playerId: String, ready: Boolean) {
+    private fun updateReady(
+        playerId: String,
+        ready: Boolean,
+    ) {
         _uiState.update { state ->
             state.copy(players = state.players.map { if (it.playerId == playerId) it.copy(ready = ready) else it })
         }
@@ -143,8 +150,8 @@ class HostLobbyViewModel(private val container: AppContainer) : ViewModel() {
                 timestamp = System.currentTimeMillis(),
                 roundCount = state.roundCount,
                 stealEnabled = state.stealEnabled,
-                players = state.players
-            )
+                players = state.players,
+            ),
         )
     }
 
@@ -191,7 +198,6 @@ class HostLobbyViewModel(private val container: AppContainer) : ViewModel() {
         // Sem 0/O nem 1/I: evita ambiguidade pra quem for digitar o código manualmente.
         private const val ROOM_CODE_CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
 
-        private fun generateRoomCode(length: Int = 5): String =
-            (1..length).map { ROOM_CODE_CHARS.random() }.joinToString("")
+        private fun generateRoomCode(length: Int = 5): String = (1..length).map { ROOM_CODE_CHARS.random() }.joinToString("")
     }
 }

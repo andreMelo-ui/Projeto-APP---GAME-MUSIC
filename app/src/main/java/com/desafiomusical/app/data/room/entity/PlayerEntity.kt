@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class PlayerEntity(
     @PrimaryKey val id: String,
     val name: String,
-    val createdAt: Long
+    val createdAt: Long,
 )

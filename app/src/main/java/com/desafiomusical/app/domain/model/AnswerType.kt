@@ -2,13 +2,13 @@ package com.desafiomusical.app.domain.model
 
 enum class AnswerType {
     TITLE,
-    ARTIST
+    ARTIST,
 }
 
 enum class AttemptType {
     MAIN_ANSWER,
     STEAL_ANSWER,
-    HINT_REQUEST
+    HINT_REQUEST,
 }
 
 enum class AttemptOutcome {
@@ -16,5 +16,5 @@ enum class AttemptOutcome {
     CORRECT_ARTIST,
     CORRECT_BOTH,
     CORRECT_WORK,
-    WRONG
+    WRONG,
 }

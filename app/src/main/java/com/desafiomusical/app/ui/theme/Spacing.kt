@@ -14,9 +14,10 @@ data class Spacing(
     val sm: Dp = 8.dp,
     val md: Dp = 12.dp,
     val lg: Dp = 16.dp,
-    val xl: Dp = 20.dp,   // padding padrão de tela
+    // padding padrão de tela
+    val xl: Dp = 20.dp,
     val xxl: Dp = 28.dp,
-    val xxxl: Dp = 40.dp
+    val xxxl: Dp = 40.dp,
 )
 
 val LocalSpacing = staticCompositionLocalOf { Spacing() }

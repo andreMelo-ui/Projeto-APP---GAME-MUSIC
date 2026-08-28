@@ -1,7 +1,6 @@
 package com.desafiomusical.app.network.multiplayer
 
 import com.desafiomusical.app.network.payloads.GameEvent
-import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.TimeoutCancellationException
@@ -14,22 +13,23 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.fail
 import org.junit.Test
+import java.util.UUID
 
 /**
  * Round-trip real: [KtorHostRoomSession] de verdade + dois [KtorClientRoomSession]
  * de verdade conectando por IP:porta (127.0.0.1 + porta efêmera do host).
  */
 class KtorClientRoomSessionTest {
-
     private var host: KtorHostRoomSession? = null
     private val clients = mutableListOf<KtorClientRoomSession>()
     private val collectJobs = mutableListOf<Job>()
 
     @After
-    fun tearDown(): Unit = runBlocking {
-        clients.forEach { runCatching { it.stop() } }
-        host?.stop()
-    }
+    fun tearDown(): Unit =
+        runBlocking {
+            clients.forEach { runCatching { it.stop() } }
+            host?.stop()
+        }
 
     /**
      * Assina [RoomSession.observeIncoming] ANTES de qualquer evento ser disparado, evitando a
@@ -56,14 +56,19 @@ class KtorClientRoomSessionTest {
         return session
     }
 
-    private suspend fun newClient(hostSession: KtorHostRoomSession, playerId: String, playerName: String): KtorClientRoomSession {
-        val client = KtorClientRoomSession(
-            roomCode = hostSession.roomCode,
-            playerId = playerId,
-            playerName = playerName,
-            hostAddress = "127.0.0.1",
-            hostPort = hostSession.port
-        )
+    private suspend fun newClient(
+        hostSession: KtorHostRoomSession,
+        playerId: String,
+        playerName: String,
+    ): KtorClientRoomSession {
+        val client =
+            KtorClientRoomSession(
+                roomCode = hostSession.roomCode,
+                playerId = playerId,
+                playerName = playerName,
+                hostAddress = "127.0.0.1",
+                hostPort = hostSession.port,
+            )
         clients.add(client)
         client.start()
         return client
@@ -87,10 +92,11 @@ class KtorClientRoomSessionTest {
             }
 
             // Drena os dois JoinRoom (p1 e p2) antes de seguir com as próximas asserções.
-            val joinedIds = setOf(
-                withTimeout(5_000) { hostReceived.receive() },
-                withTimeout(5_000) { hostReceived.receive() }
-            ).mapNotNull { (it as? GameEvent.JoinRoom)?.playerId }.toSet()
+            val joinedIds =
+                setOf(
+                    withTimeout(5_000) { hostReceived.receive() },
+                    withTimeout(5_000) { hostReceived.receive() },
+                ).mapNotNull { (it as? GameEvent.JoinRoom)?.playerId }.toSet()
             assertEquals(setOf("p1", "p2"), joinedIds)
 
             // Broadcast do host chega em ambos os clientes.
@@ -100,12 +106,13 @@ class KtorClientRoomSessionTest {
             assertEquals(gameStart.eventId, withTimeout(5_000) { client2Received.receive() }.eventId)
 
             // sendTo do host só chega no destinatário.
-            val readyForP1 = GameEvent.PlayerReady(
-                eventId = UUID.randomUUID().toString(),
-                timestamp = System.currentTimeMillis(),
-                playerId = "p1",
-                ready = true
-            )
+            val readyForP1 =
+                GameEvent.PlayerReady(
+                    eventId = UUID.randomUUID().toString(),
+                    timestamp = System.currentTimeMillis(),
+                    playerId = "p1",
+                    ready = true,
+                )
             hostSession.sendTo("p1", readyForP1)
             assertEquals(readyForP1.eventId, withTimeout(5_000) { client1Received.receive() }.eventId)
             try {
@@ -116,12 +123,13 @@ class KtorClientRoomSessionTest {
             }
 
             // Evento enviado por um cliente (broadcast() do cliente == fala com o host) chega no host.
-            val client2Ready = GameEvent.PlayerReady(
-                eventId = UUID.randomUUID().toString(),
-                timestamp = System.currentTimeMillis(),
-                playerId = "p2",
-                ready = true
-            )
+            val client2Ready =
+                GameEvent.PlayerReady(
+                    eventId = UUID.randomUUID().toString(),
+                    timestamp = System.currentTimeMillis(),
+                    playerId = "p2",
+                    ready = true,
+                )
             client2.broadcast(client2Ready)
             assertEquals(client2Ready.eventId, withTimeout(5_000) { hostReceived.receive() }.eventId)
 
@@ -149,59 +157,62 @@ class KtorClientRoomSessionTest {
         }
 
     @Test
-    fun `cliente reconecta sozinho quando a conexao cai inesperadamente e volta a funcionar`(): Unit = runBlocking {
-        val hostSession = newHost()
+    fun `cliente reconecta sozinho quando a conexao cai inesperadamente e volta a funcionar`(): Unit =
+        runBlocking {
+            val hostSession = newHost()
 
-        // maxReconnectDelayMillis baixo só pra não deixar o teste lento — a lógica de backoff em si
-        // (ver KtorClientRoomSession.backoffDelay) não muda de comportamento, só o tempo de espera.
-        val client1 = KtorClientRoomSession(
-            roomCode = hostSession.roomCode,
-            playerId = "p1",
-            playerName = "Ana",
-            hostAddress = "127.0.0.1",
-            hostPort = hostSession.port,
-            maxReconnectDelayMillis = 200
-        )
-        clients.add(client1)
-        client1.start()
+            // maxReconnectDelayMillis baixo só pra não deixar o teste lento — a lógica de backoff em si
+            // (ver KtorClientRoomSession.backoffDelay) não muda de comportamento, só o tempo de espera.
+            val client1 =
+                KtorClientRoomSession(
+                    roomCode = hostSession.roomCode,
+                    playerId = "p1",
+                    playerName = "Ana",
+                    hostAddress = "127.0.0.1",
+                    hostPort = hostSession.port,
+                    maxReconnectDelayMillis = 200,
+                )
+            clients.add(client1)
+            client1.start()
 
-        withTimeout(5_000) { hostSession.connectedPlayerIds.first { it == listOf("p1") } }
-        withTimeout(5_000) { client1.isConnected.first { it } }
+            withTimeout(5_000) { hostSession.connectedPlayerIds.first { it == listOf("p1") } }
+            withTimeout(5_000) { client1.isConnected.first { it } }
 
-        val hostReceived = recordIncoming(hostSession)
+            val hostReceived = recordIncoming(hostSession)
 
-        // Simula a conexão de client1 caindo "sem avisar": um impostor se conecta como "p1" e o
-        // host força o fechamento da conexão antiga (mesmo mecanismo do teste de reconexão em
-        // KtorHostRoomSessionTest, agora visto do lado do KtorClientRoomSession real). Para logo em
-        // seguida — é só um gatilho de uma vez, não pode ficar competindo pela reconexão de client1.
-        val impostor = KtorClientRoomSession(
-            roomCode = hostSession.roomCode,
-            playerId = "p1",
-            playerName = "Impostor",
-            hostAddress = "127.0.0.1",
-            hostPort = hostSession.port
-        )
-        impostor.start()
-        impostor.stop()
+            // Simula a conexão de client1 caindo "sem avisar": um impostor se conecta como "p1" e o
+            // host força o fechamento da conexão antiga (mesmo mecanismo do teste de reconexão em
+            // KtorHostRoomSessionTest, agora visto do lado do KtorClientRoomSession real). Para logo em
+            // seguida — é só um gatilho de uma vez, não pode ficar competindo pela reconexão de client1.
+            val impostor =
+                KtorClientRoomSession(
+                    roomCode = hostSession.roomCode,
+                    playerId = "p1",
+                    playerName = "Impostor",
+                    hostAddress = "127.0.0.1",
+                    hostPort = hostSession.port,
+                )
+            impostor.start()
+            impostor.stop()
 
-        withTimeout(5_000) { client1.isConnected.first { !it } }
-        withTimeout(10_000) { client1.isConnected.first { it } }
+            withTimeout(5_000) { client1.isConnected.first { !it } }
+            withTimeout(10_000) { client1.isConnected.first { it } }
 
-        // A reconexão reenviou JoinRoom com o mesmo playerId — o host volta a listar só "p1" (a
-        // conexão nova de client1 tomou de volta o lugar do impostor).
-        withTimeout(5_000) { hostSession.connectedPlayerIds.first { it == listOf("p1") } }
+            // A reconexão reenviou JoinRoom com o mesmo playerId — o host volta a listar só "p1" (a
+            // conexão nova de client1 tomou de volta o lugar do impostor).
+            withTimeout(5_000) { hostSession.connectedPlayerIds.first { it == listOf("p1") } }
 
-        // E a sessão reconectada continua funcional nos dois sentidos. hostReceived também recebeu
-        // os JoinRoom do impostor e da reconexão de client1 antes disto — dreno até achar a sonda.
-        val probe = GameEvent.PlayerReady(UUID.randomUUID().toString(), System.currentTimeMillis(), "p1", true)
-        client1.broadcast(probe)
-        withTimeout(5_000) {
-            var received: GameEvent
-            do {
-                received = hostReceived.receive()
-            } while (received.eventId != probe.eventId)
+            // E a sessão reconectada continua funcional nos dois sentidos. hostReceived também recebeu
+            // os JoinRoom do impostor e da reconexão de client1 antes disto — dreno até achar a sonda.
+            val probe = GameEvent.PlayerReady(UUID.randomUUID().toString(), System.currentTimeMillis(), "p1", true)
+            client1.broadcast(probe)
+            withTimeout(5_000) {
+                var received: GameEvent
+                do {
+                    received = hostReceived.receive()
+                } while (received.eventId != probe.eventId)
+            }
+
+            cancelCollectors()
         }
-
-        cancelCollectors()
-    }
 }

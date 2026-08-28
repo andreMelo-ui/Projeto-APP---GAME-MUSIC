@@ -33,38 +33,39 @@ fun SongSelectionScreen(
     category: Category,
     candidates: List<Song>,
     onSongSelected: (Song) -> Unit,
-    onRandomSelected: () -> Unit
+    onRandomSelected: () -> Unit,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .windowInsetsPadding(WindowInsets.safeDrawing)
-            .padding(24.dp)
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .windowInsetsPadding(WindowInsets.safeDrawing)
+                .padding(24.dp),
     ) {
         Text(
             text = "Rodada $roundNumber de $totalRounds • ${category.displayName}",
             style = MaterialTheme.typography.bodyMedium,
-            color = TextSecondary
+            color = TextSecondary,
         )
         Text(
             text = "${chooser.name}, escolha a música",
             style = MaterialTheme.typography.headlineMedium,
             color = ColorChooser,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(top = 4.dp, bottom = 16.dp)
+            modifier = Modifier.padding(top = 4.dp, bottom = 16.dp),
         )
 
         PrimaryButton(
             text = "Sortear música aleatória",
             onClick = onRandomSelected,
-            modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)
+            modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
         )
 
         if (candidates.isEmpty()) {
             Text(
                 text = "Não há músicas restantes nesta categoria — use o sorteio ou volte e escolha outra categoria.",
                 style = MaterialTheme.typography.bodyMedium,
-                color = TextSecondary
+                color = TextSecondary,
             )
         } else {
             LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -72,14 +73,14 @@ fun SongSelectionScreen(
                     Card(
                         onClick = { onSongSelected(song) },
                         modifier = Modifier.fillMaxWidth(),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
                     ) {
                         Column(modifier = Modifier.padding(16.dp)) {
                             Text(text = song.title, style = MaterialTheme.typography.titleMedium)
                             Text(
                                 text = "${song.artist} • ${song.difficulty.displayName}",
                                 style = MaterialTheme.typography.bodyMedium,
-                                color = TextSecondary
+                                color = TextSecondary,
                             )
                         }
                     }

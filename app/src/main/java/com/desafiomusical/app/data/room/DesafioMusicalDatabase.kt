@@ -28,17 +28,20 @@ import kotlinx.coroutines.launch
         GamePlayerEntity::class,
         RoundEntity::class,
         RoundScoreEntity::class,
-        AttemptEntity::class
+        AttemptEntity::class,
     ],
     version = 2,
-    exportSchema = true
+    exportSchema = true,
 )
 abstract class DesafioMusicalDatabase : RoomDatabase() {
-
     abstract fun playerDao(): PlayerDao
+
     abstract fun songDao(): SongDao
+
     abstract fun gameDao(): GameDao
+
     abstract fun roundDao(): RoundDao
+
     abstract fun attemptDao(): AttemptDao
 
     companion object {
@@ -47,7 +50,10 @@ abstract class DesafioMusicalDatabase : RoomDatabase() {
         @Volatile
         private var instance: DesafioMusicalDatabase? = null
 
-        fun getInstance(context: Context, applicationScope: CoroutineScope): DesafioMusicalDatabase {
+        fun getInstance(
+            context: Context,
+            applicationScope: CoroutineScope,
+        ): DesafioMusicalDatabase {
             return instance ?: synchronized(this) {
                 instance ?: buildDatabase(context, applicationScope).also { instance = it }
             }
@@ -55,17 +61,18 @@ abstract class DesafioMusicalDatabase : RoomDatabase() {
 
         private fun buildDatabase(
             context: Context,
-            applicationScope: CoroutineScope
-        ): DesafioMusicalDatabase = Room.databaseBuilder(
-            context.applicationContext,
-            DesafioMusicalDatabase::class.java,
-            DATABASE_NAME
-        )
-            .addCallback(SeedCatalogCallback(context, applicationScope))
-            // Fase 1, sem release/usuários em produção ainda — histórico local
-            // pode ser descartado com segurança quando o schema evolui.
-            .fallbackToDestructiveMigration()
-            .build()
+            applicationScope: CoroutineScope,
+        ): DesafioMusicalDatabase =
+            Room.databaseBuilder(
+                context.applicationContext,
+                DesafioMusicalDatabase::class.java,
+                DATABASE_NAME,
+            )
+                .addCallback(SeedCatalogCallback(context, applicationScope))
+                // Fase 1, sem release/usuários em produção ainda — histórico local
+                // pode ser descartado com segurança quando o schema evolui.
+                .fallbackToDestructiveMigration()
+                .build()
 
         /**
          * Só cobre a primeira instalação (a tabela ainda nem existe antes
@@ -78,7 +85,7 @@ abstract class DesafioMusicalDatabase : RoomDatabase() {
          */
         private class SeedCatalogCallback(
             private val context: Context,
-            private val applicationScope: CoroutineScope
+            private val applicationScope: CoroutineScope,
         ) : Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)

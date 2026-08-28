@@ -48,27 +48,28 @@ fun YoutubeAudioPlayer(
     videoId: String?,
     isPlaying: Boolean,
     onError: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
     val currentOnError by rememberUpdatedState(onError)
     val currentIsPlaying by rememberUpdatedState(isPlaying)
 
-    val webView = remember {
-        WebView(context).apply {
-            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            // Antes do primeiro loadDataWithBaseURL, o WebView recém-criado pinta um
-            // retângulo preto opaco em tela cheia (fundo padrão do Android para um
-            // WebView vazio) em vez de respeitar o tamanho de 1dp do modifier — daí
-            // o fundo preto visto na 1ª rodada antes do vídeo carregar pela 1ª vez.
-            setBackgroundColor(android.graphics.Color.TRANSPARENT)
-            settings.javaScriptEnabled = true
-            settings.domStorageEnabled = true
-            settings.mediaPlaybackRequiresUserGesture = false
-            webChromeClient = WebChromeClient()
-            addJavascriptInterface(YoutubeErrorBridge { currentOnError() }, "AndroidBridge")
+    val webView =
+        remember {
+            WebView(context).apply {
+                layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                // Antes do primeiro loadDataWithBaseURL, o WebView recém-criado pinta um
+                // retângulo preto opaco em tela cheia (fundo padrão do Android para um
+                // WebView vazio) em vez de respeitar o tamanho de 1dp do modifier — daí
+                // o fundo preto visto na 1ª rodada antes do vídeo carregar pela 1ª vez.
+                setBackgroundColor(android.graphics.Color.TRANSPARENT)
+                settings.javaScriptEnabled = true
+                settings.domStorageEnabled = true
+                settings.mediaPlaybackRequiresUserGesture = false
+                webChromeClient = WebChromeClient()
+                addJavascriptInterface(YoutubeErrorBridge { currentOnError() }, "AndroidBridge")
+            }
         }
-    }
 
     var loadedVideoId by remember { mutableStateOf<String?>(null) }
 
@@ -82,7 +83,7 @@ fun YoutubeAudioPlayer(
                 buildPlayerHtml(videoId),
                 "text/html",
                 "utf-8",
-                null
+                null,
             )
         } else if (videoId == null && loadedVideoId != null) {
             loadedVideoId = null
@@ -99,21 +100,22 @@ fun YoutubeAudioPlayer(
 
     val lifecycleOwner = LocalLifecycleOwner.current
     DisposableEffect(lifecycleOwner) {
-        val observer = LifecycleEventObserver { _, event ->
-            when (event) {
-                Lifecycle.Event.ON_PAUSE -> {
-                    webView.evaluateJavascript("try { pauseVideo(); } catch (e) {}", null)
-                    webView.onPause()
-                }
-                Lifecycle.Event.ON_RESUME -> {
-                    webView.onResume()
-                    if (currentIsPlaying) {
-                        webView.evaluateJavascript("try { playVideo(); } catch (e) {}", null)
+        val observer =
+            LifecycleEventObserver { _, event ->
+                when (event) {
+                    Lifecycle.Event.ON_PAUSE -> {
+                        webView.evaluateJavascript("try { pauseVideo(); } catch (e) {}", null)
+                        webView.onPause()
                     }
+                    Lifecycle.Event.ON_RESUME -> {
+                        webView.onResume()
+                        if (currentIsPlaying) {
+                            webView.evaluateJavascript("try { playVideo(); } catch (e) {}", null)
+                        }
+                    }
+                    else -> Unit
                 }
-                else -> Unit
             }
-        }
         lifecycleOwner.lifecycle.addObserver(observer)
         onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
     }
@@ -133,7 +135,8 @@ fun YoutubeAudioPlayer(
  */
 private const val PLAYER_ORIGIN = "https://desafiomusical.app"
 
-private fun buildPlayerHtml(videoId: String): String = """
+private fun buildPlayerHtml(videoId: String): String =
+    """
     <!DOCTYPE html>
     <html>
     <body style="margin:0;padding:0;background:#000;">
@@ -158,4 +161,4 @@ private fun buildPlayerHtml(videoId: String): String = """
     </script>
     </body>
     </html>
-""".trimIndent()
+    """.trimIndent()

@@ -15,11 +15,15 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
  * em `QrCodeBitmap.kt`, que aí sim só roda em Android de verdade.
  */
 object QrCodeEncoder {
-    fun encode(payload: String, size: Int = 512): BitMatrix {
-        val hints = mapOf(
-            EncodeHintType.ERROR_CORRECTION to ErrorCorrectionLevel.M,
-            EncodeHintType.MARGIN to 1
-        )
+    fun encode(
+        payload: String,
+        size: Int = 512,
+    ): BitMatrix {
+        val hints =
+            mapOf(
+                EncodeHintType.ERROR_CORRECTION to ErrorCorrectionLevel.M,
+                EncodeHintType.MARGIN to 1,
+            )
         return QRCodeWriter().encode(payload, BarcodeFormat.QR_CODE, size, size, hints)
     }
 }

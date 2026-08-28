@@ -11,9 +11,6 @@ import io.ktor.client.plugins.websocket.webSocketSession
 import io.ktor.websocket.Frame
 import io.ktor.websocket.close
 import io.ktor.websocket.readText
-import java.util.UUID
-import kotlin.math.min
-import kotlin.math.pow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -32,6 +29,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.json.Json
+import java.util.UUID
+import kotlin.math.min
+import kotlin.math.pow
 
 /**
  * Implementação de [RoomSession] para quem entra numa sala (cliente): conecta
@@ -61,9 +61,8 @@ class KtorClientRoomSession(
     private val hostPort: Int,
     private val json: Json = GameEventJson,
     private val idempotencyGuard: IdempotencyGuard = IdempotencyGuard(),
-    private val maxReconnectDelayMillis: Long = 8_000L
+    private val maxReconnectDelayMillis: Long = 8_000L,
 ) : RoomSession {
-
     override val isHost: Boolean = false
 
     private val _connectedPlayerIds = MutableStateFlow<List<String>>(emptyList())
@@ -107,7 +106,10 @@ class KtorClientRoomSession(
     override suspend fun broadcast(event: GameEvent) = sendEvent(event)
 
     /** Idêntico a [broadcast]: o cliente só fala com o host, que decide o roteamento real. */
-    override suspend fun sendTo(playerId: String, event: GameEvent) = sendEvent(event)
+    override suspend fun sendTo(
+        playerId: String,
+        event: GameEvent,
+    ) = sendEvent(event)
 
     override fun observeIncoming(): Flow<GameEvent> = incomingEvents.asSharedFlow()
 
@@ -128,8 +130,8 @@ class KtorClientRoomSession(
                 timestamp = System.currentTimeMillis(),
                 playerId = playerId,
                 playerName = playerName,
-                roomCode = roomCode
-            )
+                roomCode = roomCode,
+            ),
         )
     }
 
@@ -156,16 +158,16 @@ class KtorClientRoomSession(
         }
     }
 
-    private fun backoffDelay(attempt: Int): Long =
-        min(1000L * 2.0.pow(attempt).toLong(), maxReconnectDelayMillis)
+    private fun backoffDelay(attempt: Int): Long = min(1000L * 2.0.pow(attempt).toLong(), maxReconnectDelayMillis)
 
     private suspend fun receiveLoop(ws: DefaultClientWebSocketSession) {
         try {
             for (frame in ws.incoming) {
                 if (frame !is Frame.Text) continue
-                val event = runCatching {
-                    json.decodeFromString(GameEvent.serializer(), frame.readText())
-                }.getOrNull() ?: continue
+                val event =
+                    runCatching {
+                        json.decodeFromString(GameEvent.serializer(), frame.readText())
+                    }.getOrNull() ?: continue
 
                 trackKnownPlayer(event)
 
@@ -179,11 +181,12 @@ class KtorClientRoomSession(
     }
 
     private fun trackKnownPlayer(event: GameEvent) {
-        val id = when (event) {
-            is GameEvent.JoinRoom -> event.playerId
-            is GameEvent.PlayerReady -> event.playerId
-            else -> null
-        } ?: return
+        val id =
+            when (event) {
+                is GameEvent.JoinRoom -> event.playerId
+                is GameEvent.PlayerReady -> event.playerId
+                else -> null
+            } ?: return
         _connectedPlayerIds.update { current -> if (id in current) current else current + id }
     }
 }

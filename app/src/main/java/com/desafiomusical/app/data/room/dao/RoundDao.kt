@@ -9,7 +9,6 @@ import com.desafiomusical.app.data.room.entity.RoundScoreEntity
 
 @Dao
 interface RoundDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertRound(round: RoundEntity)
 
@@ -21,4 +20,10 @@ interface RoundDao {
 
     @Query("SELECT * FROM round_scores WHERE roundId = :roundId")
     suspend fun getScoresForRound(roundId: String): List<RoundScoreEntity>
+
+    @Query("SELECT * FROM rounds WHERE gameId IN (:gameIds) ORDER BY gameId, roundNumber ASC")
+    suspend fun getRoundsForGames(gameIds: List<String>): List<RoundEntity>
+
+    @Query("SELECT * FROM round_scores WHERE roundId IN (:roundIds)")
+    suspend fun getScoresForRounds(roundIds: List<String>): List<RoundScoreEntity>
 }

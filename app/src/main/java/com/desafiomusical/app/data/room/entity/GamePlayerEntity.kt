@@ -12,20 +12,20 @@ import androidx.room.Index
             entity = GameEntity::class,
             parentColumns = ["id"],
             childColumns = ["gameId"],
-            onDelete = ForeignKey.CASCADE
+            onDelete = ForeignKey.CASCADE,
         ),
         ForeignKey(
             entity = PlayerEntity::class,
             parentColumns = ["id"],
             childColumns = ["playerId"],
-            onDelete = ForeignKey.CASCADE
-        )
+            onDelete = ForeignKey.CASCADE,
+        ),
     ],
-    indices = [Index("gameId"), Index("playerId")]
+    indices = [Index("gameId"), Index("playerId")],
 )
 data class GamePlayerEntity(
     val gameId: String,
     val playerId: String,
     val seatOrder: Int,
-    val finalScore: Int
+    val finalScore: Int,
 )

@@ -5,5 +5,5 @@ enum class PlayerRole {
     MAIN_RESPONDER,
     ELIGIBLE_STEALER,
     ELIMINATED_STEALER,
-    SPECTATOR
+    SPECTATOR,
 }

@@ -12,15 +12,16 @@ import androidx.compose.ui.unit.dp
  */
 
 val ShapeCard = RoundedCornerShape(20.dp)
-val ShapeCardLarge = RoundedCornerShape(24.dp)   // cards de destaque (Escolhedor, resultado da música)
+val ShapeCardLarge = RoundedCornerShape(24.dp) // cards de destaque (Escolhedor, resultado da música)
 val ShapeButton = RoundedCornerShape(16.dp)
-val ShapePill = RoundedCornerShape(999.dp)       // seletores, badges, bottom nav, código da sala
+val ShapePill = RoundedCornerShape(999.dp) // seletores, badges, bottom nav, código da sala
 val ShapeInput = RoundedCornerShape(14.dp)
 
-val Shapes = Shapes(
-    extraSmall = RoundedCornerShape(8.dp),
-    small = ShapeInput,
-    medium = ShapeButton,
-    large = ShapeCard,
-    extraLarge = ShapeCardLarge
-)
+val Shapes =
+    Shapes(
+        extraSmall = RoundedCornerShape(8.dp),
+        small = ShapeInput,
+        medium = ShapeButton,
+        large = ShapeCard,
+        extraLarge = ShapeCardLarge,
+    )

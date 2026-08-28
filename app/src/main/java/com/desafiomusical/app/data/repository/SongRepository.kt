@@ -9,16 +9,15 @@ import kotlinx.coroutines.flow.map
 
 interface SongRepository {
     fun observeCatalog(): Flow<List<Song>>
+
     suspend fun getCatalog(): List<Song>
 }
 
 class SongRepositoryImpl(
     private val songDao: SongDao,
-    private val catalogAssetSource: CatalogAssetSource
+    private val catalogAssetSource: CatalogAssetSource,
 ) : SongRepository {
-
-    override fun observeCatalog(): Flow<List<Song>> =
-        songDao.observeActive().map { entities -> entities.map { it.toDomain() } }
+    override fun observeCatalog(): Flow<List<Song>> = songDao.observeActive().map { entities -> entities.map { it.toDomain() } }
 
     // Sempre resincroniza com o asset antes de ler: cobre tanto a primeira
     // leitura logo após o install (o seed do RoomDatabase.Callback.onCreate

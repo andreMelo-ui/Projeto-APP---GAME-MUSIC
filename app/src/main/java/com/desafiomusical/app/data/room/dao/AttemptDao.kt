@@ -8,7 +8,6 @@ import com.desafiomusical.app.data.room.entity.AttemptEntity
 
 @Dao
 interface AttemptDao {
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(attempt: AttemptEntity)
 

@@ -6,5 +6,5 @@ data class GameSnapshot(
     val config: GameConfig,
     val rounds: List<RoundOutcome>,
     val finalScoreboard: List<PlayerScore>,
-    val winner: Player?
+    val winner: Player?,
 )

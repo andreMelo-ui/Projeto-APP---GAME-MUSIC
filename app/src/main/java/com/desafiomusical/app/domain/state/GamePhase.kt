@@ -16,5 +16,5 @@ enum class GamePhase {
     STEAL_ANSWER,
     ROUND_RESULT,
     NEXT_ROUND,
-    GAME_RESULT
+    GAME_RESULT,
 }

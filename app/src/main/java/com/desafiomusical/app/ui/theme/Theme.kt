@@ -12,27 +12,26 @@ import androidx.core.view.WindowCompat
  * seção 23 da especificação) — não oferecemos um ColorScheme claro alternativo,
  * pois alto contraste e legibilidade rápida durante a partida dependem do fundo escuro.
  */
-private val DesafioMusicalColorScheme = darkColorScheme(
-    primary = BrandMagenta,
-    onPrimary = TextPrimary,
-    secondary = BrandCyan,
-    onSecondary = TextPrimary,
-    tertiary = InfoTeal,
-    background = BgBase,
-    onBackground = TextPrimary,
-    surface = BgSurface,
-    onSurface = TextPrimary,
-    surfaceVariant = BgSurfaceElevated,
-    onSurfaceVariant = TextSecondary,
-    error = DangerRed,
-    onError = TextPrimary,
-    outline = BgSurfaceBorder
-)
+private val DesafioMusicalColorScheme =
+    darkColorScheme(
+        primary = BrandMagenta,
+        onPrimary = TextPrimary,
+        secondary = BrandCyan,
+        onSecondary = TextPrimary,
+        tertiary = InfoTeal,
+        background = BgBase,
+        onBackground = TextPrimary,
+        surface = BgSurface,
+        onSurface = TextPrimary,
+        surfaceVariant = BgSurfaceElevated,
+        onSurfaceVariant = TextSecondary,
+        error = DangerRed,
+        onError = TextPrimary,
+        outline = BgSurfaceBorder,
+    )
 
 @Composable
-fun DesafioMusicalTheme(
-    content: @Composable () -> Unit
-) {
+fun DesafioMusicalTheme(content: @Composable () -> Unit) {
     val view = LocalView.current
     if (!view.isInEditMode) {
         val window = (view.context as? android.app.Activity)?.window
@@ -50,6 +49,6 @@ fun DesafioMusicalTheme(
         colorScheme = DesafioMusicalColorScheme,
         typography = Typography,
         shapes = Shapes,
-        content = content
+        content = content,
     )
 }

@@ -48,11 +48,12 @@ import com.desafiomusical.app.ui.theme.TextSecondary
 fun HostLobbyScreen(
     container: AppContainer,
     onGameStarted: () -> Unit,
-    onBack: () -> Unit
+    onBack: () -> Unit,
 ) {
-    val viewModel: HostLobbyViewModel = viewModel(
-        factory = viewModelFactory { initializer { HostLobbyViewModel(container) } }
-    )
+    val viewModel: HostLobbyViewModel =
+        viewModel(
+            factory = viewModelFactory { initializer { HostLobbyViewModel(container) } },
+        )
     val state by viewModel.uiState.collectAsState()
 
     Scaffold(
@@ -63,26 +64,36 @@ fun HostLobbyScreen(
                     IconButton(onClick = onBack) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Voltar")
                     }
-                }
+                },
             )
-        }
+        },
     ) { padding ->
         when (state.phase) {
             HostLobbyPhase.SETUP, HostLobbyPhase.CREATING ->
                 HostSetupContent(state = state, viewModel = viewModel, modifier = Modifier.padding(padding))
             HostLobbyPhase.WAITING, HostLobbyPhase.STARTING ->
-                HostWaitingContent(state = state, viewModel = viewModel, onGameStarted = onGameStarted, modifier = Modifier.padding(padding))
+                HostWaitingContent(
+                    state = state,
+                    viewModel = viewModel,
+                    onGameStarted = onGameStarted,
+                    modifier = Modifier.padding(padding),
+                )
         }
     }
 }
 
 @Composable
-private fun HostSetupContent(state: HostLobbyUiState, viewModel: HostLobbyViewModel, modifier: Modifier = Modifier) {
+private fun HostSetupContent(
+    state: HostLobbyUiState,
+    viewModel: HostLobbyViewModel,
+    modifier: Modifier = Modifier,
+) {
     LazyColumn(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(horizontal = 24.dp),
-        verticalArrangement = Arrangement.spacedBy(20.dp)
+        modifier =
+            modifier
+                .fillMaxSize()
+                .padding(horizontal = 24.dp),
+        verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
         item {
             OutlinedTextField(
@@ -90,7 +101,7 @@ private fun HostSetupContent(state: HostLobbyUiState, viewModel: HostLobbyViewMo
                 onValueChange = viewModel::setHostName,
                 label = { Text("Seu nome") },
                 singleLine = true,
-                modifier = Modifier.fillMaxWidth().padding(top = 16.dp)
+                modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
             )
         }
 
@@ -102,10 +113,11 @@ private fun HostSetupContent(state: HostLobbyUiState, viewModel: HostLobbyViewMo
                         selected = state.roundCount == count,
                         onClick = { viewModel.setRoundCount(count) },
                         label = { Text("$count") },
-                        colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = MaterialTheme.colorScheme.primary,
-                            selectedLabelColor = MaterialTheme.colorScheme.onPrimary
-                        )
+                        colors =
+                            FilterChipDefaults.filterChipColors(
+                                selectedContainerColor = MaterialTheme.colorScheme.primary,
+                                selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                            ),
                     )
                 }
             }
@@ -115,14 +127,14 @@ private fun HostSetupContent(state: HostLobbyUiState, viewModel: HostLobbyViewMo
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Column {
                     Text("Roubo", style = MaterialTheme.typography.titleMedium)
                     Text(
                         "Quando o respondente erra, outros podem tentar roubar a resposta.",
                         style = MaterialTheme.typography.bodyMedium,
-                        color = TextSecondary
+                        color = TextSecondary,
                     )
                 }
                 Switch(checked = state.stealEnabled, onCheckedChange = viewModel::setStealEnabled)
@@ -140,7 +152,7 @@ private fun HostSetupContent(state: HostLobbyUiState, viewModel: HostLobbyViewMo
                 PrimaryButton(
                     text = "Criar Sala",
                     onClick = viewModel::createRoom,
-                    modifier = Modifier.fillMaxWidth().padding(bottom = 32.dp)
+                    modifier = Modifier.fillMaxWidth().padding(bottom = 32.dp),
                 )
             }
         }
@@ -152,14 +164,15 @@ private fun HostWaitingContent(
     state: HostLobbyUiState,
     viewModel: HostLobbyViewModel,
     onGameStarted: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     LazyColumn(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(horizontal = 24.dp),
+        modifier =
+            modifier
+                .fillMaxSize()
+                .padding(horizontal = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         item {
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(top = 16.dp)) {
@@ -171,7 +184,7 @@ private fun HostWaitingContent(
         item {
             QrCodeImage(
                 payload = state.qrPayload,
-                contentDescription = "QR Code para entrar na sala ${state.roomCode}"
+                contentDescription = "QR Code para entrar na sala ${state.roomCode}",
             )
         }
 
@@ -179,7 +192,7 @@ private fun HostWaitingContent(
             Text(
                 "Peça pros outros escanearem o QR, digitarem o código na busca automática, ou entrarem manualmente com IP e porta.",
                 style = MaterialTheme.typography.bodySmall,
-                color = TextSecondary
+                color = TextSecondary,
             )
         }
 
@@ -187,7 +200,7 @@ private fun HostWaitingContent(
             Text(
                 "Jogadores (${state.players.size}/4)",
                 style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
+                modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
             )
         }
 
@@ -207,7 +220,7 @@ private fun HostWaitingContent(
                     text = "Iniciar Partida",
                     onClick = { viewModel.startGame(onGameStarted) },
                     enabled = state.canStart,
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 24.dp)
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 24.dp),
                 )
             }
         }
@@ -219,13 +232,13 @@ private fun PlayerRosterRow(player: RoomPlayerInfo) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(player.playerName, style = MaterialTheme.typography.bodyLarge)
         Icon(
             imageVector = if (player.ready) Icons.Default.CheckCircle else Icons.Default.HourglassEmpty,
             contentDescription = if (player.ready) "Pronto" else "Aguardando",
-            tint = if (player.ready) ColorSuccess else TextSecondary
+            tint = if (player.ready) ColorSuccess else TextSecondary,
         )
     }
 }

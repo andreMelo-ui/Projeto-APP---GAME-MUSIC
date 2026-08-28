@@ -18,24 +18,25 @@ fun ScoreBadge(
     playerName: String,
     score: Int,
     modifier: Modifier = Modifier,
-    highlighted: Boolean = false
+    highlighted: Boolean = false,
 ) {
     val background = if (highlighted) MaterialTheme.colorScheme.primary.copy(alpha = 0.18f) else BgSurfaceElevated
     Row(
-        modifier = modifier
-            .background(background, MaterialTheme.shapes.medium)
-            .padding(horizontal = 16.dp, vertical = 10.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+        modifier =
+            modifier
+                .background(background, MaterialTheme.shapes.medium)
+                .padding(horizontal = 16.dp, vertical = 10.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Text(
             text = playerName,
             style = MaterialTheme.typography.titleMedium,
-            color = if (highlighted) MaterialTheme.colorScheme.primary else TextPrimary
+            color = if (highlighted) MaterialTheme.colorScheme.primary else TextPrimary,
         )
         Text(
             text = "$score pts",
             style = MaterialTheme.typography.titleMedium,
-            color = TextSecondary
+            color = TextSecondary,
         )
     }
 }

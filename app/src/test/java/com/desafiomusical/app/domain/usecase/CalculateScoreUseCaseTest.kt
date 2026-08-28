@@ -4,7 +4,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class CalculateScoreUseCaseTest {
-
     private val useCase = CalculateScoreUseCase()
 
     @Test
@@ -68,14 +67,15 @@ class CalculateScoreUseCaseTest {
 
     @Test
     fun `acertar a obra soma mais 5 pontos`() {
-        val result = useCase(
-            "p1",
-            elapsedSeconds = 0,
-            titleCorrect = true,
-            artistCorrect = true,
-            workCorrect = true,
-            hintsUsed = 0
-        )
+        val result =
+            useCase(
+                "p1",
+                elapsedSeconds = 0,
+                titleCorrect = true,
+                artistCorrect = true,
+                workCorrect = true,
+                hintsUsed = 0,
+            )
         assertEquals(25, result.totalPoints)
     }
 

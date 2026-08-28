@@ -1,0 +1,12 @@
+root = true
+
+[*.{kt,kts}]
+charset = utf-8
+indent_size = 4
+insert_final_newline = true
+max_line_length = 140
+
+# Funções @Composable usam PascalCase por convenção do Jetpack Compose
+# (ex.: HomeScreen, PrimaryButton) — sem isso, ktlint marcaria toda função de
+# tela/componente como violação de nomenclatura (deveria ser camelCase).
+ktlint_function_naming_ignore_when_annotated_with = Composable

@@ -39,9 +39,8 @@ class KtorHostRoomSession(
     override val roomCode: String,
     private val requestedPort: Int = 0,
     private val json: Json = GameEventJson,
-    private val idempotencyGuard: IdempotencyGuard = IdempotencyGuard()
+    private val idempotencyGuard: IdempotencyGuard = IdempotencyGuard(),
 ) : RoomSession {
-
     override val isHost: Boolean = true
 
     private val _connectedPlayerIds = MutableStateFlow<List<String>>(emptyList())
@@ -58,12 +57,13 @@ class KtorHostRoomSession(
 
     override suspend fun start() {
         check(server == null) { "Sessão já iniciada." }
-        val engine = embeddedServer(CIO, port = requestedPort, host = "0.0.0.0") {
-            install(WebSockets)
-            routing {
-                webSocket(WS_PATH) { handleConnection(this) }
+        val engine =
+            embeddedServer(CIO, port = requestedPort, host = "0.0.0.0") {
+                install(WebSockets)
+                routing {
+                    webSocket(WS_PATH) { handleConnection(this) }
+                }
             }
-        }
         engine.start(wait = false)
         server = engine
         port = engine.resolvedConnectors().first().port
@@ -82,7 +82,10 @@ class KtorHostRoomSession(
         connections.values.toList().forEach { sendText(it, text) }
     }
 
-    override suspend fun sendTo(playerId: String, event: GameEvent) {
+    override suspend fun sendTo(
+        playerId: String,
+        event: GameEvent,
+    ) {
         val connection = connections[playerId] ?: return
         val text = json.encodeToString(GameEvent.serializer(), event)
         sendText(connection, text)
@@ -90,7 +93,10 @@ class KtorHostRoomSession(
 
     override fun observeIncoming(): Flow<GameEvent> = incomingEvents.asSharedFlow()
 
-    private suspend fun sendText(connection: HostConnection, text: String) {
+    private suspend fun sendText(
+        connection: HostConnection,
+        text: String,
+    ) {
         runCatching {
             connection.sendMutex.withLock { connection.session.send(Frame.Text(text)) }
         }
@@ -112,9 +118,10 @@ class KtorHostRoomSession(
         try {
             for (frame in session.incoming) {
                 if (frame !is Frame.Text) continue
-                val event = runCatching {
-                    json.decodeFromString(GameEvent.serializer(), frame.readText())
-                }.getOrNull() ?: continue
+                val event =
+                    runCatching {
+                        json.decodeFromString(GameEvent.serializer(), frame.readText())
+                    }.getOrNull() ?: continue
 
                 if (event is GameEvent.JoinRoom) {
                     if (event.roomCode != roomCode) {
@@ -148,7 +155,7 @@ class KtorHostRoomSession(
     private data class HostConnection(
         val playerId: String,
         val session: DefaultWebSocketServerSession,
-        val sendMutex: Mutex = Mutex()
+        val sendMutex: Mutex = Mutex(),
     )
 
     companion object {

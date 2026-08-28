@@ -10,7 +10,7 @@ package com.desafiomusical.app.network.multiplayer
 data class RoomInvite(
     val roomCode: String,
     val hostAddress: String,
-    val port: Int
+    val port: Int,
 ) {
     fun toQrPayload(): String = listOf(PREFIX, roomCode, hostAddress, port.toString()).joinToString(SEPARATOR)
 

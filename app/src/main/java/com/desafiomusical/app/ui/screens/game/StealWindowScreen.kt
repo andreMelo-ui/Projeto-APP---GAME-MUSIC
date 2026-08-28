@@ -21,55 +21,56 @@ import com.desafiomusical.app.domain.state.ActiveRoundView
 import com.desafiomusical.app.ui.components.BigAnswerButton
 import com.desafiomusical.app.ui.components.CompactCountdown
 import com.desafiomusical.app.ui.theme.BgBase
-import com.desafiomusical.app.ui.theme.WarningAmber
 import com.desafiomusical.app.ui.theme.TextSecondary
+import com.desafiomusical.app.ui.theme.WarningAmber
 
 @Composable
 fun StealWindowScreen(
     round: ActiveRoundView,
     stealSecondsLeft: Int,
-    onClaim: (playerId: String) -> Unit
+    onClaim: (playerId: String) -> Unit,
 ) {
     val eligible = round.eligibleStealers.filterNot { it.id in round.eliminatedIds }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .windowInsetsPadding(WindowInsets.safeDrawing)
-            .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .windowInsetsPadding(WindowInsets.safeDrawing)
+                .padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
             text = "CHANCE DE ROUBAR",
             style = MaterialTheme.typography.headlineMedium,
             color = WarningAmber,
-            fontWeight = FontWeight.Black
+            fontWeight = FontWeight.Black,
         )
         CompactCountdown(secondsLeft = stealSecondsLeft, modifier = Modifier.padding(vertical = 12.dp))
         Text(
             text = "${round.pointsAvailableNow} pontos disponíveis para quem acertar",
             style = MaterialTheme.typography.bodyLarge,
             color = TextSecondary,
-            modifier = Modifier.padding(bottom = 20.dp)
+            modifier = Modifier.padding(bottom = 20.dp),
         )
 
         if (eligible.isEmpty()) {
             Text(
                 text = "Ninguém elegível para roubar nesta rodada.",
                 style = MaterialTheme.typography.bodyLarge,
-                color = TextSecondary
+                color = TextSecondary,
             )
         } else {
             LazyColumn(
                 verticalArrangement = Arrangement.spacedBy(12.dp),
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 items(eligible, key = { it.id }) { player ->
                     BigAnswerButton(
                         text = "RESPONDER — ${player.name}",
                         onClick = { onClaim(player.id) },
                         containerColor = WarningAmber,
-                        contentColor = BgBase
+                        contentColor = BgBase,
                     )
                 }
             }

@@ -9,6 +9,9 @@ import androidx.navigation.navArgument
 import com.desafiomusical.app.di.AppContainer
 import com.desafiomusical.app.ui.screens.common.ComingSoonScreen
 import com.desafiomusical.app.ui.screens.game.GameHostScreen
+import com.desafiomusical.app.ui.screens.history.GameDetailScreen
+import com.desafiomusical.app.ui.screens.history.HistoryListScreen
+import com.desafiomusical.app.ui.screens.history.PlayerStatsScreen
 import com.desafiomusical.app.ui.screens.home.HomeScreen
 import com.desafiomusical.app.ui.screens.lobby.HostLobbyScreen
 import com.desafiomusical.app.ui.screens.lobby.JoinLobbyScreen
@@ -24,8 +27,8 @@ fun DesafioMusicalNavHost(container: AppContainer) {
                 onNewGame = { navController.navigate(Routes.PlayerSetup.route) },
                 onHostGame = { navController.navigate(Routes.HostLobby.route) },
                 onJoinGame = { navController.navigate(Routes.JoinLobby.route) },
-                onHistory = { navController.navigate(Routes.ComingSoon.build("Histórico")) },
-                onSettings = { navController.navigate(Routes.ComingSoon.build("Configurações")) }
+                onHistory = { navController.navigate(Routes.History.route) },
+                onSettings = { navController.navigate(Routes.ComingSoon.build("Configurações")) },
             )
         }
         composable(Routes.HostLobby.route) {
@@ -36,13 +39,13 @@ fun DesafioMusicalNavHost(container: AppContainer) {
                         popUpTo(Routes.Home.route) { inclusive = false }
                     }
                 },
-                onBack = { navController.popBackStack() }
+                onBack = { navController.popBackStack() },
             )
         }
         composable(Routes.JoinLobby.route) {
             JoinLobbyScreen(
                 container = container,
-                onBack = { navController.popBackStack() }
+                onBack = { navController.popBackStack() },
             )
         }
         composable(Routes.PlayerSetup.route) {
@@ -53,7 +56,7 @@ fun DesafioMusicalNavHost(container: AppContainer) {
                         popUpTo(Routes.Home.route) { inclusive = false }
                     }
                 },
-                onBack = { navController.popBackStack() }
+                onBack = { navController.popBackStack() },
             )
         }
         composable(Routes.Game.route) {
@@ -61,16 +64,44 @@ fun DesafioMusicalNavHost(container: AppContainer) {
                 container = container,
                 onExitToHome = {
                     navController.popBackStack(Routes.Home.route, inclusive = false)
-                }
+                },
+            )
+        }
+        composable(Routes.History.route) {
+            HistoryListScreen(
+                container = container,
+                onBack = { navController.popBackStack() },
+                onOpenGame = { gameId -> navController.navigate(Routes.GameDetail.build(gameId)) },
+                onOpenPlayerStats = { playerId -> navController.navigate(Routes.PlayerStats.build(playerId)) },
+            )
+        }
+        composable(
+            route = Routes.GameDetail.route,
+            arguments = listOf(navArgument("gameId") { type = NavType.StringType }),
+        ) { backStackEntry ->
+            GameDetailScreen(
+                container = container,
+                gameId = backStackEntry.arguments?.getString("gameId").orEmpty(),
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable(
+            route = Routes.PlayerStats.route,
+            arguments = listOf(navArgument("playerId") { type = NavType.StringType }),
+        ) { backStackEntry ->
+            PlayerStatsScreen(
+                container = container,
+                playerId = backStackEntry.arguments?.getString("playerId").orEmpty(),
+                onBack = { navController.popBackStack() },
             )
         }
         composable(
             route = Routes.ComingSoon.route,
-            arguments = listOf(navArgument("feature") { type = NavType.StringType })
+            arguments = listOf(navArgument("feature") { type = NavType.StringType }),
         ) { backStackEntry ->
             ComingSoonScreen(
                 feature = backStackEntry.arguments?.getString("feature").orEmpty(),
-                onBack = { navController.popBackStack() }
+                onBack = { navController.popBackStack() },
             )
         }
     }

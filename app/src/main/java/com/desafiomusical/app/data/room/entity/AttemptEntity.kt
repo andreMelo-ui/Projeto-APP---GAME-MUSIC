@@ -12,10 +12,10 @@ import androidx.room.PrimaryKey
             entity = RoundEntity::class,
             parentColumns = ["id"],
             childColumns = ["roundId"],
-            onDelete = ForeignKey.CASCADE
-        )
+            onDelete = ForeignKey.CASCADE,
+        ),
     ],
-    indices = [Index("roundId"), Index("playerId")]
+    indices = [Index("roundId"), Index("playerId")],
 )
 data class AttemptEntity(
     @PrimaryKey val id: String,
@@ -24,5 +24,5 @@ data class AttemptEntity(
     val attemptType: String,
     val timestamp: Long,
     val correct: Boolean,
-    val eliminated: Boolean
+    val eliminated: Boolean,
 )
