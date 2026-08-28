@@ -11,6 +11,7 @@ import com.desafiomusical.app.ui.screens.common.ComingSoonScreen
 import com.desafiomusical.app.ui.screens.game.GameHostScreen
 import com.desafiomusical.app.ui.screens.history.GameDetailScreen
 import com.desafiomusical.app.ui.screens.history.HistoryListScreen
+import com.desafiomusical.app.ui.screens.history.PlayerStatsScreen
 import com.desafiomusical.app.ui.screens.home.HomeScreen
 import com.desafiomusical.app.ui.screens.lobby.HostLobbyScreen
 import com.desafiomusical.app.ui.screens.lobby.JoinLobbyScreen
@@ -70,7 +71,8 @@ fun DesafioMusicalNavHost(container: AppContainer) {
             HistoryListScreen(
                 container = container,
                 onBack = { navController.popBackStack() },
-                onOpenGame = { gameId -> navController.navigate(Routes.GameDetail.build(gameId)) }
+                onOpenGame = { gameId -> navController.navigate(Routes.GameDetail.build(gameId)) },
+                onOpenPlayerStats = { playerId -> navController.navigate(Routes.PlayerStats.build(playerId)) }
             )
         }
         composable(
@@ -80,6 +82,16 @@ fun DesafioMusicalNavHost(container: AppContainer) {
             GameDetailScreen(
                 container = container,
                 gameId = backStackEntry.arguments?.getString("gameId").orEmpty(),
+                onBack = { navController.popBackStack() }
+            )
+        }
+        composable(
+            route = Routes.PlayerStats.route,
+            arguments = listOf(navArgument("playerId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            PlayerStatsScreen(
+                container = container,
+                playerId = backStackEntry.arguments?.getString("playerId").orEmpty(),
                 onBack = { navController.popBackStack() }
             )
         }

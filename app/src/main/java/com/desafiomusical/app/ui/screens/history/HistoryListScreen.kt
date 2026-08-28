@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -35,6 +36,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.desafiomusical.app.di.AppContainer
 import com.desafiomusical.app.domain.model.GameHistoryEntry
+import com.desafiomusical.app.domain.model.Player
 import com.desafiomusical.app.ui.components.ScoreBadge
 import com.desafiomusical.app.ui.theme.SuccessGreen
 import com.desafiomusical.app.ui.theme.TextSecondary
@@ -55,7 +57,8 @@ fun formatPlayedAt(epochMillis: Long): String =
 fun HistoryListScreen(
     container: AppContainer,
     onBack: () -> Unit,
-    onOpenGame: (gameId: String) -> Unit
+    onOpenGame: (gameId: String) -> Unit,
+    onOpenPlayerStats: (playerId: String) -> Unit
 ) {
     val viewModel: HistoryListViewModel = viewModel(
         factory = viewModelFactory { initializer { HistoryListViewModel(container) } }
@@ -92,6 +95,32 @@ fun HistoryListScreen(
                 contentPadding = PaddingValues(vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
+                if (state.players.isNotEmpty()) {
+                    item {
+                        Text(
+                            text = "Jogadores",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    item {
+                        LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            items(state.players, key = { it.id }) { player ->
+                                PlayerChip(player = player, onClick = { onOpenPlayerStats(player.id) })
+                            }
+                        }
+                    }
+                }
+
+                item {
+                    Text(
+                        text = "Partidas",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(top = if (state.players.isNotEmpty()) 8.dp else 0.dp)
+                    )
+                }
+
                 items(state.entries, key = { it.gameId }) { entry ->
                     GameHistoryCard(entry = entry, onClick = { onOpenGame(entry.gameId) })
                 }
@@ -120,6 +149,22 @@ private fun EmptyHistoryMessage(modifier: Modifier = Modifier) {
             color = TextSecondary,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(top = 8.dp)
+        )
+    }
+}
+
+@Composable
+private fun PlayerChip(player: Player, onClick: () -> Unit) {
+    Card(
+        onClick = onClick,
+        shape = MaterialTheme.shapes.medium,
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+    ) {
+        Text(
+            text = player.name,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)
         )
     }
 }

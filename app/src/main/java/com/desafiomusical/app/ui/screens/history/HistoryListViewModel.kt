@@ -4,14 +4,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.desafiomusical.app.di.AppContainer
 import com.desafiomusical.app.domain.model.GameHistoryEntry
+import com.desafiomusical.app.domain.model.Player
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 data class HistoryListUiState(
     val isLoading: Boolean = true,
-    val entries: List<GameHistoryEntry> = emptyList()
+    val entries: List<GameHistoryEntry> = emptyList(),
+    val players: List<Player> = emptyList()
 )
 
 class HistoryListViewModel(container: AppContainer) : ViewModel() {
@@ -21,9 +24,11 @@ class HistoryListViewModel(container: AppContainer) : ViewModel() {
 
     init {
         viewModelScope.launch {
-            container.gameHistoryRepository.observeHistory().collect { entries ->
-                _uiState.value = HistoryListUiState(isLoading = false, entries = entries)
-            }
+            combine(
+                container.gameHistoryRepository.observeHistory(),
+                container.playerRepository.observeKnownPlayers()
+            ) { entries, players -> HistoryListUiState(isLoading = false, entries = entries, players = players) }
+                .collect { _uiState.value = it }
         }
     }
 }
