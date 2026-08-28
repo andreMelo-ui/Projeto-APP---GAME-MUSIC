@@ -117,6 +117,8 @@ Nenhum dos dois roda automaticamente no build normal (`assembleDebug`/`testDebug
 
 Cobrem (seção 35 da especificação): os quatro casos de pontuação por tempo, penalidades de dica (-1/-3/-6), distribuição de papéis (inclui o exemplo de 4 jogadores da própria documentação), elegibilidade/eliminação de roubo, transições válidas e inválidas da máquina de estados, e o fluxo ponta a ponta de uma rodada dentro do `GameEngine`.
 
+`HistoryPersistenceRegressionTest` roda com Robolectric (ainda em `src/test`, sem emulador) contra um Room de verdade em memória e trava a família de bugs de persistência do histórico: identidade do jogador remoto no host (o insert em `game_players` não pode falhar por FK), re-sync de catálogo com partida salva (`SongDao`, FK `RESTRICT`) e regravação de jogador recorrente (`PlayerDao`, `onDelete = CASCADE`).
+
 ### Testando com 2, 3 e 4 jogadores (modo um celular)
 
 Esta fase entrega o modo pass-and-play: em "Nova Partida", escolha de 2 a 4 jogadores, digite os nomes, escolha rodadas (5/10/15/20) e Roubo ON/OFF. O aparelho é passado fisicamente entre os jogadores — a tela do escolhedor mostra a resposta, a tela seguinte é do respondente principal, e a tela de confirmação (mostrada a quem sabe a resposta) valida o que foi dito em voz alta, exatamente como a seção 11 da especificação exige (sem reconhecimento de voz na V1).
@@ -133,16 +135,15 @@ Compose BOM 2024.10.00, Navigation Compose 2.8, Room 2.6.1 (KSP), Ktor 2.3.12 (c
 
 - **Player do YouTube só toca áudio** — usa a IFrame Player API oficial num `WebView` quase invisível (1dp), de propósito: o jogo nunca exibe o vídeo, miniatura ou título, só o som, pra não vazar a resposta (mesma regra de privacidade do `MaskedSong`). O áudio toca durante `PLAYING` e para assim que a rodada avança pra `ANSWERING` (não volta durante o roubo). Se um vídeo falhar (removido/bloqueado por região/idade), a rodada segue normalmente — cronômetro e pontuação não dependem do player — só aparece um aviso discreto na tela.
 - **Empate/morte súbita**: `TieBreakUseCase` detecta o empate no placar final, mas o fluxo de rodada extra (sortear música, primeiro a acertar vence) ainda não está integrado à máquina de estados.
-- **Roster remoto não persiste localmente no host**: se uma partida hospedada (multiplayer) tentar salvar histórico, jogadores que entraram só pela rede (nunca abriram "Nova Partida" localmente) podem não existir na tabela `players` do host — o `game_players` provavelmente falharia por FK. Precisa de uma passada que persista o roster inteiro ao criar a sala, não só a identidade do host.
+- **Multiplayer: a identidade do jogador remoto no host é por aparelho**: ao receber um `GameEvent.JoinRoom`, o host registra localmente o `id` que o cliente já decidiu para si (`PlayerRepository.upsertRemotePlayer`), o que faz o histórico de partidas hospedadas funcionar — antes, quem entrava só pela rede não tinha linha em `players` no host e o insert em `game_players` falhava por FK ao encerrar a partida. Como esse `id` não é reconciliado por nome com os jogadores locais do host (isso exigiria avisar o cliente que seu id mudou no meio da partida), a mesma pessoa jogando de aparelhos diferentes conta como jogadores distintos no histórico do host — mesmo trade-off de identidade-por-nome abaixo, só que por aparelho.
 - **Identidade de jogador é só por nome** (`PlayerRepository.findOrCreatePlayer`, case/acento-insensitive): sem contas reais, duas pessoas diferentes que digitarem o mesmo nome compartilham as mesmas estatísticas agregadas — trade-off aceito para um app de festa local, sem login.
 - **detekt configurado mas não roda neste ambiente**: a versão 1.23.6 (`io.gitlab.arturbosch.detekt`) tem um bug de compatibilidade com JDK 24+ (mesma classe de problema do Gradle/kotlin-dsl já documentada acima). A migração para o novo plugin `dev.detekt` 2.x exige Kotlin 2.4+ no projeto (hoje em 2.0.21) — bump maior, fora de escopo por ora. `ktlint` não é afetado e roda normalmente.
 - Sem reconhecimento de voz (deliberado, conforme seção 11 da especificação).
 
 ## Próximos passos sugeridos
 
-1. Persistir o roster remoto no host ao criar/entrar em uma sala multiplayer (ver limitação acima) — pré-requisito pra histórico funcionar em partidas hospedadas.
-2. Integrar o fluxo de morte súbita (`TieBreakUseCase`) na máquina de estados para empates no placar final.
-3. Polimento geral: acessibilidade (contraste, tamanhos de tela), animações, tratamento de "app em segundo plano"/tela bloqueada durante uma rodada.
-4. Conquistas (mencionadas na seção 22 da especificação, ainda não implementadas).
-5. Revisitar o detekt quando a versão 2.0.0 estável for lançada, ou se o projeto migrar para Kotlin 2.4+ por outro motivo.
-6. Preparação para publicação: assinatura de release, `isMinifyEnabled = true` + regras de ProGuard revisadas, ícone definitivo, ficha da Play Store.
+1. Integrar o fluxo de morte súbita (`TieBreakUseCase`) na máquina de estados para empates no placar final.
+2. Polimento geral: acessibilidade (contraste, tamanhos de tela), animações, tratamento de "app em segundo plano"/tela bloqueada durante uma rodada.
+3. Conquistas (mencionadas na seção 22 da especificação, ainda não implementadas).
+4. Revisitar o detekt quando a versão 2.0.0 estável for lançada, ou se o projeto migrar para Kotlin 2.4+ por outro motivo.
+5. Preparação para publicação: assinatura de release, `isMinifyEnabled = true` + regras de ProGuard revisadas, ícone definitivo, ficha da Play Store.

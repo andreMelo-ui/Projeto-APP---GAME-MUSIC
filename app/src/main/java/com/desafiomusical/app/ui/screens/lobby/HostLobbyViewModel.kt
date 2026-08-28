@@ -111,6 +111,12 @@ class HostLobbyViewModel(private val container: AppContainer) : ViewModel() {
             session.observeIncoming().collect { event ->
                 when (event) {
                     is GameEvent.JoinRoom -> {
+                        // Registra a identidade do jogador remoto no banco local do
+                        // host pelo id que ele mandou (sem casar por nome) — ver KDoc
+                        // de PlayerRepository.upsertRemotePlayer. Sem isso, o insert em
+                        // game_players falha por FK quando a partida termina e o
+                        // histórico é salvo.
+                        container.playerRepository.upsertRemotePlayer(event.playerId, event.playerName)
                         addOrUpdatePlayer(RoomPlayerInfo(event.playerId, event.playerName, ready = false))
                         broadcastRoster(session)
                     }

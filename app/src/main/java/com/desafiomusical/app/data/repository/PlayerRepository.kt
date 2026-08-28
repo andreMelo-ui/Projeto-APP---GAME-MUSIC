@@ -32,6 +32,34 @@ interface PlayerRepository {
      * nome (ex.: irmãos "João") compartilham as mesmas estatísticas.
      */
     suspend fun findOrCreatePlayer(name: String): Player
+
+    /**
+     * Garante que existe uma linha em [Player] com EXATAMENTE o [id] informado —
+     * ao contrário de [findOrCreatePlayer], não tenta casar por nome com
+     * jogadores já conhecidos. Existe pro HOST do multiplayer local: ao receber
+     * um `GameEvent.JoinRoom`, o [id] já foi decidido no aparelho remoto (pelo
+     * `findOrCreatePlayer` de lá) e o host só precisa registrar essa identidade
+     * localmente pra não violar a foreign key de `game_players` ao salvar o
+     * histórico no fim da partida — sem isso, jogadores que só entraram pela
+     * rede (nunca abriram "Nova Partida" localmente nesse aparelho) não
+     * existiam na tabela `players` do host e o insert falhava.
+     *
+     * Não faz nada se [id] já existe — evita sobrescrever `createdAt` (e
+     * reordenar [observeKnownPlayers]) a cada reconexão do mesmo jogador
+     * durante o lobby.
+     *
+     * Limitação conhecida e aceita: por não reconciliar por nome (evitaria ter
+     * que avisar o cliente que seu id nesta partida mudou, exigindo alterar o
+     * protocolo), a MESMA pessoa jogando de aparelhos diferentes é tratada
+     * como jogadores distintos no host — estatísticas agregadas ficam
+     * separadas por nome+aparelho no caso do multiplayer, o mesmo trade-off de
+     * identidade por nome já documentado em [findOrCreatePlayer], só que por
+     * aparelho em vez de por app.
+     */
+    suspend fun upsertRemotePlayer(
+        id: String,
+        name: String,
+    )
 }
 
 class PlayerRepositoryImpl(private val playerDao: PlayerDao) : PlayerRepository {
@@ -39,6 +67,15 @@ class PlayerRepositoryImpl(private val playerDao: PlayerDao) : PlayerRepository 
 
     override suspend fun saveIfNew(players: List<Player>) {
         playerDao.upsertAll(players.map { it.toEntity() })
+    }
+
+    override suspend fun upsertRemotePlayer(
+        id: String,
+        name: String,
+    ) {
+        if (playerDao.getById(id) != null) return
+        val created = Player(id = id, name = name.trim(), createdAt = System.currentTimeMillis())
+        playerDao.upsert(created.toEntity())
     }
 
     override suspend fun findOrCreatePlayer(name: String): Player {
