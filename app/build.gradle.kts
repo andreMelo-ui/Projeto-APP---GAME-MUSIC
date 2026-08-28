@@ -52,6 +52,15 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    testOptions {
+        unitTests {
+            // Necessário para o Robolectric enxergar o manifesto/recursos
+            // mesclados nos testes de `src/test` (HistoryPersistenceRegressionTest
+            // roda um Room de verdade em memória, sem emulador).
+            isIncludeAndroidResources = true
+        }
+    }
 }
 
 ksp {
@@ -83,6 +92,20 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
 }
 tasks.withType<io.gitlab.arturbosch.detekt.DetektCreateBaselineTask>().configureEach {
     jvmTarget = "17"
+}
+
+tasks.withType<Test>().configureEach {
+    // O Robolectric ainda não é testado oficialmente no JDK 25 (o JBR que vem
+    // com o Android Studio). Estas aberturas são as mesmas que o plugin oficial
+    // do Robolectric aplica e evitam InaccessibleObjectException em JDKs novos.
+    jvmArgs(
+        "-Djdk.attach.allowAttachSelf=true",
+        "--add-opens=java.base/java.lang=ALL-UNNAMED",
+        "--add-opens=java.base/java.util=ALL-UNNAMED",
+        "--add-opens=java.base/java.lang.invoke=ALL-UNNAMED",
+        "--add-opens=java.base/java.io=ALL-UNNAMED",
+        "--add-opens=java.base/java.net=ALL-UNNAMED",
+    )
 }
 
 dependencies {
@@ -128,6 +151,8 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.test.core)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
