@@ -101,6 +101,15 @@ Adicione objetos em `app/src/main/assets/catalog.json` seguindo o schema do `Son
 
 Para rodar num emulador sem abrir o Android Studio: crie um AVD com `avdmanager` (API 26+, `google_apis` recomendado para ter o Play Services básico) e suba com `emulator -avd <nome>`, depois use `adb devices` para confirmar que está visível antes do `installDebug`.
 
+### Qualidade de código (ktlint + detekt)
+
+```bash
+./gradlew ktlintCheck   # formatação Kotlin — ./gradlew ktlintFormat corrige automaticamente o que der
+./gradlew detekt        # análise estática (complexidade, code smells) — usa o ruleset padrão, sem config customizado ainda
+```
+
+Nenhum dos dois roda automaticamente no build normal (`assembleDebug`/`testDebugUnitTest`) — são passos manuais, rode antes de abrir um PR. As versões dos plugins (`gradle/libs.versions.toml`) foram escolhidas por serem estáveis e amplamente usadas, mas não foram validadas contra um `./gradlew sync` de verdade neste ambiente (sem Android SDK/Gradle aqui) — se o Android Studio não resolver alguma delas, é só bumpar pra versão mais recente compatível.
+
 ### Testes
 
 ```bash
