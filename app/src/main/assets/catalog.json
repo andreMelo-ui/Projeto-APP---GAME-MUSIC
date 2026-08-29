@@ -3137,7 +3137,7 @@
       "fantasia",
       "vocal"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-022",
@@ -3155,7 +3155,7 @@
       "fantasia",
       "instrumental"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-023",
@@ -3173,7 +3173,7 @@
       "fantasia",
       "combate"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-024",
@@ -3191,7 +3191,7 @@
       "jrpg_style",
       "2025"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-025",
@@ -3209,7 +3209,7 @@
       "jrpg_style",
       "2025"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-026",
@@ -3227,7 +3227,7 @@
       "jrpg_style",
       "2025"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-027",
@@ -3245,7 +3245,7 @@
       "jrpg",
       "instrumental"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-028",
@@ -3263,7 +3263,7 @@
       "nintendo",
       "instrumental"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-029",
@@ -3281,7 +3281,7 @@
       "nintendo",
       "instrumental"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-030",
@@ -3299,7 +3299,7 @@
       "jrpg",
       "instrumental"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-031",
@@ -3317,7 +3317,7 @@
       "crossover",
       "instrumental"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-032",
@@ -3335,7 +3335,7 @@
       "rock",
       "vocal"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-033",
@@ -3353,7 +3353,7 @@
       "indie",
       "instrumental"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-034",
@@ -3371,7 +3371,7 @@
       "indie",
       "instrumental"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-035",
@@ -3388,7 +3388,7 @@
       "fps",
       "eletronica"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-036",
@@ -3405,7 +3405,7 @@
       "furtividade",
       "instrumental"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-037",
@@ -3423,7 +3423,7 @@
       "nintendo",
       "instrumental"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-038",
@@ -3440,7 +3440,7 @@
       "rpg",
       "instrumental"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-039",
@@ -3458,7 +3458,7 @@
       "aventura",
       "instrumental"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-games-040",
@@ -3476,7 +3476,7 @@
       "jrpg",
       "instrumental"
     ],
-    "active": true
+    "active": false
   },
   {
     "id": "song-personagens-021",
@@ -4194,6 +4194,6 @@
       "abertura",
       "shonen"
     ],
-    "active": true
+    "active": false
   }
 ]
