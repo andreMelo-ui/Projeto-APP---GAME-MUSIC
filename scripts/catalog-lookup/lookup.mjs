@@ -11,6 +11,9 @@
  * Uso:
  *   YOUTUBE_API_KEY=sua_chave node scripts/catalog-lookup/lookup.mjs
  * ou crie scripts/catalog-lookup/.env com a linha: YOUTUBE_API_KEY=sua_chave
+ *
+ * Flag opcional:
+ *   --category=GAMES   restringe às músicas pendentes dessa categoria
  */
 
 import { readFile, writeFile } from "node:fs/promises";
@@ -72,11 +75,20 @@ async function main() {
     process.exit(1);
   }
 
+  const categoryArg = process.argv.find((a) => a.startsWith("--category="));
+  const categoryFilter = categoryArg ? categoryArg.split("=")[1].toUpperCase() : null;
+
   const catalog = JSON.parse(await readFile(CATALOG_PATH, "utf-8"));
-  const pending = catalog.filter((song) => song.youtubeVideoId.startsWith(PLACEHOLDER_PREFIX));
+  const pending = catalog.filter(
+    (song) => song.youtubeVideoId.startsWith(PLACEHOLDER_PREFIX) && (!categoryFilter || song.category === categoryFilter)
+  );
 
   if (pending.length === 0) {
-    console.log("Nenhuma música pendente — todos os youtubeVideoId já foram preenchidos.");
+    console.log(
+      categoryFilter
+        ? `Nenhuma música pendente na categoria ${categoryFilter}.`
+        : "Nenhuma música pendente — todos os youtubeVideoId já foram preenchidos."
+    );
     return;
   }
 

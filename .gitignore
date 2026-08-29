@@ -13,4 +13,5 @@ app/schemas/
 *.hprof
 .claude/
 scripts/catalog-lookup/.env
+scripts/catalog-lookup/auto-resolve-report.json
 node_modules/
